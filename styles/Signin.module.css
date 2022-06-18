@@ -1,0 +1,208 @@
+.Signin {
+  background-color: #fff;
+}
+
+.con {
+  display: flex;
+  font-family: var(--fontFamRegular);
+}
+
+.right {
+  height: 95vh;
+  width: 45vw;
+  padding: 2.5rem;
+  padding-top: 0.1rem;
+  z-index: 100;
+}
+
+.imageRight {
+  position: relative;
+  right: 1.5rem;
+}
+
+.bigTxt {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  font-family: var(--fontFamBold);
+}
+
+.smTxt {
+  width: 30rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.btnCon {
+}
+
+.google,
+.facebook {
+  height: 2.5rem;
+  width: 20rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #000;
+  border-radius: 5rem;
+  color: #808080;
+  background-color: #fff;
+  margin-bottom: 1.5rem;
+}
+
+.google > span {
+  height: 20px;
+  width: 20px;
+  margin-right: 0.3rem;
+  background: rgba(0, 0, 0, 0)
+    url("https://accounts.scdn.co/sso/images/google-icon.1cdc8fce9609d07f0e9d8d0bc4b61f8f.svg")
+    no-repeat scroll center center;
+}
+
+.facebook > span {
+  margin-right: 0.3rem;
+}
+
+.orCon {
+  margin-top: 1rem;
+}
+
+.or {
+  display: flex;
+  width: 20rem;
+  margin-bottom: 1rem;
+}
+
+.or > span {
+  font-size: 0.75rem;
+  margin-left: 0.45rem;
+  margin-right: 0.45rem;
+}
+
+.or > hr {
+  height: 1px;
+  width: 9.5rem;
+  background-color: #808080;
+}
+
+.pwd,
+.user {
+  font-size: 0.8rem;
+}
+
+.pwd > input,
+.user > input {
+  height: 2.5rem;
+  width: 20rem;
+  font-size: 0.75rem;
+  border: 1px solid #000;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.forgot {
+  font-size: 0.9rem;
+}
+
+.login > button {
+  height: 2.5rem;
+  width: 20rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 5rem;
+  color: #fff;
+  background-color: var(--techBlue);
+  margin-top: 1rem;
+}
+
+.left {
+  height: 95vh;
+  width: 55vw;
+  position: relative;
+}
+
+.image {
+  position: relative;
+  top: 4.5rem;
+  left: 25rem;
+}
+
+.lastline {
+  height: 1px;
+  width: 20rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  right: 10rem;
+}
+
+.signup {
+  font-size: 0.93rem;
+}
+
+.signup > span {
+  font-weight: 900;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 0.7rem;
+  font-size: 0.8rem;
+  color: #6a6a6a;
+}
+
+/*dark theme*/
+.google,
+.facebook {
+  height: 2.5rem;
+  width: 20rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5rem;
+  color: #808080;
+  background-color: #fff;
+  margin-bottom: 1.5rem;
+}
+
+.google > span {
+  height: 20px;
+  width: 20px;
+  margin-right: 0.3rem;
+  background: rgba(0, 0, 0, 0)
+    url("https://accounts.scdn.co/sso/images/google-icon.1cdc8fce9609d07f0e9d8d0bc4b61f8f.svg")
+    no-repeat scroll center center;
+}
+
+.or > hr {
+  height: 1px;
+  width: 9.5rem;
+  background-color: #808080;
+}
+
+.login > button {
+  height: 2.5rem;
+  width: 20rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 5rem;
+  color: #fff;
+  background-color: var(--techBlue);
+  margin-top: 1rem;
+}

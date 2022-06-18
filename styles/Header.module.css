@@ -1,0 +1,53 @@
+.Header {
+  display: flex;
+  justify-content: space-around;
+  background-color: #fff;
+  height: 3.5rem;
+}
+
+.logo {
+  position: relative;
+  bottom: 2.8rem;
+}
+
+.search {
+  position: relative;
+  top: 0.5rem;
+}
+
+.search > input {
+  height: 2rem;
+  width: 25rem;
+  color: #6c6e70;
+  background-color: #eff7fc;
+  padding: 1rem;
+  outline: none;
+  border: 1px #def1fc solid;
+  border-top-left-radius: 2rem;
+  border-bottom-left-radius: 2rem;
+}
+
+.search > input::placeholder {
+  color: #6c6e70;
+}
+
+.search > button {
+  height: 2rem;
+  width: 2.5rem;
+  position: relative;
+  top: 0.25rem;
+  color: #fff;
+  background-color: var(--techBlue);
+  border: none;
+  border-top-right-radius: 2rem;
+  border-bottom-right-radius: 2rem;
+}
+
+.profile {
+  position: relative;
+  top: 0.5rem;
+  right: 0.8rem;
+  display: flex;
+  justify-content: space-around;
+  width: 12rem;
+}
