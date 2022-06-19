@@ -2,52 +2,72 @@ import React from "react";
 import Image from "next/image";
 import styles from "../styles/Header.module.css";
 import { Avatar } from "@mui/material";
+import WhatshotOutlinedIcon from "@mui/icons-material/WhatshotOutlined";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
-import MessageOutlinedIcon from "@mui/icons-material/MessageOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import BusinessOutlinedIcon from "@mui/icons-material/BusinessOutlined";
+import GroupsOutlinedIcon from "@mui/icons-material/GroupsOutlined";
+import OtherHousesOutlinedIcon from "@mui/icons-material/OtherHousesOutlined";
 
-function Header({ profilePic }) {
+function Header({ profilePic, userName }) {
   return (
     <header className={styles.Header}>
-      <div className={styles.logo}>
-        <Image
-          src="/../public/assets/logonamelight.png"
-          alt="logo"
-          height={150}
-          width={150}
-        />
-      </div>
-      <div className={styles.search}>
-        <input
-          type="search"
-          name=""
-          id=""
-          placeholder="What are you looking for, Preye?"
-        />
-        <button>
-          <SearchOutlinedIcon
+      <div className={styles.headerCon}>
+        <div className={styles.logo}>
+          <Image
+            src="/../public/assets/clann/3.png"
+            alt="logo"
+            height={250}
+            width={250}
+          />
+        </div>
+        <div className={styles.search}>
+          <div className={styles.btn}>
+            <SearchOutlinedIcon
+              sx={{
+                color: "#707070",
+                width: "20px",
+                height: "20px",
+                position: "relative",
+                top: "0.3rem",
+                left: "1rem",
+              }}
+            />
+          </div>
+          <input
+            type="search"
+            name=""
+            id=""
+            placeholder={`Looking for a room, ?`}
+          />
+        </div>
+        <div className={styles.profile}>
+          <WhatshotOutlinedIcon
+            fontSize="small"
+            sx={{ color: "#707070", position: "relative", top: "0.7rem" }}
+          />
+          <NotificationsNoneOutlinedIcon
+            fontSize="small"
+            sx={{ color: "#707070", position: "relative", top: "0.7rem" }}
+          />
+          <GroupsOutlinedIcon
+            sx={{ color: "#707070", position: "relative", top: "0.7rem" }}
+          />
+          <OtherHousesOutlinedIcon
+            fontSize="small"
+            sx={{ color: "#707070", position: "relative", top: "0.7rem" }}
+          />
+
+          <Avatar
+            alt="profile Picture"
             sx={{
-              width: "20px",
-              height: "20px",
+              height: "28px",
+              width: "28px",
               position: "relative",
-              top: "0.2rem",
+              top: "0.4rem",
+              left: "0.3rem",
             }}
           />
-        </button>
-        <div className={styles.btn}></div>
-      </div>
-      <div className={styles.profile}>
-        <NotificationsNoneOutlinedIcon
-          sx={{ color: "#707070", position: "relative", top: "0.5rem" }}
-        />
-        <MessageOutlinedIcon
-          sx={{ color: "#707070", position: "relative", top: "0.5rem" }}
-        />
-        <BusinessOutlinedIcon
-          sx={{ color: "#707070", position: "relative", top: "0.5rem" }}
-        />
-        <Avatar alt="profile Picture" src={profilePic} />
+        </div>
       </div>
     </header>
   );

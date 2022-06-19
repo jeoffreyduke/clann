@@ -3,7 +3,7 @@ body {
   padding: 0;
   margin: 0;
   color: #000;
-  background-color: #f2f2f2;
+  background-color: #dae0e6;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
@@ -19,7 +19,7 @@ body {
 }
 
 :root {
-  --techBlue: #2776ea;
+  --mainColor: #8c52ff;
   --fontFamRegular: "Sora Regular";
   --fontFamBold: "Sora Strong";
 }

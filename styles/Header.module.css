@@ -1,13 +1,22 @@
 .Header {
+  display: grid;
+  place-items: center;
+  height: 3.5rem;
+  width: 100vw;
+  background-color: #fff;
+}
+
+.headerCon {
   display: flex;
   justify-content: space-around;
-  background-color: #fff;
-  height: 3.5rem;
+  position: relative;
+  right: 3.5rem;
 }
 
 .logo {
   position: relative;
-  bottom: 2.8rem;
+  right: 6rem;
+  bottom: 6rem;
 }
 
 .search {
@@ -17,14 +26,17 @@
 
 .search > input {
   height: 2rem;
-  width: 25rem;
+  width: 20rem;
+  position: relative;
+  top: 0.2rem;
   color: #6c6e70;
-  background-color: #eff7fc;
-  padding: 1rem;
+  background-color: #f3f3f3;
+  padding: 0.5rem;
   outline: none;
-  border: 1px #def1fc solid;
-  border-top-left-radius: 2rem;
-  border-bottom-left-radius: 2rem;
+  border: 1px #e7defa solid;
+  border-left: none !important;
+  border-top-right-radius: 2rem;
+  border-bottom-right-radius: 2rem;
 }
 
 .search > input::placeholder {
@@ -37,16 +49,30 @@
   position: relative;
   top: 0.25rem;
   color: #fff;
-  background-color: var(--techBlue);
+  background-color: var(--mainColor);
   border: none;
   border-top-right-radius: 2rem;
   border-bottom-right-radius: 2rem;
 }
 
+.btn {
+  display: inline-block;
+  height: 2.1rem;
+  width: 2.5rem;
+  position: relative;
+  top: 0.18rem;
+  color: #fff;
+  background-color: #f3f3f3;
+  border: 1px #e7defa solid;
+  border-right: none !important;
+  border-top-left-radius: 2rem;
+  border-bottom-left-radius: 2rem;
+}
+
 .profile {
   position: relative;
   top: 0.5rem;
-  right: 0.8rem;
+  left: 9rem;
   display: flex;
   justify-content: space-around;
   width: 12rem;

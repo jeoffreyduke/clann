@@ -1,7 +1,9 @@
 import styles from "../styles/Home.module.css";
 import Signin from "./signin";
 import Header from "../components/Header";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
+import Body from "../components/Body";
+import Create from "./create";
 
 export default function Home() {
   const { data: session, status } = useSession();
@@ -12,17 +14,16 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
-      {status === "unauthenticated" && (
+      {status === "authenticated" && (
         <>
           <Signin />
         </>
       )}
 
-      {status === "authenticated" && (
+      {status === "unauthenticated" && (
         <>
-          <Header profilePic={session.user.image} />
-          <p>You have sucessfully logged in as: {session.user.name}</p>
-          <button onClick={() => signOut()}>Sign Out</button>
+          <Header />
+          <Create />
         </>
       )}
     </div>

@@ -1,0 +1,81 @@
+.Body {
+  display: grid;
+  justify-content: center;
+  grid-template-areas: "nav main aside";
+}
+
+.nav {
+  grid-area: nav;
+  height: fit-content;
+  width: fit-content;
+  padding: 1rem;
+  margin: 1rem;
+  margin-left: 4rem;
+  background-color: transparent;
+  text-align: right;
+  z-index: 100;
+}
+
+.main {
+  grid-area: main;
+  border: 1px solid #d8d8d8;
+  height: 88vh;
+  width: 42vw;
+  padding: 3rem;
+  margin: 1rem;
+  background-color: #fff;
+}
+
+.aside {
+  grid-area: aside;
+  display: flex;
+  flex-direction: column-reverse;
+  margin: 1.5rem;
+}
+
+.userPic {
+  margin-bottom: 1rem;
+}
+
+.userName {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.nav > button {
+  color: #fff;
+  background-color: var(--mainColor);
+  border: none;
+  padding: 0.3rem;
+  border-radius: 1rem;
+}
+
+.roomsTitle {
+  position: relative;
+  bottom: 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--mainColor);
+}
+
+.rooms > ul {
+  position: relative;
+  bottom: 2.5rem;
+  font-size: 2rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  list-style: none;
+}
+
+.options > ul {
+  font-size: 4.5rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  list-style: none;
+}
+
+.copyright {
+  position: relative;
+  top: 4.5rem;
+  font-size: 0.8rem;
+}

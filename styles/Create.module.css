@@ -1,0 +1,56 @@
+.heading {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-size: 1.2rem;
+}
+
+.inputLabel {
+  margin-bottom: 1rem;
+}
+
+.title > input {
+  height: 3.5rem;
+  width: 30rem;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  border: none;
+  border-bottom: 1px solid #6c6e70;
+  z-index: 100;
+  outline: none;
+}
+
+.title > input::placeholder {
+  color: #6c6e70;
+}
+
+.swCon {
+  width: 30rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.switchLabel {
+  position: relative;
+  top: 0.2rem;
+  font-weight: 500;
+}
+
+.switch {
+  width: 10rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn > button {
+  height: 2rem;
+  width: 6rem;
+  color: #fff;
+  background-color: var(--mainColor);
+  border: none;
+  border-radius: 1rem;
+}
