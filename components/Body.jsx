@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import styles from "../styles/Body.module.css";
 import { signOut, useSession } from "next-auth/react";
@@ -8,6 +8,31 @@ import ExitToAppRoundedIcon from "@mui/icons-material/ExitToAppRounded";
 function Body({ profilePic, midComp }) {
   const { data: session, status } = useSession();
 
+  const [createActive, setCreateActive] = useState(true);
+  const [disActive, setDisActive] = useState(false);
+  const [favActive, setFavActive] = useState(false);
+
+  const switchCreate = () => {
+    setCreateActive(true);
+    setDisActive(false);
+    setFavActive(false);
+    console.log("create");
+  };
+
+  const switchDiscover = () => {
+    setDisActive(true);
+    setCreateActive(false);
+    setFavActive(false);
+    console.log("discover");
+  };
+
+  const switchFav = () => {
+    setFavActive(true);
+    setCreateActive(false);
+    setDisActive(false);
+    console.log("fav");
+  };
+
   return (
     <div className={styles.Body}>
       <nav className={styles.nav}>
@@ -15,17 +40,17 @@ function Body({ profilePic, midComp }) {
           <ul>
             <li>
               <Link href="/">
-                <a className={styles.active}>Create</a>
+                <a className={styles.link}>Home</a>
               </Link>
             </li>
             <li>
-              <Link href="/discover">
-                <a className={styles.active}>Discover</a>
+              <Link href="/create">
+                <a className={styles.link}>Create</a>
               </Link>
             </li>
             <li>
               <Link href="/favorites">
-                <a className={styles.active}>Favorites</a>
+                <a className={styles.link}>Favorites</a>
               </Link>
             </li>
           </ul>
@@ -33,9 +58,21 @@ function Body({ profilePic, midComp }) {
         <div className={styles.rooms}>
           <p className={styles.roomsTitle}>Rooms</p>
           <ul>
-            <li>Alcholics</li>
-            <li>Ipsum</li>
-            <li>Lorem</li>
+            <li>
+              <Link href="/room">
+                <a className={styles.linkLittle}>Ipsum</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/room">
+                <a className={styles.linkLittle}>Lorem</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/room">
+                <a className={styles.linkLittle}>Alcholics</a>
+              </Link>
+            </li>
           </ul>
         </div>
         <div className={styles.copyright}>© 2022 Clann</div>
@@ -53,7 +90,7 @@ function Body({ profilePic, midComp }) {
         <div className={styles.userPic}>
           <Avatar
             alt="profile Picture"
-            src={profilePic}
+            src={session.user.image}
             sx={{
               height: "42px",
               width: "42px",

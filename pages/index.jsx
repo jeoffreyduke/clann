@@ -3,9 +3,9 @@ import Signin from "./signin";
 import Header from "../components/Header";
 import { useSession } from "next-auth/react";
 import Body from "../components/Body";
-import Create from "./create";
+import Home from "./home";
 
-export default function Home() {
+export default function Index() {
   const { data: session, status } = useSession();
 
   if (status === "loading") {
@@ -14,16 +14,19 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
-      {status === "authenticated" && (
+      {status === "unauthenticated" && (
         <>
           <Signin />
         </>
       )}
 
-      {status === "unauthenticated" && (
+      {status === "authenticated" && (
         <>
-          <Header />
-          <Create />
+          <Header
+            profilePic={session.user.image}
+            userName={session.user.name}
+          />
+          <Home />
         </>
       )}
     </div>

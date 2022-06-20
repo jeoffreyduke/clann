@@ -4,6 +4,7 @@ import { signOut, useSession } from "next-auth/react";
 import Body from "../components/Body";
 import Switch from "@mui/material/Switch";
 import { styled } from "@mui/material/styles";
+import Header from "../components/Header";
 
 const label = { inputProps: { "aria-label": "Record Switch" } };
 
@@ -58,7 +59,7 @@ const IOSSwitch = styled((props) => (
   },
 }));
 
-function createComp() {
+function CreateComp() {
   return (
     <>
       <div className={styles.heading}>Create your room</div>
@@ -72,14 +73,39 @@ function createComp() {
           placeholder="Please pick a name that is relevant to the subject"
         />
       </div>
+      <div className={styles.select}>
+        <div className={styles.selectLabel}>
+          <label htmlFor="subject">Subject</label>
+        </div>
+        <select name="subject" className={styles.subject}>
+          <option value="Alcoholism">Alcoholism</option>
+          <option value="Drug Abuse">Drug Abuse</option>
+          <option value="Gambling">Gambling</option>
+        </select>
+      </div>
+
+      <div className={styles.swCon}>
+        <div className={styles.switch}>
+          <div className={styles.switchLabel}>Invite Only</div>
+          <IOSSwitch {...label} defaultChecked={false} />
+        </div>
+      </div>
+
+      <div className={styles.swCon}>
+        <div className={styles.switch}>
+          <div className={styles.switchLabel}>Adults Only</div>
+          <IOSSwitch {...label} defaultChecked={false} />
+        </div>
+      </div>
+
       <div className={styles.swCon}>
         <div className={styles.switch}>
           <div className={styles.switchLabel}>Anonymous</div>
           <IOSSwitch {...label} defaultChecked={false} />
         </div>
-        <div className={styles.btn}>
-          <button>Start it up</button>
-        </div>
+      </div>
+      <div className={styles.btn}>
+        <button>Start it up</button>
       </div>
     </>
   );
@@ -90,7 +116,8 @@ function Create() {
 
   return (
     <>
-      <Body midComp={createComp()} />
+      <Header />
+      <Body midComp={CreateComp()} />
     </>
   );
 }

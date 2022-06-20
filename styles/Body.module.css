@@ -21,9 +21,16 @@
   border: 1px solid #d8d8d8;
   height: 88vh;
   width: 42vw;
-  padding: 3rem;
+  padding: 2rem;
   margin: 1rem;
+  overflow: hidden;
   background-color: #fff;
+  border-radius: 0.2rem;
+  scrollbar-color: var(--mainColor) transparent;
+}
+
+.main:hover {
+  overflow-y: scroll;
 }
 
 .aside {
@@ -48,6 +55,26 @@
   border: none;
   padding: 0.3rem;
   border-radius: 1rem;
+}
+
+.active {
+  color: var(--mainColor);
+}
+
+.notActive {
+  color: #000;
+}
+
+.link:hover {
+  letter-spacing: 0.5rem;
+  right: 3rem;
+  transition: 1s;
+}
+
+.linkLittle:hover {
+  letter-spacing: 0.3rem;
+  right: 3rem;
+  transition: 1s;
 }
 
 .roomsTitle {

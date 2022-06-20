@@ -1,5 +1,6 @@
 .Signin {
   background-color: #fff;
+  overflow: hidden;
 }
 
 .con {
@@ -10,14 +11,19 @@
 .right {
   height: 95vh;
   width: 45vw;
-  padding: 2.5rem;
-  padding-top: 0.1rem;
+  padding: 2rem;
   z-index: 100;
+}
+
+.rightContent {
+  position: relative;
+  bottom: 7.2rem;
 }
 
 .imageRight {
   position: relative;
-  right: 1.5rem;
+  right: 4.5rem;
+  bottom: 3rem;
 }
 
 .bigTxt {
@@ -32,9 +38,6 @@
   font-size: 1.3rem;
   font-weight: 700;
   margin-bottom: 1.5rem;
-}
-
-.btnCon {
 }
 
 .google,
@@ -108,7 +111,7 @@
   font-size: 0.9rem;
 }
 
-.login > button {
+.login > input {
   height: 2.5rem;
   width: 20rem;
   font-size: 0.9rem;
@@ -119,7 +122,7 @@
   border: none;
   border-radius: 5rem;
   color: #fff;
-  background-color: var(--techBlue);
+  background-color: var(--mainColor);
   margin-top: 1rem;
 }
 
@@ -153,6 +156,7 @@
 }
 
 .footer {
+  height: 5vh;
   display: flex;
   justify-content: center;
   align-items: center;

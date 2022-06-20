@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import styles from "../styles/Header.module.css";
+import { signOut, useSession } from "next-auth/react";
 import { Avatar } from "@mui/material";
 import WhatshotOutlinedIcon from "@mui/icons-material/WhatshotOutlined";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
@@ -8,7 +9,9 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import GroupsOutlinedIcon from "@mui/icons-material/GroupsOutlined";
 import OtherHousesOutlinedIcon from "@mui/icons-material/OtherHousesOutlined";
 
-function Header({ profilePic, userName }) {
+function Header() {
+  const { data: session, status } = useSession();
+
   return (
     <header className={styles.Header}>
       <div className={styles.headerCon}>
@@ -37,7 +40,7 @@ function Header({ profilePic, userName }) {
             type="search"
             name=""
             id=""
-            placeholder={`Looking for a room, ?`}
+            placeholder={`Looking for a room, ${session.user.name}?`}
           />
         </div>
         <div className={styles.profile}>
@@ -59,6 +62,7 @@ function Header({ profilePic, userName }) {
 
           <Avatar
             alt="profile Picture"
+            src={session.user.image}
             sx={{
               height: "28px",
               width: "28px",

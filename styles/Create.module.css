@@ -16,10 +16,9 @@
 .title > input {
   height: 3.5rem;
   width: 30rem;
-  padding: 1rem;
   margin-bottom: 2rem;
   border: none;
-  border-bottom: 1px solid #6c6e70;
+  border-bottom: 1px solid var(--mainColor);
   z-index: 100;
   outline: none;
 }
@@ -28,10 +27,43 @@
   color: #6c6e70;
 }
 
+.select {
+  margin-bottom: 2rem;
+}
+
+.selectLabel {
+  position: relative;
+  top: 0.6rem;
+  left: 0.6rem;
+  width: fit-content;
+  color: #6c6e70;
+  background-color: #fff;
+  font-size: 0.78rem;
+  font-weight: 400;
+  padding: 0.2rem;
+}
+
+.subject > option {
+  background-color: #fff;
+}
+
+.subject {
+  height: 3.5rem;
+  width: 30rem;
+  border: 1px solid var(--mainColor);
+  outline: none;
+  background-color: transparent;
+}
+
+.subject > option {
+  background-color: transparent;
+}
+
 .swCon {
   width: 30rem;
   display: flex;
   justify-content: space-between;
+  margin-bottom: 2rem;
 }
 
 .switchLabel {
@@ -46,11 +78,17 @@
   justify-content: space-between;
 }
 
+.btn {
+  width: 30rem;
+  display: flex;
+  justify-content: end;
+}
+
 .btn > button {
-  height: 2rem;
-  width: 6rem;
+  height: 2.25rem;
+  width: 10rem;
   color: #fff;
   background-color: var(--mainColor);
   border: none;
-  border-radius: 1rem;
+  border-radius: 2rem;
 }
