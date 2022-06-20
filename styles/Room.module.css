@@ -1,0 +1,84 @@
+.header {
+  height: 12rem;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  left: 0;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(140, 82, 255, 1) 100%,
+    rgba(39, 118, 234, 1) 35%
+  );
+  z-index: 100;
+}
+
+.title {
+  position: relative;
+  top: 5rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.headerCon {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.headerIcons,
+.roomUsers {
+  position: relative;
+  bottom: 1.5rem;
+}
+
+.headerIcons {
+  display: flex;
+  padding: 0.5rem;
+  background-color: #fff;
+  border-radius: 2rem;
+}
+
+.react,
+.notif,
+.more {
+  position: relative;
+  top: 0.2rem;
+}
+
+.notif,
+.react {
+  margin-right: 0.5rem;
+}
+
+.participators {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+  padding-right: 0;
+}
+
+.pAvatars {
+  display: grid;
+  place-items: center;
+  margin-right: 2rem;
+  margin-bottom: 1rem;
+}
+
+.userName {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-top: 0.25rem;
+}
+
+.userRole {
+  font-size: 0.8rem;
+}

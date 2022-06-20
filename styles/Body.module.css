@@ -8,6 +8,8 @@
   grid-area: nav;
   height: fit-content;
   width: fit-content;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   padding: 1rem;
   margin: 1rem;
   margin-left: 4rem;
@@ -68,13 +70,13 @@
 .link:hover {
   letter-spacing: 0.5rem;
   right: 3rem;
-  transition: 1s;
+  transition: 1s ease-in-out;
 }
 
 .linkLittle:hover {
   letter-spacing: 0.3rem;
   right: 3rem;
-  transition: 1s;
+  transition: 1s ease-in-out;
 }
 
 .roomsTitle {
@@ -105,4 +107,5 @@
   position: relative;
   top: 4.5rem;
   font-size: 0.8rem;
+  font-family: var(--fontFamRegular);
 }
