@@ -1,4 +1,5 @@
 import React from "react";
+import { userData } from "../pages/index";
 import Image from "next/image";
 import styles from "../styles/Header.module.css";
 import { signOut, useSession } from "next-auth/react";
@@ -40,7 +41,7 @@ function Header() {
             type="search"
             name=""
             id=""
-            placeholder={`Looking for a room, ${session.user.name}?`}
+            placeholder={`Looking for a room, ${userData.name}?`}
           />
         </div>
         <div className={styles.profile}>
@@ -61,8 +62,8 @@ function Header() {
           />
 
           <Avatar
-            alt="profile Picture"
-            src={session.user.image}
+            alt={userData.name}
+            src={userData.profile_pic}
             sx={{
               height: "28px",
               width: "28px",

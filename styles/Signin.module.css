@@ -151,8 +151,9 @@
   font-size: 0.93rem;
 }
 
-.signup > span {
+.linkLittle {
   font-weight: 900;
+  margin-left: 0.3rem;
 }
 
 .footer {

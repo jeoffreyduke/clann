@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { userData } from "../pages/index";
 import Link from "next/link";
 import styles from "../styles/Body.module.css";
 import { signOut, useSession } from "next-auth/react";
@@ -90,7 +91,7 @@ function Body({ profilePic, midComp }) {
         <div className={styles.userPic}>
           <Avatar
             alt="profile Picture"
-            src={session.user.image}
+            src={userData.profile_pic}
             sx={{
               height: "42px",
               width: "42px",

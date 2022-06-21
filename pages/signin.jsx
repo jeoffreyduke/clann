@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import Link from "next/link";
 import Image from "next/image";
 import { signIn } from "next-auth/react";
 import styles from "../styles/Signin.module.css";
@@ -62,35 +63,42 @@ function Signin() {
             </div>
 
             <div className={styles.loginForm}>
-              <div className={styles.user}>
-                <div>
-                  <label htmlFor="user">Email address or username</label>
+              <form action="get" onSubmit={(e) => e.preventDefault()}>
+                <div className={styles.user}>
+                  <div>
+                    <label htmlFor="user">Email address or username</label>
+                  </div>
+                  <input
+                    id="user"
+                    type="text"
+                    placeholder="Email address or username"
+                  />
                 </div>
-                <input
-                  id="user"
-                  type="text"
-                  placeholder="Email address or username"
-                />
-              </div>
-              <div className={styles.pwd}>
-                <div>
-                  <label htmlFor="pwd">Password</label>
+                <div className={styles.pwd}>
+                  <div>
+                    <label htmlFor="pwd">Password</label>
+                  </div>
+                  <input
+                    type="password"
+                    name="pwd"
+                    id="pwd"
+                    placeholder="Password"
+                  />
                 </div>
-                <input
-                  type="password"
-                  name="pwd"
-                  id="pwd"
-                  placeholder="Password"
-                />
-              </div>
-              <div className={styles.forgot}>Forgot your password?</div>
-              <div className={styles.login}>
-                <input type="button" value="LOG IN" />
-              </div>
-              <hr className={styles.lastline} />
-              <div className={styles.signup}>
-                New to Clann? <span>SIGN UP</span>
-              </div>
+                <div className={styles.forgot}>Forgot your password?</div>
+                <div className={styles.login}>
+                  <input type="button" value="LOG IN" />
+                </div>
+                <hr className={styles.lastline} />
+                <div className={styles.signup}>
+                  New to Clann?
+                  <span>
+                    <Link href="/signup">
+                      <a className={styles.linkLittle}>SIGN UP</a>
+                    </Link>
+                  </span>
+                </div>
+              </form>
             </div>
           </div>
         </section>
