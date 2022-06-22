@@ -19,6 +19,9 @@ export default NextAuth({
 
     // ...add more providers here
   ],
+  pages: {
+    signIn: "/",
+  },
   jwt: {
     encryption: true,
   },

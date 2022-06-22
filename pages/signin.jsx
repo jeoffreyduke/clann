@@ -1,10 +1,60 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import userSlice, { handleUser } from "../provider/userSlice";
+import { firebaseConfig } from ".";
+import { initializeApp } from "firebase/app";
+import { getDatabase, onValue, ref } from "firebase/database";
 import Link from "next/link";
 import Image from "next/image";
 import { signIn } from "next-auth/react";
 import styles from "../styles/Signin.module.css";
 
-function Signin() {
+function Signin({ authenticate }) {
+  const dispatch = useDispatch();
+  const selector = useSelector(handleUser);
+  const user = selector.payload.userSlice.value;
+
+  let users;
+  const [userdata, setUserdata] = useState({
+    userName: "",
+    password: "",
+  });
+
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase();
+  const userRef = ref(db, "users/");
+
+  onValue(userRef, (snapshot) => {
+    users = snapshot.val();
+  });
+
+  const handleUserData = (e) => {
+    setUserdata({
+      ...userdata,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+
+    users.forEach((user) => {
+      if (
+        user.username === userdata.userName &&
+        user.password === userdata.password
+      ) {
+        dispatch(handleUser(user));
+        authenticate(true);
+        console.log(user);
+      }
+    });
+
+    if (userdata.userName && userdata.password) {
+      // authenticate(true);
+      console.log(users);
+    }
+  };
+
   return (
     <div className={styles.Signin}>
       <div className={styles.con}>
@@ -69,6 +119,10 @@ function Signin() {
                     <label htmlFor="user">Email address or username</label>
                   </div>
                   <input
+                    onChange={handleUserData}
+                    required
+                    value={userdata.userName}
+                    name="userName"
                     id="user"
                     type="text"
                     placeholder="Email address or username"
@@ -79,15 +133,18 @@ function Signin() {
                     <label htmlFor="pwd">Password</label>
                   </div>
                   <input
+                    onChange={handleUserData}
+                    required
+                    value={userdata.password}
+                    name="password"
                     type="password"
-                    name="pwd"
                     id="pwd"
                     placeholder="Password"
                   />
                 </div>
                 <div className={styles.forgot}>Forgot your password?</div>
                 <div className={styles.login}>
-                  <input type="button" value="LOG IN" />
+                  <input onClick={handleLogin} type="button" value="LOG IN" />
                 </div>
                 <hr className={styles.lastline} />
                 <div className={styles.signup}>

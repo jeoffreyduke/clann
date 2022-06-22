@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../styles/Create.module.css";
 import { signOut, useSession } from "next-auth/react";
 import Body from "../components/Body";
@@ -60,6 +60,11 @@ const IOSSwitch = styled((props) => (
 }));
 
 function CreateComp() {
+  const [userdata, setUserdata] = useState({
+    roomName: "",
+    subject: "",
+  });
+
   return (
     <>
       <div className={styles.heading}>Create your room</div>
