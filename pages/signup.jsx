@@ -9,7 +9,7 @@ import styles from "../styles/Signup.module.css";
 function Signup() {
   const app = initializeApp(firebaseConfig);
 
-  const [userId, setUserId] = useState(1);
+  const [userId, setUserId] = useState(0);
 
   const [userData, setUserData] = useState({
     firstName: "",

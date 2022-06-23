@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { userData } from "../pages/index";
+import { useSelector } from "react-redux";
+import { handleUser } from "../provider/userSlice";
 import Link from "next/link";
 import styles from "../styles/Body.module.css";
 import { signOut, useSession } from "next-auth/react";
@@ -8,6 +9,8 @@ import ExitToAppRoundedIcon from "@mui/icons-material/ExitToAppRounded";
 
 function Body({ profilePic, midComp }) {
   const { data: session, status } = useSession();
+  const selector = useSelector(handleUser);
+  const user = selector.payload.userSlice.value;
 
   const [createActive, setCreateActive] = useState(true);
   const [disActive, setDisActive] = useState(false);
@@ -91,7 +94,7 @@ function Body({ profilePic, midComp }) {
         <div className={styles.userPic}>
           <Avatar
             alt="profile Picture"
-            src={userData.profile_pic}
+            src={user.profile_pic}
             sx={{
               height: "42px",
               width: "42px",

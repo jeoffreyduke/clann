@@ -1,5 +1,6 @@
 import React from "react";
-import { userData } from "../pages/index";
+import { useSelector } from "react-redux";
+import { handleUser } from "../provider/userSlice";
 import Image from "next/image";
 import styles from "../styles/Header.module.css";
 import { signOut, useSession } from "next-auth/react";
@@ -12,6 +13,8 @@ import OtherHousesOutlinedIcon from "@mui/icons-material/OtherHousesOutlined";
 
 function Header() {
   const { data: session, status } = useSession();
+  const selector = useSelector(handleUser);
+  const user = selector.payload.userSlice.value;
 
   return (
     <header className={styles.Header}>
@@ -41,7 +44,7 @@ function Header() {
             type="search"
             name=""
             id=""
-            placeholder={`Looking for a room, ${userData.name}?`}
+            placeholder={`Looking for a room, ${user.name}?`}
           />
         </div>
         <div className={styles.profile}>
@@ -62,8 +65,8 @@ function Header() {
           />
 
           <Avatar
-            alt={userData.name}
-            src={userData.profile_pic}
+            alt={user.name}
+            src={user.profile_pic}
             sx={{
               height: "28px",
               width: "28px",

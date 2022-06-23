@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import userSlice, { handleUser } from "../provider/userSlice";
+import { handleUser } from "../provider/userSlice";
+import { handleAllUsers } from "../provider/allUsersSlice";
+import { handleAuth } from "../provider/authSlice";
 import { firebaseConfig } from ".";
 import { initializeApp } from "firebase/app";
 import { getDatabase, onValue, ref } from "firebase/database";
@@ -9,12 +11,13 @@ import Image from "next/image";
 import { signIn } from "next-auth/react";
 import styles from "../styles/Signin.module.css";
 
-function Signin({ authenticate }) {
+function Signin() {
   const dispatch = useDispatch();
   const selector = useSelector(handleUser);
   const user = selector.payload.userSlice.value;
+  const users = selector.payload.allUsersSlice.value;
+  const auth = selector.payload.authSlice.value;
 
-  let users;
   const [userdata, setUserdata] = useState({
     userName: "",
     password: "",
@@ -23,10 +26,6 @@ function Signin({ authenticate }) {
   const app = initializeApp(firebaseConfig);
   const db = getDatabase();
   const userRef = ref(db, "users/");
-
-  onValue(userRef, (snapshot) => {
-    users = snapshot.val();
-  });
 
   const handleUserData = (e) => {
     setUserdata({
@@ -44,15 +43,10 @@ function Signin({ authenticate }) {
         user.password === userdata.password
       ) {
         dispatch(handleUser(user));
-        authenticate(true);
+        dispatch(handleAuth(true));
         console.log(user);
       }
     });
-
-    if (userdata.userName && userdata.password) {
-      // authenticate(true);
-      console.log(users);
-    }
   };
 
   return (

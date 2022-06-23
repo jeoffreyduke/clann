@@ -1,6 +1,9 @@
 import styles from "../styles/Home.module.css";
 import Signin from "./signin";
 import Header from "../components/Header";
+import { useDispatch, useSelector } from "react-redux";
+import { handleAllUsers, refreshAllUsers } from "../provider/allUsersSlice";
+import { refreshAuth } from "../provider/authSlice";
 import { useSession } from "next-auth/react";
 import Home from "./home";
 import { initializeApp } from "firebase/app";
@@ -11,7 +14,7 @@ import {
 } from "firebase/auth";
 import { getDatabase, onValue, ref } from "firebase/database";
 import { createUser, createRoom } from "./api/database";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const firebaseConfig = {
   apiKey: "AIzaSyDI4J_cygaTFClHNVmHdPtJHy2uTUh3-u0",
@@ -28,20 +31,24 @@ export const app = initializeApp(firebaseConfig);
 const db = getDatabase();
 export const auth = getAuth(app);
 
-createRoom(0, "Alcoholics Anonymous", "Alcoholism", true, true, false);
+const userRef = ref(db, "users/");
 
-const userRef = ref(db, "users/" + 0);
-
-export let userData;
-
-onValue(userRef, (snapshot) => {
-  userData = snapshot.val();
-});
+export let users;
 
 export default function Index() {
   const { data: session, status } = useSession();
+  const dispatch = useDispatch();
+  const selector = useSelector(handleAllUsers);
+  const allUsers = selector.payload.allUsersSlice.value;
+  const auth = selector.payload.authSlice.value;
 
-  const [authenticated, setAuthenticated] = useState(false);
+  useEffect(() => {
+    dispatch(refreshAuth());
+    dispatch(refreshAllUsers());
+    onValue(userRef, (snapshot) => {
+      dispatch(handleAllUsers(snapshot.val()));
+    });
+  }, [dispatch]);
 
   if (status === "loading") {
     return <p>Loading...</p>;
@@ -49,9 +56,9 @@ export default function Index() {
 
   return (
     <div className={styles.container}>
-      {authenticated === false ? (
+      {!auth ? (
         <>
-          <Signin authenticate={setAuthenticated} />
+          <Signin />
         </>
       ) : (
         <>
