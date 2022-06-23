@@ -1,6 +1,14 @@
 import { getDatabase, ref, set, onValue, update } from "firebase/database";
 
-export function createUser(userId, name, username, email, password, imageUrl) {
+export function createUser(
+  userId,
+  name,
+  username,
+  email,
+  password,
+  date,
+  imageUrl
+) {
   const db = getDatabase();
   const userRef = ref(db, "users/" + userId);
 
@@ -9,6 +17,7 @@ export function createUser(userId, name, username, email, password, imageUrl) {
     username: username,
     email: email,
     password: password,
+    date: date,
     profile_pic: imageUrl,
   });
 }

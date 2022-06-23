@@ -9,7 +9,7 @@ import styles from "../styles/Signup.module.css";
 function Signup() {
   const app = initializeApp(firebaseConfig);
 
-  const [userId, setUserId] = useState(0);
+  const [userId, setUserId] = useState(4);
 
   const [userData, setUserData] = useState({
     firstName: "",
@@ -33,11 +33,12 @@ function Signup() {
 
     createUser(
       userId,
-      userData.firstName,
-      userData.surName,
+      userData.firstName + " " + userData.surName,
+      userData.username,
       userData.mobOrEmail,
       userData.password,
-      userData.date
+      userData.date,
+      ""
     );
 
     setUserId((prevUserId) => prevUserId + 1);
@@ -149,7 +150,7 @@ function Signup() {
           <div className={styles.signin}>
             Already have an account?
             <span>
-              <Link href="/signin">
+              <Link href="/">
                 <a className={styles.linkLittle}>LOG IN</a>
               </Link>
             </span>
