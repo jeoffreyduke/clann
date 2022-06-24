@@ -1,16 +1,22 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { handleUser } from "../provider/userSlice";
+import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import { handleUser, refreshUser } from "../provider/userSlice";
 import Link from "next/link";
 import styles from "../styles/Body.module.css";
-import { signOut, useSession } from "next-auth/react";
+import { firebaseConfig } from "../pages";
+import { initializeApp } from "firebase/app";
+import { getAuth, signOut } from "firebase/auth";
 import { Avatar } from "@mui/material";
 import ExitToAppRoundedIcon from "@mui/icons-material/ExitToAppRounded";
 
 function Body({ profilePic, midComp }) {
-  const { data: session, status } = useSession();
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const dispatch = useDispatch();
   const selector = useSelector(handleUser);
   const user = selector.payload.userSlice.value;
+  const router = useRouter();
 
   const [createActive, setCreateActive] = useState(true);
   const [disActive, setDisActive] = useState(false);
@@ -37,13 +43,19 @@ function Body({ profilePic, midComp }) {
     console.log("fav");
   };
 
+  const handleSignOut = () => {
+    dispatch(refreshUser());
+    signOut(auth);
+    router.push("/");
+  };
+
   return (
     <div className={styles.Body}>
       <nav className={styles.nav}>
         <div className={styles.options}>
           <ul>
             <li>
-              <Link href="/">
+              <Link href="/home">
                 <a className={styles.link}>Home</a>
               </Link>
             </li>
@@ -83,7 +95,7 @@ function Body({ profilePic, midComp }) {
       </nav>
       <main className={styles.main}>{midComp}</main>
       <aside className={styles.aside}>
-        <div onClick={() => signOut()}>
+        <div onClick={handleSignOut}>
           <ExitToAppRoundedIcon
             sx={{
               height: "45px",

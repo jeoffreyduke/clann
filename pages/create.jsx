@@ -1,10 +1,14 @@
 import React, { useState } from "react";
+import { createRoom } from "./api/database";
+import { useSelector, useDispatch } from "react-redux";
+import { handleAllUsers } from "../provider/allUsersSlice";
 import styles from "../styles/Create.module.css";
 import { signOut, useSession } from "next-auth/react";
 import Body from "../components/Body";
 import Switch from "@mui/material/Switch";
 import { styled } from "@mui/material/styles";
 import Header from "../components/Header";
+import { useRef, useEffect } from "react";
 
 const label = { inputProps: { "aria-label": "Record Switch" } };
 
@@ -60,10 +64,54 @@ const IOSSwitch = styled((props) => (
 }));
 
 function CreateComp() {
-  const [userdata, setUserdata] = useState({
+  const selector = useSelector(handleAllUsers);
+  const roomId = selector.payload.allRoomsSlice.value.length + 1;
+
+  const [roomData, setRoomData] = useState({
     roomName: "",
-    subject: "",
   });
+
+  const [selectData, setSelectData] = useState();
+  const [inviteChecked, setInviteChecked] = useState(false);
+  const [adulthecked, setAdultChecked] = useState(false);
+  const [anonymousChecked, setAnonymousChecked] = useState(false);
+
+  const handleInviteChecked = (e) => {
+    setInviteChecked(e.target.checked);
+  };
+
+  const handleAdultChecked = (e) => {
+    setAdultChecked(e.target.checked);
+  };
+
+  const handleAnonymousChecked = (e) => {
+    setAnonymousChecked(e.target.checked);
+  };
+
+  const handleRoomData = (e) => {
+    setRoomData({
+      ...roomData,
+      [e.target.name]: e.target.value,
+    });
+    console.log(roomData);
+  };
+
+  const handleSelectData = (e) => {
+    setSelectData(e.target.value);
+  };
+
+  const handleCreateRoom = (e) => {
+    e.preventDefault();
+
+    createRoom(
+      roomId,
+      roomData.roomName,
+      selectData,
+      inviteChecked,
+      adulthecked,
+      anonymousChecked
+    );
+  };
 
   return (
     <>
@@ -73,6 +121,8 @@ function CreateComp() {
           <label htmlFor="roomName">What will you call your room?</label>
         </div>
         <input
+          onChange={handleRoomData}
+          value={roomData.roomName}
           type="text"
           name="roomName"
           placeholder="Please pick a name that is relevant to the subject"
@@ -83,34 +133,52 @@ function CreateComp() {
           <label htmlFor="subject">Subject</label>
         </div>
         <select name="subject" className={styles.subject}>
-          <option value="Alcoholism">Alcoholism</option>
-          <option value="Drug Abuse">Drug Abuse</option>
-          <option value="Gambling">Gambling</option>
+          <option onClick={handleSelectData} value="Alcoholism">
+            Alcoholism
+          </option>
+          <option onClick={handleSelectData} value="Drug Abuse">
+            Drug Abuse
+          </option>
+          <option onClick={handleSelectData} value="Gambling">
+            Gambling
+          </option>
         </select>
       </div>
 
       <div className={styles.swCon}>
         <div className={styles.switch}>
           <div className={styles.switchLabel}>Invite Only</div>
-          <IOSSwitch {...label} defaultChecked={false} />
+          <IOSSwitch
+            {...label}
+            checked={inviteChecked}
+            onChange={handleInviteChecked}
+          />
         </div>
       </div>
 
       <div className={styles.swCon}>
         <div className={styles.switch}>
           <div className={styles.switchLabel}>Adults Only</div>
-          <IOSSwitch {...label} defaultChecked={false} />
+          <IOSSwitch
+            {...label}
+            checked={adulthecked}
+            onChange={handleAdultChecked}
+          />
         </div>
       </div>
 
       <div className={styles.swCon}>
         <div className={styles.switch}>
           <div className={styles.switchLabel}>Anonymous</div>
-          <IOSSwitch {...label} defaultChecked={false} />
+          <IOSSwitch
+            {...label}
+            checked={anonymousChecked}
+            onChange={handleAnonymousChecked}
+          />
         </div>
       </div>
       <div className={styles.btn}>
-        <button>Start it up</button>
+        <button onClick={handleCreateRoom}>Start it up</button>
       </div>
     </>
   );

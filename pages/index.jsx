@@ -3,18 +3,17 @@ import Signin from "./signin";
 import Header from "../components/Header";
 import { useDispatch, useSelector } from "react-redux";
 import { handleAllUsers, refreshAllUsers } from "../provider/allUsersSlice";
+import { handleAllRooms, refreshAllRooms } from "../provider/allRoomsSlice";
 import { refreshAuth } from "../provider/authSlice";
 import { useSession } from "next-auth/react";
 import Home from "./home";
 import { initializeApp } from "firebase/app";
-import {
-  getAuth,
-  connectAuthEmulator,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { getDatabase, onValue, ref } from "firebase/database";
 import { createUser, createRoom } from "./api/database";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 export const firebaseConfig = {
   apiKey: "AIzaSyDI4J_cygaTFClHNVmHdPtJHy2uTUh3-u0",
@@ -27,45 +26,42 @@ export const firebaseConfig = {
   measurementId: "G-MNJR2E2C0P",
 };
 
-export const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 const db = getDatabase();
-export const auth = getAuth(app);
+const auth = getAuth(app);
 
 const userRef = ref(db, "users/");
+const roomRef = ref(db, "rooms/");
 
 export let users;
 
 export default function Index() {
-  const { data: session, status } = useSession();
+  const router = useRouter();
+  const [user, loading, error] = useAuthState(auth);
   const dispatch = useDispatch();
   const selector = useSelector(handleAllUsers);
   const allUsers = selector.payload.allUsersSlice.value;
-  const auth = selector.payload.authSlice.value;
+  const allRooms = selector.payload.allRoomsSlice.value;
 
   useEffect(() => {
     dispatch(refreshAuth());
     dispatch(refreshAllUsers());
+    dispatch(refreshAllRooms());
     onValue(userRef, (snapshot) => {
       dispatch(handleAllUsers(snapshot.val()));
     });
+    onValue(roomRef, (snapshot) => {
+      dispatch(handleAllRooms(snapshot.val()));
+    });
   }, [dispatch]);
 
-  if (status === "loading") {
+  if (error) {
+    alert(error);
+  }
+
+  if (loading) {
     return <p>Loading...</p>;
   }
 
-  return (
-    <div className={styles.container}>
-      {!auth ? (
-        <>
-          <Signin />
-        </>
-      ) : (
-        <>
-          <Header />
-          <Home />
-        </>
-      )}
-    </div>
-  );
+  return <div className={styles.container}>{user ? <Home /> : <Signin />}</div>;
 }

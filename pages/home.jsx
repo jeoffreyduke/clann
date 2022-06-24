@@ -3,6 +3,7 @@ import { signOut, useSession } from "next-auth/react";
 import Body from "../components/Body";
 import styles from "../styles/Home.module.css";
 import { Avatar, AvatarGroup } from "@mui/material";
+import Header from "../components/Header";
 
 function homeComp() {
   return (
@@ -99,6 +100,7 @@ function Home() {
 
   return (
     <>
+      <Header />
       <Body midComp={homeComp()} />
     </>
   );

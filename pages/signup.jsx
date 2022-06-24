@@ -1,15 +1,22 @@
 import React, { useState } from "react";
+import { useRouter } from "next/router";
+import { useSelector, useDispatch } from "react-redux";
+import { handleAllUsers } from "../provider/allUsersSlice";
 import Link from "next/link";
 import Image from "next/image";
 import { firebaseConfig } from ".";
 import { initializeApp } from "firebase/app";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { createUser } from "./api/database";
 import styles from "../styles/Signup.module.css";
 
 function Signup() {
   const app = initializeApp(firebaseConfig);
-
-  const [userId, setUserId] = useState(4);
+  const auth = getAuth(app);
+  const selector = useSelector(handleAllUsers);
+  const [user] = useAuthState(auth);
+  const router = useRouter();
 
   const [userData, setUserData] = useState({
     firstName: "",
@@ -20,29 +27,43 @@ function Signup() {
     date: "",
   });
 
+  const createAccount = async (e) => {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        userData.mobOrEmail,
+        userData.password
+      );
+
+      createUser(
+        userCredential.user.uid,
+        userData.firstName + " " + userData.surName,
+        userData.username,
+        userData.mobOrEmail,
+        userData.password,
+        userData.date,
+        ""
+      );
+
+      console.log(userCredential.user);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleUserData = (e) => {
     setUserData({
       ...userData,
       [e.target.name]: e.target.value,
     });
-    console.log(userData);
   };
 
   const handleSignup = (e) => {
     e.preventDefault();
 
-    createUser(
-      userId,
-      userData.firstName + " " + userData.surName,
-      userData.username,
-      userData.mobOrEmail,
-      userData.password,
-      userData.date,
-      ""
-    );
+    createAccount();
 
-    setUserId((prevUserId) => prevUserId + 1);
-    console.log(userData.firstName + "has been created");
+    if (user) router.push("/");
   };
 
   return (
@@ -110,7 +131,7 @@ function Signup() {
               required
               type="password"
               id="pwd"
-              placeholder=" New Password"
+              placeholder="New Password"
             />
           </div>
 

@@ -5,6 +5,7 @@ import { handleAllUsers } from "../provider/allUsersSlice";
 import { handleAuth } from "../provider/authSlice";
 import { firebaseConfig } from ".";
 import { initializeApp } from "firebase/app";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { getDatabase, onValue, ref } from "firebase/database";
 import Link from "next/link";
 import Image from "next/image";
@@ -16,16 +17,34 @@ function Signin() {
   const selector = useSelector(handleUser);
   const user = selector.payload.userSlice.value;
   const users = selector.payload.allUsersSlice.value;
-  const auth = selector.payload.authSlice.value;
 
   const [userdata, setUserdata] = useState({
-    userName: "",
+    email: "",
     password: "",
   });
 
+  const [error, setError] = useState("");
+
   const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
   const db = getDatabase();
   const userRef = ref(db, "users/");
+
+  const loginEmailPassword = async (e) => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        userdata.email,
+        userdata.password
+      );
+      console.log(userCredential.user);
+    } catch (error) {
+      error === "FirebaseError: Firebase: Error (auth/wrong-password)."
+        ? setError("Wrong password, please try again")
+        : setError("Your email does not seem to be correct");
+      console.log(error);
+    }
+  };
 
   const handleUserData = (e) => {
     setUserdata({
@@ -37,16 +56,16 @@ function Signin() {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    users.forEach((user) => {
+    for (const key in users) {
       if (
-        user.username === userdata.userName &&
-        user.password === userdata.password
+        users[key].email === userdata.email &&
+        users[key].password === userdata.password
       ) {
-        dispatch(handleUser(user));
-        dispatch(handleAuth(true));
-        console.log(user);
+        dispatch(handleUser(users[key]));
+        loginEmailPassword();
+        console.log(users[key]);
       }
-    });
+    }
   };
 
   return (
@@ -110,16 +129,16 @@ function Signin() {
               <form action="get" onSubmit={(e) => e.preventDefault()}>
                 <div className={styles.user}>
                   <div>
-                    <label htmlFor="user">Email address or username</label>
+                    <label htmlFor="user">Email address</label>
                   </div>
                   <input
                     onChange={handleUserData}
                     required
-                    value={userdata.userName}
-                    name="userName"
+                    value={userdata.email}
+                    name="email"
                     id="user"
                     type="text"
-                    placeholder="Email address or username"
+                    placeholder="Email address"
                   />
                 </div>
                 <div className={styles.pwd}>
@@ -136,6 +155,7 @@ function Signin() {
                     placeholder="Password"
                   />
                 </div>
+                <p>{}</p>
                 <div className={styles.forgot}>Forgot your password?</div>
                 <div className={styles.login}>
                   <input onClick={handleLogin} type="button" value="LOG IN" />
