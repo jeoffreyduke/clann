@@ -29,11 +29,8 @@ export const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase();
 const auth = getAuth(app);
-
 const userRef = ref(db, "users/");
 const roomRef = ref(db, "rooms/");
-
-export let users;
 
 export default function Index() {
   const router = useRouter();
@@ -56,7 +53,7 @@ export default function Index() {
   }, [dispatch]);
 
   if (error) {
-    alert(error);
+    return <p>{error}</p>;
   }
 
   if (loading) {

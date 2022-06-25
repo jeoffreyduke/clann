@@ -15,6 +15,7 @@ function Body({ profilePic, midComp }) {
   const auth = getAuth(app);
   const dispatch = useDispatch();
   const selector = useSelector(handleUser);
+  const rooms = selector.payload.allRoomsSlice.value;
   const user = selector.payload.userSlice.value;
   const router = useRouter();
 
@@ -49,6 +50,12 @@ function Body({ profilePic, midComp }) {
     router.push("/");
   };
 
+  const trimName = (name) => {
+    if (name.length > 10) {
+      return name.substring(0, 10) + "...";
+    } else return name;
+  };
+
   return (
     <div className={styles.Body}>
       <nav className={styles.nav}>
@@ -74,21 +81,17 @@ function Body({ profilePic, midComp }) {
         <div className={styles.rooms}>
           <p className={styles.roomsTitle}>Rooms</p>
           <ul>
-            <li>
-              <Link href="/room">
-                <a className={styles.linkLittle}>Ipsum</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/room">
-                <a className={styles.linkLittle}>Lorem</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/room">
-                <a className={styles.linkLittle}>Alcholics</a>
-              </Link>
-            </li>
+            {!rooms
+              ? ""
+              : Object.keys(rooms).map((room) => (
+                  <li key={room + Math.random()}>
+                    <Link href={`/room/${room}`}>
+                      <a className={styles.linkLittle}>
+                        {trimName(rooms[room].name)}
+                      </a>
+                    </Link>
+                  </li>
+                ))}
           </ul>
         </div>
         <div className={styles.copyright}>© 2022 Clann</div>

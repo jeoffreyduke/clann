@@ -104,8 +104,8 @@
 }
 
 .copyright {
-  position: relative;
-  top: 4.5rem;
+  margin-top: 6.5rem;
+  align-items: flex-end;
   font-size: 0.8rem;
   font-family: var(--fontFamRegular);
 }

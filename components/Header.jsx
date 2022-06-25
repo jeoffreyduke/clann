@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { useSelector } from "react-redux";
 import { handleUser } from "../provider/userSlice";
 import Image from "next/image";
@@ -59,10 +60,12 @@ function Header() {
           <GroupsOutlinedIcon
             sx={{ color: "#707070", position: "relative", top: "0.7rem" }}
           />
-          <OtherHousesOutlinedIcon
-            fontSize="small"
-            sx={{ color: "#707070", position: "relative", top: "0.7rem" }}
-          />
+          <Link href="/favorites">
+            <OtherHousesOutlinedIcon
+              fontSize="small"
+              sx={{ color: "#707070", position: "relative", top: "0.7rem" }}
+            />
+          </Link>
 
           <Avatar
             alt={user.name}

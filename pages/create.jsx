@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-import { createRoom } from "./api/database";
+import { firebaseConfig } from ".";
+import { initializeApp } from "firebase/app";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { createRoom, addUserToRoom } from "./api/database";
 import { useSelector, useDispatch } from "react-redux";
 import { handleAllUsers } from "../provider/allUsersSlice";
 import styles from "../styles/Create.module.css";
@@ -64,8 +68,13 @@ const IOSSwitch = styled((props) => (
 }));
 
 function CreateComp() {
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const [userData, loading, error] = useAuthState(auth);
   const selector = useSelector(handleAllUsers);
-  const roomId = selector.payload.allRoomsSlice.value.length + 1;
+  const users = selector.payload.allUsersSlice.value;
+  const user = selector.payload.userSlice.value;
+  const roomId = Date.now();
 
   const [roomData, setRoomData] = useState({
     roomName: "",
@@ -109,7 +118,19 @@ function CreateComp() {
       selectData,
       inviteChecked,
       adulthecked,
-      anonymousChecked
+      anonymousChecked,
+      user.name
+    );
+
+    addUserToRoom(
+      userData.uid,
+      user.name,
+      user.username,
+      user.email,
+      user.password,
+      user.date,
+      user.profile_pic,
+      roomId
     );
   };
 

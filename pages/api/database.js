@@ -13,11 +13,11 @@ export function createUser(
   const userRef = ref(db, "users/" + userId);
 
   set(userRef, {
-    name: name,
-    username: username,
-    email: email,
-    password: password,
-    date: date,
+    name,
+    username,
+    email,
+    password,
+    date,
     profile_pic: imageUrl,
   });
 }
@@ -28,16 +28,41 @@ export function createRoom(
   subject,
   inviteOnly,
   adultsOnly,
-  anonymous
+  anonymous,
+  createdBy
 ) {
   const db = getDatabase();
   const roomRef = ref(db, "rooms/" + roomId);
 
   set(roomRef, {
-    name: name,
-    subject: subject,
-    inviteOnly: inviteOnly,
-    adultsOnly: adultsOnly,
-    anonymous: anonymous,
+    name,
+    subject,
+    inviteOnly,
+    adultsOnly,
+    anonymous,
+    createdBy,
+  });
+}
+
+export function addUserToRoom(
+  userId,
+  name,
+  username,
+  email,
+  password,
+  date,
+  imageUrl,
+  roomId
+) {
+  const db = getDatabase();
+  const roomUserRef = ref(db, "rooms/" + `${roomId}/` + "users/" + userId);
+
+  set(roomUserRef, {
+    name,
+    username,
+    email,
+    password,
+    date,
+    profile_pic: imageUrl,
   });
 }
