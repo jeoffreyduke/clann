@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
-import { SocketContext } from "../../provider/SocketContext";
 import styles from "../../styles/Room.module.css";
 import { handleAllRooms } from "../../provider/allRoomsSlice";
 import { useRouter } from "next/router";
@@ -21,14 +20,21 @@ function RoomComp() {
   const users = selector.payload.allUsersSlice.value;
   const router = useRouter();
   const { roomId } = router.query;
+  const [idActive, setIdActive] = useState(false);
   const [roomActive, setRoomActive] = useState(false);
   const [peers, setPeers] = useState([]);
   const socketRef = useRef();
   const userAudio = useRef();
   const peersRef = useRef([]);
 
-  const handleStartSession = () => {
-    setRoomActive(true);
+  useEffect(() => {
+    if (router.isReady) {
+      setIdActive(true);
+    }
+  }, [router.isReady]);
+
+  useEffect(() => {
+    if (roomActive === false) return;
     socketRef.current = io.connect("/");
     navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
       userAudio.current.srcObject = stream;
@@ -61,11 +67,10 @@ function RoomComp() {
         item.peer.signal(payload.signal);
       });
     });
-  };
+  }, [roomId, roomActive]);
 
   const handleEndSession = () => {
     setRoomActive(false);
-    setRoomActive();
     socketRef.current.close();
     router.push("/");
   };
@@ -107,20 +112,22 @@ function RoomComp() {
   return (
     <>
       <div className={styles.header}>
-        <div className={styles.title}>{rooms[roomId].name}</div>
+        <div className={styles.title}>{rooms[roomId]?.name}</div>
         <div className={styles.headerCon}>
           <div className={styles.roomUsers}>
             <AvatarGroup
               max={3}
-              total={Object.keys(rooms[roomId].users).length}
+              total={idActive ? Object.keys(rooms[roomId]?.users).length : ""}
             >
-              {Object.keys(rooms[roomId].users).map((user) => (
-                <Avatar
-                  key={user + Math.random()}
-                  alt={users[user].name}
-                  src={users[user].profile_pic}
-                />
-              ))}
+              {idActive
+                ? Object.keys(rooms[roomId]?.users).map((user) => (
+                    <Avatar
+                      key={user + Math.random()}
+                      alt={users[user].name}
+                      src={users[user].profile_pic}
+                    />
+                  ))
+                : ""}
             </AvatarGroup>
           </div>
 
@@ -137,10 +144,10 @@ function RoomComp() {
           </div>
         </div>
       </div>
-      {user.name === rooms[roomId].createdBy.name ? (
+      {user.name === rooms[roomId]?.createdBy.name ? (
         <div className={styles.begin}>
           {!roomActive ? (
-            <button onClick={handleStartSession}>Start</button>
+            <button onClick={() => setRoomActive(true)}>Start</button>
           ) : (
             <button onClick={handleEndSession}>End</button>
           )}
@@ -151,10 +158,10 @@ function RoomComp() {
       <div className={styles.participators}>
         <div className={styles.pAvatars}>
           <Avatar
-            alt={rooms[roomId].createdBy.name}
-            src={rooms[roomId].createdBy.profile_pic}
+            alt={rooms[roomId]?.createdBy.name}
+            src={rooms[roomId]?.createdBy.profile_pic}
           />
-          <div className={styles.userName}>{rooms[roomId].createdBy.name}</div>
+          <div className={styles.userName}>{rooms[roomId]?.createdBy.name}</div>
           <div className={styles.userRole}>Admin</div>
           <div>
             <audio autoPlay ref={userAudio} />
@@ -163,20 +170,28 @@ function RoomComp() {
             })}
           </div>
         </div>
-        {Object.keys(rooms[roomId].users)
-          .filter((user) => users[user].name !== rooms[roomId].createdBy.name)
-          .map((user) => (
-            <div className={styles.pAvatars} key={Math.random() + user}>
-              <Avatar alt={users[user].name} src={users[user].profile_pic} />
-              <div className={styles.userName}>{users[user].name}</div>
-              <div className={styles.userRole}>Admin</div>
-            </div>
-          ))}
+        {idActive
+          ? Object.keys(rooms[roomId]?.users)
+              .filter(
+                (user) => users[user].name !== rooms[roomId]?.createdBy.name
+              )
+              .map((user) => (
+                <div className={styles.pAvatars} key={Math.random() + user}>
+                  <Avatar
+                    alt={users[user].name}
+                    src={users[user].profile_pic}
+                  />
+                  <div className={styles.userName}>{users[user].name}</div>
+                  <div className={styles.userRole}>Admin</div>
+                </div>
+              ))
+          : ""}
       </div>
     </>
   );
 }
 
+// Audio Component
 const Audio = (props) => {
   const ref = useRef();
 
@@ -194,7 +209,7 @@ function room() {
   return (
     <>
       <Header />
-      <Body midComp={RoomComp()} />
+      <Body midComp={<RoomComp />} />
     </>
   );
 }

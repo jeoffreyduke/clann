@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
+import { HomeComp } from "../pages/home";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { handleUser, refreshUser } from "../provider/userSlice";

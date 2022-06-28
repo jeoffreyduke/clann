@@ -216,7 +216,7 @@ function Create() {
   return (
     <>
       <Header />
-      <Body midComp={CreateComp()} />
+      <Body midComp={<CreateComp />} />
     </>
   );
 }

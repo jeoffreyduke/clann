@@ -13,7 +13,7 @@ import styles from "../styles/Home.module.css";
 import { Avatar, AvatarGroup } from "@mui/material";
 import Header from "../components/Header";
 
-function HomeComp() {
+export function HomeComp() {
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const selector = useSelector(handleAllRooms);
@@ -173,7 +173,7 @@ function Home() {
   return (
     <>
       <Header />
-      <Body midComp={HomeComp()} />
+      <Body midComp={<HomeComp />} />
     </>
   );
 }
