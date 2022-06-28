@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
+import { SocketContext } from "../../provider/SocketContext";
 import styles from "../../styles/Room.module.css";
 import { handleAllRooms } from "../../provider/allRoomsSlice";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { signOut, useSession } from "next-auth/react";
+import io from "socket.io-client";
+import Peer from "simple-peer";
 import Header from "../../components/Header";
 import Body from "../../components/Body";
 import { Avatar, AvatarGroup } from "@mui/material";
@@ -14,9 +17,92 @@ import AddReactionOutlinedIcon from "@mui/icons-material/AddReactionOutlined";
 function RoomComp() {
   const selector = useSelector(handleAllRooms);
   const rooms = selector.payload.allRoomsSlice.value;
+  const user = selector.payload.userSlice.value;
   const users = selector.payload.allUsersSlice.value;
   const router = useRouter();
   const { roomId } = router.query;
+  const [roomActive, setRoomActive] = useState(false);
+  const [peers, setPeers] = useState([]);
+  const socketRef = useRef();
+  const userAudio = useRef();
+  const peersRef = useRef([]);
+
+  const handleStartSession = () => {
+    setRoomActive(true);
+    socketRef.current = io.connect("/");
+    navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
+      userAudio.current.srcObject = stream;
+      socketRef.current.emit("join room", roomId);
+      socketRef.current.on("all users", (users) => {
+        const peers = [];
+        users.forEach((userID) => {
+          const peer = createPeer(userID, socketRef.current.id, stream);
+          peersRef.current.push({
+            peerID: userID,
+            peer,
+          });
+          peers.push(peer);
+        });
+        setPeers(peers);
+      });
+
+      socketRef.current.on("user joined", (payload) => {
+        const peer = addPeer(payload.signal, payload.callerID, stream);
+        peersRef.current.push({
+          peerID: payload.callerID,
+          peer,
+        });
+
+        setPeers((users) => [...users, peer]);
+      });
+
+      socketRef.current.on("receiving returned signal", (payload) => {
+        const item = peersRef.current.find((p) => p.peerID === payload.id);
+        item.peer.signal(payload.signal);
+      });
+    });
+  };
+
+  const handleEndSession = () => {
+    setRoomActive(false);
+    setRoomActive();
+    socketRef.current.close();
+    router.push("/");
+  };
+
+  function createPeer(userToSignal, callerID, stream) {
+    const peer = new Peer({
+      initiator: true,
+      trickle: false,
+      stream,
+    });
+
+    peer.on("signal", (signal) => {
+      socketRef.current.emit("sending signal", {
+        userToSignal,
+        callerID,
+        signal,
+      });
+    });
+
+    return peer;
+  }
+
+  function addPeer(incomingSignal, callerID, stream) {
+    const peer = new Peer({
+      initiator: false,
+      trickle: false,
+      stream,
+    });
+
+    peer.on("signal", (signal) => {
+      socketRef.current.emit("returning signal", { signal, callerID });
+    });
+
+    peer.signal(incomingSignal);
+
+    return peer;
+  }
 
   return (
     <>
@@ -51,22 +137,58 @@ function RoomComp() {
           </div>
         </div>
       </div>
+      {user.name === rooms[roomId].createdBy.name ? (
+        <div className={styles.begin}>
+          {!roomActive ? (
+            <button onClick={handleStartSession}>Start</button>
+          ) : (
+            <button onClick={handleEndSession}>End</button>
+          )}
+        </div>
+      ) : (
+        ""
+      )}
       <div className={styles.participators}>
-        {!users ? (
-          <div className={styles.noUsers}>No users</div>
-        ) : (
-          Object.keys(rooms[roomId].users).map((user) => (
+        <div className={styles.pAvatars}>
+          <Avatar
+            alt={rooms[roomId].createdBy.name}
+            src={rooms[roomId].createdBy.profile_pic}
+          />
+          <div className={styles.userName}>{rooms[roomId].createdBy.name}</div>
+          <div className={styles.userRole}>Admin</div>
+          <div>
+            <audio autoPlay ref={userAudio} />
+            {peers.map((peer, index) => {
+              return <Audio key={index} peer={peer} />;
+            })}
+          </div>
+        </div>
+        {Object.keys(rooms[roomId].users)
+          .filter((user) => users[user].name !== rooms[roomId].createdBy.name)
+          .map((user) => (
             <div className={styles.pAvatars} key={Math.random() + user}>
               <Avatar alt={users[user].name} src={users[user].profile_pic} />
               <div className={styles.userName}>{users[user].name}</div>
               <div className={styles.userRole}>Admin</div>
             </div>
-          ))
-        )}
+          ))}
       </div>
     </>
   );
 }
+
+const Audio = (props) => {
+  const ref = useRef();
+
+  useEffect(() => {
+    props.peer.on("stream", (stream) => {
+      ref.current.srcObject = stream;
+    });
+    /* eslint-disable */
+  }, []);
+
+  return <audio autoPlay ref={ref} />;
+};
 
 function room() {
   return (

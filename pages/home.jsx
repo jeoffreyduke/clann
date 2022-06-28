@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Link from "next/link";
 import { firebaseConfig } from ".";
 import { initializeApp } from "firebase/app";
@@ -21,8 +21,6 @@ function HomeComp() {
   const users = selector.payload.allUsersSlice.value;
   const user = selector.payload.userSlice.value;
   const [userData, loading, error] = useAuthState(auth);
-
-  console.log(userData);
 
   const handleAddUser = (id) => {
     addUserToRoom(

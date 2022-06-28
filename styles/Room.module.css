@@ -15,6 +15,29 @@
   z-index: 100;
 }
 
+.begin {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.begin > button {
+  position: relative;
+  right: 0.25rem;
+  height: 2rem;
+  width: 4rem;
+  font-size: 0.8rem;
+  color: #fff;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(140, 82, 255, 1) 100%,
+    rgba(39, 118, 234, 1) 35%
+  );
+  border: none;
+  border-radius: 0.2rem;
+}
+
 .title {
   position: relative;
   top: 5rem;
@@ -81,4 +104,8 @@
 
 .userRole {
   font-size: 0.8rem;
+}
+
+.audio {
+  border: 1px solid red;
 }

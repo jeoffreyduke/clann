@@ -22,7 +22,10 @@
     "react-firebase-hooks": "^5.0.3",
     "react-redux": "^8.0.2",
     "redux": "^4.2.0",
-    "redux-persist": "^6.0.0"
+    "redux-persist": "^6.0.0",
+    "simple-peer": "^9.11.1",
+    "socket.io-client": "^4.5.1",
+    "uuidv4": "^6.2.13"
   },
   "devDependencies": {
     "eslint": "8.15.0",

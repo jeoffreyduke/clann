@@ -13,6 +13,8 @@ import Switch from "@mui/material/Switch";
 import { styled } from "@mui/material/styles";
 import Header from "../components/Header";
 import { useRef, useEffect } from "react";
+import { useRouter } from "next/router";
+import { uuid } from "uuidv4";
 
 const label = { inputProps: { "aria-label": "Record Switch" } };
 
@@ -74,7 +76,8 @@ function CreateComp() {
   const selector = useSelector(handleAllUsers);
   const users = selector.payload.allUsersSlice.value;
   const user = selector.payload.userSlice.value;
-  const roomId = Date.now();
+  const roomId = uuid();
+  const router = useRouter();
 
   const [roomData, setRoomData] = useState({
     roomName: "",
@@ -119,7 +122,7 @@ function CreateComp() {
       inviteChecked,
       adulthecked,
       anonymousChecked,
-      user.name
+      user
     );
 
     addUserToRoom(
@@ -132,6 +135,8 @@ function CreateComp() {
       user.profile_pic,
       roomId
     );
+
+    router.push(`/room/${roomId}`);
   };
 
   return (
