@@ -49,17 +49,26 @@ function Header() {
           />
         </div>
         <div className={styles.profile}>
-          <WhatshotOutlinedIcon
-            fontSize="small"
-            sx={{ color: "#707070", position: "relative", top: "0.7rem" }}
-          />
-          <NotificationsNoneOutlinedIcon
-            fontSize="small"
-            sx={{ color: "#707070", position: "relative", top: "0.7rem" }}
-          />
-          <GroupsOutlinedIcon
-            sx={{ color: "#707070", position: "relative", top: "0.7rem" }}
-          />
+          <Link href="/popular">
+            <WhatshotOutlinedIcon
+              fontSize="small"
+              sx={{ color: "#707070", position: "relative", top: "0.7rem" }}
+            />
+          </Link>
+
+          <Link href="/notifications">
+            <NotificationsNoneOutlinedIcon
+              fontSize="small"
+              sx={{ color: "#707070", position: "relative", top: "0.7rem" }}
+            />
+          </Link>
+
+          <Link href="/friends">
+            <GroupsOutlinedIcon
+              sx={{ color: "#707070", position: "relative", top: "0.7rem" }}
+            />
+          </Link>
+
           <Link href="/favorites">
             <OtherHousesOutlinedIcon
               fontSize="small"
@@ -67,17 +76,19 @@ function Header() {
             />
           </Link>
 
-          <Avatar
-            alt={user.name}
-            src={user.profile_pic}
-            sx={{
-              height: "28px",
-              width: "28px",
-              position: "relative",
-              top: "0.4rem",
-              left: "0.3rem",
-            }}
-          />
+          <Link href="/profile">
+            <Avatar
+              alt={user.name}
+              src={user.profile_pic}
+              sx={{
+                height: "28px",
+                width: "28px",
+                position: "relative",
+                top: "0.4rem",
+                left: "0.3rem",
+              }}
+            />
+          </Link>
         </div>
       </div>
     </header>

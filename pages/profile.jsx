@@ -2,21 +2,21 @@ import React from "react";
 import Body from "../components/Body";
 import Header from "../components/Header";
 
-function FavComp() {
+function ProfileComp() {
   return (
     <>
-      <div>Notifications</div>
+      <div>Profile</div>
     </>
   );
 }
 
-function Notifications() {
+function Profile() {
   return (
     <>
       <Header />
-      <Body midComp={<FavComp />} />
+      <Body midComp={<ProfileComp />} />
     </>
   );
 }
 
-export default Notifications;
+export default Profile;

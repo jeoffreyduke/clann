@@ -1,7 +1,22 @@
 import React from "react";
+import Header from "../components/Header";
+import Body from "../components/Body";
 
-function popular() {
-  return <div>popular</div>;
+function PopularComp() {
+  return (
+    <>
+      <div>popular</div>
+    </>
+  );
 }
 
-export default popular;
+function Popular() {
+  return (
+    <>
+      <Header />
+      <Body midComp={<PopularComp />} />
+    </>
+  );
+}
+
+export default Popular;

@@ -5,7 +5,7 @@ import Header from "../components/Header";
 import Body from "../components/Body";
 import { Avatar, AvatarGroup } from "@mui/material";
 
-function favComp() {
+function FavComp() {
   return (
     <>
       <div>
@@ -34,7 +34,7 @@ function Favorites() {
   return (
     <>
       <Header />
-      <Body midComp={favComp()} />
+      <Body midComp={<FavComp />} />
     </>
   );
 }

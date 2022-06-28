@@ -108,14 +108,16 @@ function Body({ profilePic, midComp }) {
           />
         </div>
         <div className={styles.userPic}>
-          <Avatar
-            alt="profile Picture"
-            src={user.profile_pic}
-            sx={{
-              height: "42px",
-              width: "42px",
-            }}
-          />
+          <Link href="/profile">
+            <Avatar
+              alt="profile Picture"
+              src={user.profile_pic}
+              sx={{
+                height: "42px",
+                width: "42px",
+              }}
+            />
+          </Link>
         </div>
       </aside>
     </div>
