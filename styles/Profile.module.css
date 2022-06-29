@@ -1,0 +1,93 @@
+.header {
+  height: 12rem;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  left: 0;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(140, 82, 255, 1) 100%,
+    rgba(39, 118, 234, 1) 35%
+  );
+  z-index: 100;
+}
+
+.editCover {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+}
+
+.editCover > div {
+  height: fit-content;
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+.profilePic {
+  height: fit-content;
+  width: fit-content;
+  position: relative;
+  bottom: 6rem;
+  left: 1rem;
+  z-index: 100;
+  padding: 0.2rem;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+.profileName {
+  position: relative;
+  bottom: 6rem;
+  left: 1.3rem;
+  z-index: 100;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.profileUserName {
+  position: relative;
+  bottom: 6rem;
+  left: 1.3rem;
+  z-index: 100;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: #5c5d5f;
+}
+
+.edCon {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+}
+
+.editProfile {
+  position: relative;
+  right: 1rem;
+  bottom: 10.9rem;
+}
+
+.editProfile > button {
+  width: 6.5rem;
+  padding: 0.6rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--mainColor);
+  background-color: transparent;
+  border-radius: 5rem;
+  border: 1.8px solid var(--mainColor);
+}
+
+.profileBio {
+  position: relative;
+  bottom: 6rem;
+  left: 1.3rem;
+  font-size: 0.9rem;
+}

@@ -76,7 +76,7 @@ function Header() {
             />
           </Link>
 
-          <Link href="/profile">
+          <Link href={`/user/${user.username}`}>
             <Avatar
               alt={user.name}
               src={user.profile_pic}

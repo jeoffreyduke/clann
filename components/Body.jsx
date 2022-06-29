@@ -57,6 +57,8 @@ function Body({ profilePic, midComp }) {
     } else return name;
   };
 
+  console.log(user);
+
   return (
     <div className={styles.Body}>
       <nav className={styles.nav}>
@@ -108,7 +110,7 @@ function Body({ profilePic, midComp }) {
           />
         </div>
         <div className={styles.userPic}>
-          <Link href="/profile">
+          <Link href={`/user/${user.username}`}>
             <Avatar
               alt="profile Picture"
               src={user.profile_pic}
