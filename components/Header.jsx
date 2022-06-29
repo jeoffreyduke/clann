@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { useSelector } from "react-redux";
 import { handleUser } from "../provider/userSlice";
@@ -11,87 +11,130 @@ import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNone
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import GroupsOutlinedIcon from "@mui/icons-material/GroupsOutlined";
 import OtherHousesOutlinedIcon from "@mui/icons-material/OtherHousesOutlined";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 function Header() {
   const { data: session, status } = useSession();
   const selector = useSelector(handleUser);
   const user = selector.payload.userSlice.value;
+  const [drop, setDrop] = useState(false);
+
+  const handleDrop = () => {
+    setDrop(!drop);
+  };
 
   return (
-    <header className={styles.Header}>
-      <div className={styles.headerCon}>
-        <div className={styles.logo}>
-          <Image
-            src="/../public/assets/clann/3.png"
-            alt="logo"
-            height={250}
-            width={250}
-          />
-        </div>
-        <div className={styles.search}>
-          <div className={styles.btn}>
-            <SearchOutlinedIcon
-              sx={{
-                color: "#707070",
-                width: "20px",
-                height: "20px",
-                position: "relative",
-                top: "0.3rem",
-                left: "1rem",
-              }}
+    <>
+      <header className={styles.Header}>
+        <div className={styles.headerCon}>
+          <Link href="/">
+            <div className={styles.logo}>
+              <Image
+                src="/../public/assets/clann/3.png"
+                alt="logo"
+                height={250}
+                width={250}
+              />
+            </div>
+          </Link>
+          <div className={styles.search}>
+            <div className={styles.btn}>
+              <SearchOutlinedIcon
+                sx={{
+                  color: "#707070",
+                  width: "20px",
+                  height: "20px",
+                  position: "relative",
+                  top: "0.3rem",
+                  left: "1rem",
+                }}
+              />
+            </div>
+            <input
+              type="search"
+              name=""
+              id=""
+              placeholder={`Looking for a room, ${user.name}?`}
             />
           </div>
-          <input
-            type="search"
-            name=""
-            id=""
-            placeholder={`Looking for a room, ${user.name}?`}
-          />
+          <div className={styles.profile}>
+            <Link href="/popular">
+              <WhatshotOutlinedIcon
+                fontSize="small"
+                sx={{
+                  color: "#707070",
+                  position: "relative",
+                  top: "0.7rem",
+                  left: "0.2rem",
+                }}
+              />
+            </Link>
+
+            <Link href="/notifications">
+              <NotificationsNoneOutlinedIcon
+                fontSize="small"
+                sx={{ color: "#707070", position: "relative", top: "0.7rem" }}
+              />
+            </Link>
+
+            <Link href="/friends">
+              <GroupsOutlinedIcon
+                sx={{ color: "#707070", position: "relative", top: "0.7rem" }}
+              />
+            </Link>
+
+            <Link href="/favorites">
+              <OtherHousesOutlinedIcon
+                fontSize="small"
+                sx={{ color: "#707070", position: "relative", top: "0.7rem" }}
+              />
+            </Link>
+
+            <div
+              className={drop ? styles.pdActive : styles.profileDrop}
+              onClick={handleDrop}
+            >
+              <Avatar
+                alt={user.name}
+                src={user.profile_pic}
+                sx={{
+                  height: "28px",
+                  width: "28px",
+                  position: "relative",
+                  top: "0.4rem",
+                  right: "0.12rem",
+                }}
+              />
+              <ArrowDropDownIcon
+                sx={{
+                  color: "#707070",
+                  position: "relative",
+                  top: "0.55rem",
+                  left: "0.45rem",
+                }}
+              />
+            </div>
+          </div>
         </div>
-        <div className={styles.profile}>
-          <Link href="/popular">
-            <WhatshotOutlinedIcon
-              fontSize="small"
-              sx={{ color: "#707070", position: "relative", top: "0.7rem" }}
-            />
-          </Link>
+      </header>
+      <div className={drop ? styles.dropDown : styles.noDrop}>
+        <Link href={`/user/${user.username}`}>
+          <div className={styles.dropDownItem}>Profile</div>
+        </Link>
 
-          <Link href="/notifications">
-            <NotificationsNoneOutlinedIcon
-              fontSize="small"
-              sx={{ color: "#707070", position: "relative", top: "0.7rem" }}
-            />
-          </Link>
+        <Link href="/settings/profile">
+          <div className={styles.dropDownItem}>User settings</div>
+        </Link>
 
-          <Link href="/friends">
-            <GroupsOutlinedIcon
-              sx={{ color: "#707070", position: "relative", top: "0.7rem" }}
-            />
-          </Link>
+        <Link href="/">
+          <div className={styles.dropDownItem}>About</div>
+        </Link>
 
-          <Link href="/favorites">
-            <OtherHousesOutlinedIcon
-              fontSize="small"
-              sx={{ color: "#707070", position: "relative", top: "0.7rem" }}
-            />
-          </Link>
+        <div className={styles.dropDownItem}>Dark Mode</div>
 
-          <Link href={`/user/${user.username}`}>
-            <Avatar
-              alt={user.name}
-              src={user.profile_pic}
-              sx={{
-                height: "28px",
-                width: "28px",
-                position: "relative",
-                top: "0.4rem",
-                left: "0.3rem",
-              }}
-            />
-          </Link>
-        </div>
+        <div className={styles.copyRight}>© 2022 Clann</div>
       </div>
-    </header>
+    </>
   );
 }
 

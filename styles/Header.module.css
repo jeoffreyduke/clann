@@ -75,5 +75,61 @@
   left: 9rem;
   display: flex;
   justify-content: space-around;
-  width: 12rem;
+  width: 16rem;
+}
+
+.pdActive,
+.profileDrop {
+  position: relative;
+  right: 0.32rem;
+  bottom: 0.25rem;
+  width: 5rem;
+  height: 3rem;
+  display: flex;
+  justify-content: space-around;
+  padding: 0.2rem;
+}
+
+.pdActive {
+  border: 1px rgb(226, 225, 225) solid;
+}
+
+.profileDrop:active,
+.profileDrop:hover {
+  border: 1px rgb(226, 225, 225) solid;
+}
+
+.dropDown {
+  height: 15rem;
+  width: 15rem;
+  position: absolute;
+  top: 3.6rem;
+  left: 75vw;
+  font-size: 0.8rem;
+  padding: 1.5rem;
+  padding-top: 2rem;
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  z-index: 120;
+}
+
+.noDrop {
+  display: none;
+}
+
+.dropDownItemSwitch,
+.dropDownItem {
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+.dropDownItemSwitch {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.copyRight {
+  margin-top: 3rem;
+  font-size: 0.6rem;
 }
