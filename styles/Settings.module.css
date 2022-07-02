@@ -1,0 +1,118 @@
+.Settings {
+  position: relative;
+  left: 60vh;
+  height: 88vh;
+  width: 42vw;
+  place-items: center;
+  margin: 1rem;
+  padding: 2rem;
+  overflow: hidden;
+  background-color: #fff;
+  border: 1px solid #d8d8d8;
+  border-radius: 0.2rem;
+  scrollbar-color: var(--mainColor) transparent;
+}
+
+.Settings:hover {
+  overflow-y: scroll;
+}
+
+.Settings > nav {
+  display: flex;
+  font-size: 0.9rem;
+  padding: 1rem;
+  padding-bottom: 0;
+  border-bottom: 1px solid #e7defa;
+}
+
+.Settings > nav > div {
+  margin-right: 2rem;
+  text-align: center;
+}
+
+.active,
+.profile,
+.account {
+  width: 5rem;
+  padding-bottom: 0.5rem;
+}
+
+.active {
+  border-bottom: 3px solid var(--mainColor);
+}
+
+/* Account */
+
+.Profile,
+.Account {
+  padding: 1rem;
+  padding-top: 2rem;
+}
+
+.Profile > header,
+.Account > header {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
+.proInfo,
+.deleteAcc {
+  font-family: var(--fontFamBold);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #707070;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #e7defa;
+}
+
+.delete {
+  display: flex;
+  justify-content: flex-end;
+  font-family: var(--fontFamBold);
+  font-size: 0.9rem;
+  color: red;
+}
+
+.image,
+.bio,
+.name {
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
+.image > p,
+.bio > p,
+.name > p {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #707070;
+}
+
+.name > input {
+  height: 2.5rem;
+  width: 9.5rem;
+  padding: 0.5rem;
+  outline: none;
+  margin-right: 1rem;
+}
+
+.bio > textarea {
+  width: 20rem;
+  padding: 0.5rem;
+  outline: none;
+}
+
+.pp {
+  margin-bottom: 1rem;
+}
+
+.btn > button {
+  height: 2.5rem;
+  width: 10rem;
+  color: #fff;
+  background-color: var(--mainColor);
+  border: none;
+  border-radius: 0.2rem;
+}

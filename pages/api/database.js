@@ -7,7 +7,9 @@ export function createUser(
   email,
   password,
   date,
-  imageUrl
+  imageUrl,
+  coverUrl,
+  bio
 ) {
   const db = getDatabase();
   const userRef = ref(db, "users/" + userId);
@@ -19,6 +21,8 @@ export function createUser(
     password,
     date,
     profile_pic: imageUrl,
+    cover_photo: coverUrl,
+    bio,
   });
 }
 
@@ -65,4 +69,61 @@ export function addUserToRoom(
     date,
     profile_pic: imageUrl,
   });
+}
+
+// destination specific functions (update)
+export function updateUser(userId, name, bio) {
+  const db = getDatabase();
+  const userRef = ref(db, "users/" + `${userId}`);
+
+  if (name.length > 0) {
+    update(userRef, {
+      name,
+    });
+  }
+
+  if (bio.length > 0) {
+    update(userRef, {
+      bio,
+    });
+  }
+}
+
+export function changeBio(userId, bio) {
+  const db = getDatabase();
+  const userRef = ref(db, "users/" + `${userId}/`);
+
+  if (bio !== "") {
+    update(userRef, {
+      bio,
+    });
+  }
+}
+
+export function changeDP(userId, imageUrl) {
+  const db = getDatabase();
+  const userRef = ref(db, "users/" + `${userId}/`);
+
+  if (imageUrl !== "") {
+    update(userRef, {
+      profile_pic: imageUrl,
+    });
+  }
+}
+
+export function changeCover(userId, coverUrl) {
+  const db = getDatabase();
+  const userRef = ref(db, "users/" + `${userId}/`);
+
+  if (coverUrl !== "") {
+    update(userRef, {
+      cover_photo: coverUrl,
+    });
+  }
+}
+
+async function updateProfilePic(file, user, setLoading) {
+  const fileRef = store.ref(`profilePics/${user.uid}`);
+
+  const snapshot = await uploadBytes(file, fileRef);
 }

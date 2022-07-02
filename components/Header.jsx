@@ -122,7 +122,7 @@ function Header() {
           <div className={styles.dropDownItem}>Profile</div>
         </Link>
 
-        <Link href="/settings/profile">
+        <Link href="/settings">
           <div className={styles.dropDownItem}>User settings</div>
         </Link>
 

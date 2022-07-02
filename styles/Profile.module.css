@@ -91,3 +91,19 @@
   left: 1.3rem;
   font-size: 0.9rem;
 }
+
+.coverInput {
+  position: absolute;
+  bottom: 35.5rem;
+  left: 58rem;
+  color: #fff;
+  z-index: 200;
+}
+
+.dpInput {
+  position: absolute;
+  bottom: 30rem;
+  left: 47rem;
+  color: transparent;
+  z-index: 200;
+}
