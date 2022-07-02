@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 import styles from "../../styles/Settings.module.css";
 import { firebaseConfig } from "../index";
 import { initializeApp } from "firebase/app";
@@ -59,6 +60,7 @@ function Profile() {
     uploadBytes(fileRef, file).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((url) => {
         changeDP(user.uid, url);
+        dispatch(updateDP(url));
       });
     });
   }
@@ -69,6 +71,7 @@ function Profile() {
     uploadBytes(fileRef, file).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((url) => {
         changeCover(user.uid, url);
+        dispatch(updateCover(url));
       });
     });
   }
@@ -78,12 +81,10 @@ function Profile() {
 
     if (image.profilePic) {
       updateProfilePic(image.profilePic, user);
-      dispatch(updateDP(image.profilePic));
     }
 
     if (image.coverPhoto) {
       updateCoverPhoto(image.coverPhoto, user);
-      dispatch(updateCover(image.coverPhoto));
     }
 
     updateUser(
@@ -106,7 +107,7 @@ function Profile() {
   };
 
   return (
-    <>
+    <div className={styles.Profile}>
       <header>Customize Profile</header>
       <section className={styles.firstSec}>
         <div className={styles.proInfo}>Profile Information</div>
@@ -116,17 +117,17 @@ function Profile() {
             Name <p>Change your name. You can only do this once a month.</p>
             <input
               onChange={handleUserData}
-              value={userData.firstName}
               name="firstName"
               type="text"
               placeholder="First Name"
+              value={userData.firstName}
             />
             <input
               onChange={handleUserData}
-              value={userData.surName}
               name="surName"
               type="text"
               placeholder="Surname"
+              value={userData.surName}
             />
           </div>
 
@@ -147,7 +148,6 @@ function Profile() {
             <p>Profile picture must be .png or .jpg format</p>
             <input
               onChange={handleUserImages}
-              value={image.profilePic}
               name="profilePic"
               className={styles.pp}
               type="file"
@@ -156,7 +156,6 @@ function Profile() {
             <p>Cover photo must be .png or .jpg format</p>
             <input
               onChange={handleUserImages}
-              value={image.coverPhoto}
               name="coverPhoto"
               type="file"
               accept="image/png, image/jpeg"
@@ -168,7 +167,7 @@ function Profile() {
           <button onClick={handleSave}>Save changes</button>
         </div>
       </section>
-    </>
+    </div>
   );
 }
 

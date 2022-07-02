@@ -10,8 +10,8 @@ function Settings() {
   const router = useRouter();
 
   const [active, setActive] = useState({
-    account: true,
-    profile: false,
+    account: false,
+    profile: true,
   });
 
   const handleAcc = () => {
@@ -44,7 +44,7 @@ function Settings() {
             Profile
           </div>
         </nav>
-        {active.account ? <Account /> : <Profile />}
+        {active.profile ? <Profile /> : <Account />}
       </div>
     </>
   );

@@ -1,3 +1,7 @@
+.Profile {
+  overflow: hidden;
+}
+
 .header {
   height: 12rem;
   width: 100%;
@@ -90,20 +94,5 @@
   bottom: 6rem;
   left: 1.3rem;
   font-size: 0.9rem;
-}
-
-.coverInput {
-  position: absolute;
-  bottom: 35.5rem;
-  left: 58rem;
-  color: #fff;
-  z-index: 200;
-}
-
-.dpInput {
-  position: absolute;
-  bottom: 30rem;
-  left: 47rem;
-  color: transparent;
-  z-index: 200;
+  padding-right: 2rem;
 }
