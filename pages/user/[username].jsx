@@ -25,7 +25,17 @@ function ProfileComp() {
               }
             : {}
         }
-      ></div>
+      >
+        {user.cover_photo ? (
+          ""
+        ) : (
+          <Link href="/settings">
+            <EditOutlinedIcon
+              sx={{ color: "#fff", height: "22px", width: "22px" }}
+            />
+          </Link>
+        )}
+      </div>
 
       <div className={styles.profilePic}>
         <Avatar

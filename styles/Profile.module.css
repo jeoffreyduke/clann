@@ -8,6 +8,8 @@
   position: sticky;
   top: 0;
   left: 0;
+  display: flex;
+  justify-content: flex-end;
   padding: 1rem;
   margin-bottom: 2rem;
   background: rgb(2, 0, 36);
@@ -22,7 +24,7 @@
 .editCover {
   width: 100%;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .editCover > div {
@@ -69,7 +71,7 @@
 .edCon {
   width: 100%;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .editProfile {

@@ -1,10 +1,17 @@
 import React, { useState } from "react";
+import { useRouter } from "next/router";
 import { ErrorBoundary } from "react-error-boundary";
 import styles from "../../styles/Settings.module.css";
 import { firebaseConfig } from "../index";
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { getStorage, uploadBytes, ref, getDownloadURL } from "firebase/storage";
+import {
+  getStorage,
+  uploadBytes,
+  ref,
+  getDownloadURL,
+  uploadBytesResumable,
+} from "firebase/storage";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { updateUser, changeBio, changeDP, changeCover } from "../api/database";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,6 +30,7 @@ function Profile() {
   const [user] = useAuthState(auth);
   const dispatch = useDispatch();
   const selector = useSelector(handleUser);
+  const router = useRouter();
   //const user = selector.payload.userSlice.value;
 
   const [userData, setUserData] = useState({
@@ -34,6 +42,16 @@ function Profile() {
   const [image, setImage] = useState({
     profilePic: "",
     coverPhoto: "",
+  });
+
+  const [progress, setProgress] = useState({
+    profilePic: 0,
+    coverPhoto: 0,
+  });
+
+  const [clicked, setClicked] = useState({
+    profilePic: false,
+    coverPhoto: false,
   });
 
   const handleUserData = (e) => {
@@ -57,7 +75,13 @@ function Profile() {
   function updateProfilePic(file, user) {
     const fileRef = ref(store, `profilePics/${user.uid}`);
 
-    uploadBytes(fileRef, file).then((snapshot) => {
+    uploadBytesResumable(fileRef, file).then((snapshot) => {
+      const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      setProgress({
+        ...progress,
+        profilePic: progress,
+      });
+      router.reload(); // reload the page to update the profile pic
       getDownloadURL(snapshot.ref).then((url) => {
         changeDP(user.uid, url);
         dispatch(updateDP(url));
@@ -68,7 +92,13 @@ function Profile() {
   function updateCoverPhoto(file, user) {
     const fileRef = ref(store, `coverPhotos/${user.uid}`);
 
-    uploadBytes(fileRef, file).then((snapshot) => {
+    uploadBytesResumable(fileRef, file).then((snapshot) => {
+      const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      setProgress({
+        ...progress,
+        coverPhoto: progress,
+      });
+      router.reload(); // reload the page to update the cover photo
       getDownloadURL(snapshot.ref).then((url) => {
         changeCover(user.uid, url);
         dispatch(updateCover(url));
@@ -78,14 +108,6 @@ function Profile() {
 
   const handleSave = (e) => {
     e.preventDefault();
-
-    if (image.profilePic) {
-      updateProfilePic(image.profilePic, user);
-    }
-
-    if (image.coverPhoto) {
-      updateCoverPhoto(image.coverPhoto, user);
-    }
 
     updateUser(
       user.uid,
@@ -97,13 +119,29 @@ function Profile() {
 
     if (userData.firstName.length > 0 && userData.surName.length > 0) {
       dispatch(updateName(userData.firstName + " " + userData.surName));
+      router.reload();
     }
 
     if (userData.bio.length > 0) {
       dispatch(updateBio(userData.bio));
+      router.reload();
     }
 
-    window.location.reload();
+    if (image.profilePic) {
+      updateProfilePic(image.profilePic, user);
+      setClicked({
+        ...clicked,
+        profilePic: true,
+      });
+    }
+
+    if (image.coverPhoto) {
+      updateCoverPhoto(image.coverPhoto, user);
+      setClicked({
+        ...clicked,
+        coverPhoto: true,
+      });
+    }
   };
 
   return (
@@ -153,6 +191,13 @@ function Profile() {
               type="file"
               accept="image/png, image/jpeg"
             />
+            {clicked.profilePic ? (
+              <div className={styles.progress}>
+                Uploaded {progress.profilePic}%
+              </div>
+            ) : (
+              ""
+            )}
             <p>Cover photo must be .png or .jpg format</p>
             <input
               onChange={handleUserImages}
@@ -160,6 +205,13 @@ function Profile() {
               type="file"
               accept="image/png, image/jpeg"
             />
+            {clicked.coverPhoto ? (
+              <div className={styles.progress}>
+                Uploaded {progress.coverPhoto}%
+              </div>
+            ) : (
+              ""
+            )}
           </div>
         </form>
 
