@@ -8,6 +8,7 @@ import io from "socket.io-client";
 import Peer from "simple-peer";
 import Header from "../../components/Header";
 import Body from "../../components/Body";
+import toggleHelper from "../../customHooks/toggleHelper";
 import { Avatar, AvatarGroup } from "@mui/material";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import MoreHorizOutlined from "@mui/icons-material/MoreHorizOutlined";
@@ -23,9 +24,21 @@ function RoomComp() {
   const [idActive, setIdActive] = useState(false);
   const [roomActive, setRoomActive] = useState(false);
   const [peers, setPeers] = useState([]);
+  const [drop, setDrop] = useState(false);
+  const [showEdit, setShowEdit] = useState(false);
+
   const socketRef = useRef();
   const userAudio = useRef();
   const peersRef = useRef([]);
+
+  const handleDrop = () => {
+    setDrop(!drop);
+  };
+
+  const dropRef = useRef(null);
+  const [listening, setListening] = useState(false);
+  /* eslint-disable */
+  useEffect(toggleHelper(listening, setListening, dropRef, setDrop));
 
   useEffect(() => {
     if (router.isReady) {
@@ -110,8 +123,12 @@ function RoomComp() {
   }
 
   return (
-    <>
-      <div className={styles.header}>
+    <div>
+      <div
+        className={styles.header}
+        ref={dropRef}
+        onClick={drop ? () => setDrop(false) : () => {}}
+      >
         <div className={styles.title}>{rooms[roomId]?.name}</div>
         <div className={styles.headerCon}>
           <div className={styles.roomUsers}>
@@ -138,8 +155,102 @@ function RoomComp() {
             <div className={styles.notif}>
               <NotificationsNoneOutlinedIcon />
             </div>
-            <div className={styles.more}>
+            <div className={styles.more} onClick={handleDrop}>
               <MoreHorizOutlined />
+            </div>
+          </div>
+          <div className={drop ? styles.dropDown : styles.noDrop}>
+            <div className={styles.aboutName}>{rooms[roomId]?.name}</div>
+            {user.name === rooms[roomId]?.createdBy.name ? (
+              rooms[roomId]?.about ? (
+                <div className={styles.aboutContent}>
+                  {rooms[roomId]?.about}
+                  <br />
+                  {!showEdit ? (
+                    <button
+                      className={styles.leave}
+                      onClick={() => setShowEdit(!showEdit)}
+                    >
+                      Edit about
+                    </button>
+                  ) : (
+                    <button
+                      className={styles.leave}
+                      onClick={() => setShowEdit(!showEdit)}
+                    >
+                      Save Changes
+                    </button>
+                  )}
+
+                  {showEdit ? (
+                    <textarea
+                      className={styles.editAbout}
+                      type="text"
+                      placeholder="Edit about"
+                      rows={5}
+                      maxLength={300}
+                    />
+                  ) : (
+                    ""
+                  )}
+                </div>
+              ) : (
+                <div className={styles.aboutContent}>
+                  {!showEdit ? (
+                    <button
+                      className={styles.leave}
+                      onClick={() => setShowEdit(!showEdit)}
+                    >
+                      Add about
+                    </button>
+                  ) : (
+                    <button
+                      className={styles.leave}
+                      onClick={() => setShowEdit(!showEdit)}
+                    >
+                      Save Changes
+                    </button>
+                  )}
+
+                  {showEdit ? (
+                    <textarea
+                      className={styles.editAbout}
+                      type="text"
+                      placeholder="Add about"
+                      rows={5}
+                      maxLength={300}
+                    />
+                  ) : (
+                    ""
+                  )}
+                </div>
+              )
+            ) : (
+              <div className={styles.aboutContent}>{rooms[roomId]?.about}</div>
+            )}
+
+            <div className={styles.aboutInfo}>
+              <div className={styles.infoUsers}>
+                {idActive ? (
+                  <p className={styles.userTotal}>
+                    {Object.keys(rooms[roomId]?.users).length} Members
+                  </p>
+                ) : (
+                  ""
+                )}
+              </div>
+              <div className={styles.infoCreated}>
+                <p>Created {rooms[roomId]?.createdOn}</p>
+              </div>
+            </div>
+            <div className={styles.aboutBtns}>
+              <button className={styles.favs}>Add room to favorites</button>
+              <br />
+              {user.name === rooms[roomId]?.createdBy.name ? (
+                <button className={styles.leave}>Delete Room</button>
+              ) : (
+                <button className={styles.leave}>Leave Room</button>
+              )}
             </div>
           </div>
         </div>
@@ -187,7 +298,7 @@ function RoomComp() {
               ))
           : ""}
       </div>
-    </>
+    </div>
   );
 }
 

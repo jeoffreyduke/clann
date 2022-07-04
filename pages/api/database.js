@@ -9,7 +9,9 @@ export function createUser(
   date,
   imageUrl,
   coverUrl,
-  bio
+  bio,
+  favorites,
+  joined
 ) {
   const db = getDatabase();
   const userRef = ref(db, "users/" + userId);
@@ -23,6 +25,8 @@ export function createUser(
     profile_pic: imageUrl,
     cover_photo: coverUrl,
     bio,
+    favorites,
+    joined,
   });
 }
 
@@ -33,7 +37,9 @@ export function createRoom(
   inviteOnly,
   adultsOnly,
   anonymous,
-  createdBy
+  createdBy,
+  createdOn,
+  about
 ) {
   const db = getDatabase();
   const roomRef = ref(db, "rooms/" + roomId);
@@ -45,6 +51,8 @@ export function createRoom(
     adultsOnly,
     anonymous,
     createdBy,
+    createdOn,
+    about,
   });
 }
 
@@ -56,6 +64,7 @@ export function addUserToRoom(
   password,
   date,
   imageUrl,
+  joined,
   roomId
 ) {
   const db = getDatabase();
@@ -68,6 +77,7 @@ export function addUserToRoom(
     password,
     date,
     profile_pic: imageUrl,
+    joined,
   });
 }
 

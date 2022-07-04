@@ -70,13 +70,101 @@
 .react,
 .notif,
 .more {
+  height: 1.65rem;
   position: relative;
-  top: 0.2rem;
+  top: 0.07rem;
+  place-items: center;
+  border-radius: 0.2rem;
+}
+
+.react:hover,
+.notif:hover,
+.more:hover {
+  color: var(--mainColor);
+  background-color: #e7defa;
 }
 
 .notif,
 .react {
   margin-right: 0.5rem;
+}
+
+.dropDown {
+  width: 16rem;
+  height: 22.5rem;
+  position: absolute;
+  top: 11.5rem;
+  right: 0.3rem;
+  background-color: #fff;
+  padding: 1rem;
+  padding-top: 2rem;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 3px 10px;
+  overflow: hidden;
+  scrollbar-color: var(--mainColor) transparent;
+}
+
+.dropDown:hover {
+  overflow-y: scroll;
+}
+
+.noDrop {
+  display: none;
+}
+
+.aboutName {
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-bottom: 1px solid #e7defa;
+  padding-bottom: 0.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.aboutContent {
+  font-size: 0.8rem;
+}
+
+.aboutContent > button {
+  margin-top: 1rem;
+}
+
+.editAbout {
+  height: 2.5rem;
+  width: 100%;
+  font-size: 0.75rem;
+  padding: 0.5rem;
+  outline: none;
+}
+
+.userTotal {
+  font-size: 0.79rem;
+  font-family: var(--fontFamBold);
+}
+
+.totalTxt {
+  font-size: 0.75rem;
+}
+
+.infoCreated {
+  font-size: 0.79rem;
+  font-weight: 300;
+}
+
+.favs {
+  color: var(--mainColor) !important;
+  background-color: transparent !important;
+  border: 1px solid var(--mainColor) !important;
+}
+
+.favs,
+.leave {
+  font-size: 0.75rem;
+  width: 100%;
+  color: #fff;
+  background-color: var(--mainColor);
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 1rem;
+  border: none;
 }
 
 .participators {

@@ -15,6 +15,7 @@ import Header from "../components/Header";
 import { useRef, useEffect } from "react";
 import { useRouter } from "next/router";
 import { uuid } from "uuidv4";
+import date from "date-and-time";
 
 const label = { inputProps: { "aria-label": "Record Switch" } };
 
@@ -88,6 +89,9 @@ function CreateComp() {
   const [adulthecked, setAdultChecked] = useState(false);
   const [anonymousChecked, setAnonymousChecked] = useState(false);
 
+  const now = new Date();
+  const pattern = date.compile("MMM, DD YYYY");
+
   const handleInviteChecked = (e) => {
     setInviteChecked(e.target.checked);
   };
@@ -122,7 +126,9 @@ function CreateComp() {
       inviteChecked,
       adulthecked,
       anonymousChecked,
-      user
+      user,
+      date.format(now, pattern),
+      ""
     );
 
     addUserToRoom(
@@ -133,6 +139,7 @@ function CreateComp() {
       user.password,
       user.date,
       user.profile_pic,
+      date.format(now, pattern),
       roomId
     );
 

@@ -9,6 +9,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { createUser } from "./api/database";
+import date from "date-and-time";
 import styles from "../styles/Signup.module.css";
 
 function Signup() {
@@ -17,6 +18,9 @@ function Signup() {
   const selector = useSelector(handleAllUsers);
   const [user] = useAuthState(auth);
   const router = useRouter();
+
+  const now = new Date();
+  const pattern = date.compile("MMM, DD YYYY");
 
   const [userData, setUserData] = useState({
     firstName: "",
@@ -44,7 +48,9 @@ function Signup() {
         userData.date,
         "",
         "",
-        ""
+        "",
+        "",
+        date.format(now, pattern)
       );
 
       console.log(userCredential.user);
@@ -63,9 +69,9 @@ function Signup() {
   const handleSignup = (e) => {
     e.preventDefault();
 
-    createAccount();
-
-    if (user) router.push("/");
+    createAccount().then(() => {
+      if (user) router.push("/");
+    });
   };
 
   return (

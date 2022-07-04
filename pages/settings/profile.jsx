@@ -177,7 +177,7 @@ function Profile() {
               value={userData.bio}
               name="bio"
               placeholder="Bio (optional)"
-              rows="5"
+              rows={5}
             />
           </div>
 

@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import toggleHelper from "../customHooks/toggleHelper";
 import { useSelector } from "react-redux";
 import { handleUser } from "../provider/userSlice";
 import Image from "next/image";
@@ -23,8 +24,13 @@ function Header() {
     setDrop(!drop);
   };
 
+  const dropRef = useRef(null);
+  const [listening, setListening] = useState(false);
+  /* eslint-disable */
+  useEffect(toggleHelper(listening, setListening, dropRef, setDrop));
+
   return (
-    <>
+    <div ref={dropRef} onClick={drop ? () => setDrop(false) : () => {}}>
       <header className={styles.Header}>
         <div className={styles.headerCon}>
           <Link href="/">
@@ -134,7 +140,7 @@ function Header() {
 
         <div className={styles.copyRight}>© 2022 Clann</div>
       </div>
-    </>
+    </div>
   );
 }
 

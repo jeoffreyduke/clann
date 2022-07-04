@@ -11,6 +11,7 @@ import { signOut, useSession } from "next-auth/react";
 import Body from "../components/Body";
 import styles from "../styles/Home.module.css";
 import { Avatar, AvatarGroup } from "@mui/material";
+import date from "date-and-time";
 import Header from "../components/Header";
 
 export function HomeComp() {
@@ -22,6 +23,9 @@ export function HomeComp() {
   const user = selector.payload.userSlice.value;
   const [userData, loading, error] = useAuthState(auth);
 
+  const now = new Date();
+  const pattern = date.compile("MMM, DD YYYY");
+
   const handleAddUser = (id) => {
     addUserToRoom(
       userData.uid,
@@ -31,6 +35,7 @@ export function HomeComp() {
       user.password,
       user.date,
       user.profile_pic,
+      date.format(now, pattern),
       id
     );
     console.log(user.name + " added");
