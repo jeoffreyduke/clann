@@ -13,7 +13,7 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { updateUser, changeBio, changeDP, changeCover } from "../api/database";
+import { updateUser, changeDP, changeCover } from "../api/database";
 import { useDispatch, useSelector } from "react-redux";
 import {
   handleUser,

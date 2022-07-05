@@ -1,13 +1,23 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import styles from "../../styles/Room.module.css";
+import { firebaseConfig } from "../index";
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { handleAllRooms } from "../../provider/allRoomsSlice";
+import { updateAbout } from "../../provider/roomSlice";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
-import { signOut, useSession } from "next-auth/react";
 import io from "socket.io-client";
 import Peer from "simple-peer";
 import Header from "../../components/Header";
 import Body from "../../components/Body";
+import {
+  addRoomToFavorite,
+  updateRoomAbout,
+  removeUserFromRoom,
+  deleteRoom,
+} from "../api/database";
 import toggleHelper from "../../customHooks/toggleHelper";
 import { Avatar, AvatarGroup } from "@mui/material";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
@@ -15,6 +25,10 @@ import MoreHorizOutlined from "@mui/icons-material/MoreHorizOutlined";
 import AddReactionOutlinedIcon from "@mui/icons-material/AddReactionOutlined";
 
 function RoomComp() {
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const [userr] = useAuthState(auth);
+  const dispatch = useDispatch();
   const selector = useSelector(handleAllRooms);
   const rooms = selector.payload.allRoomsSlice.value;
   const user = selector.payload.userSlice.value;
@@ -26,10 +40,50 @@ function RoomComp() {
   const [peers, setPeers] = useState([]);
   const [drop, setDrop] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
+  const [about, setAbout] = useState("");
 
   const socketRef = useRef();
   const userAudio = useRef();
   const peersRef = useRef([]);
+
+  const handleEditAbout = (e) => {
+    setAbout(e.target.value);
+    console.log(about);
+  };
+
+  const handleSave = () => {
+    if (about.length > 0) {
+      updateRoomAbout(roomId, about);
+      dispatch(updateAbout(about));
+      setAbout("");
+      setShowEdit(false);
+    }
+  };
+
+  const handleLeaveRoom = () => {
+    removeUserFromRoom(userr.uid, roomId);
+    router.push("/");
+  };
+
+  const handleDeleteRoom = () => {
+    router.push("/");
+    deleteRoom(roomId);
+  };
+
+  const handleAddToFavorite = () => {
+    addRoomToFavorite(
+      userr.uid,
+      roomId,
+      rooms[roomId]?.name,
+      rooms[roomId]?.subject,
+      rooms[roomId]?.inviteOnly,
+      rooms[roomId]?.adultsOnly,
+      rooms[roomId]?.anonymous,
+      rooms[roomId]?.createdBy,
+      rooms[roomId]?.createdOn,
+      rooms[roomId]?.about
+    );
+  };
 
   const handleDrop = () => {
     setDrop(!drop);
@@ -124,19 +178,19 @@ function RoomComp() {
 
   return (
     <div>
-      <div
-        className={styles.header}
-        ref={dropRef}
-        onClick={drop ? () => setDrop(false) : () => {}}
-      >
+      <div className={styles.header} ref={dropRef}>
         <div className={styles.title}>{rooms[roomId]?.name}</div>
         <div className={styles.headerCon}>
           <div className={styles.roomUsers}>
             <AvatarGroup
               max={3}
-              total={idActive ? Object.keys(rooms[roomId]?.users).length : ""}
+              total={
+                idActive && rooms[roomId]
+                  ? Object.keys(rooms[roomId]?.users).length
+                  : ""
+              }
             >
-              {idActive
+              {idActive && rooms[roomId]
                 ? Object.keys(rooms[roomId]?.users).map((user) => (
                     <Avatar
                       key={user + Math.random()}
@@ -174,10 +228,7 @@ function RoomComp() {
                       Edit about
                     </button>
                   ) : (
-                    <button
-                      className={styles.leave}
-                      onClick={() => setShowEdit(!showEdit)}
-                    >
+                    <button className={styles.leave} onClick={handleSave}>
                       Save Changes
                     </button>
                   )}
@@ -185,6 +236,8 @@ function RoomComp() {
                   {showEdit ? (
                     <textarea
                       className={styles.editAbout}
+                      onChange={handleEditAbout}
+                      value={about}
                       type="text"
                       placeholder="Edit about"
                       rows={5}
@@ -204,10 +257,7 @@ function RoomComp() {
                       Add about
                     </button>
                   ) : (
-                    <button
-                      className={styles.leave}
-                      onClick={() => setShowEdit(!showEdit)}
-                    >
+                    <button className={styles.leave} onClick={handleSave}>
                       Save Changes
                     </button>
                   )}
@@ -215,8 +265,10 @@ function RoomComp() {
                   {showEdit ? (
                     <textarea
                       className={styles.editAbout}
+                      onChange={handleEditAbout}
+                      value={about}
                       type="text"
-                      placeholder="Add about"
+                      placeholder="Edit about"
                       rows={5}
                       maxLength={300}
                     />
@@ -231,7 +283,7 @@ function RoomComp() {
 
             <div className={styles.aboutInfo}>
               <div className={styles.infoUsers}>
-                {idActive ? (
+                {idActive && rooms[roomId] ? (
                   <p className={styles.userTotal}>
                     {Object.keys(rooms[roomId]?.users).length} Members
                   </p>
@@ -244,12 +296,18 @@ function RoomComp() {
               </div>
             </div>
             <div className={styles.aboutBtns}>
-              <button className={styles.favs}>Add room to favorites</button>
+              <button className={styles.favs} onClick={handleAddToFavorite}>
+                Add room to favorites
+              </button>
               <br />
               {user.name === rooms[roomId]?.createdBy.name ? (
-                <button className={styles.leave}>Delete Room</button>
+                <button className={styles.leave} onClick={handleDeleteRoom}>
+                  Delete Room
+                </button>
               ) : (
-                <button className={styles.leave}>Leave Room</button>
+                <button className={styles.leave} onClick={handleLeaveRoom}>
+                  Leave Room
+                </button>
               )}
             </div>
           </div>
@@ -281,7 +339,7 @@ function RoomComp() {
             })}
           </div>
         </div>
-        {idActive
+        {idActive && rooms[roomId]
           ? Object.keys(rooms[roomId]?.users)
               .filter(
                 (user) => users[user].name !== rooms[roomId]?.createdBy.name

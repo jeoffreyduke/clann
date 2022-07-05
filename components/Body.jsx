@@ -57,7 +57,7 @@ function Body({ profilePic, midComp }) {
     } else return name;
   };
 
-  console.log(user);
+  console.log(user.favorites);
 
   return (
     <div className={styles.Body}>
@@ -84,17 +84,19 @@ function Body({ profilePic, midComp }) {
         <div className={styles.rooms}>
           <p className={styles.roomsTitle}>Rooms</p>
           <ul>
-            {!rooms
-              ? ""
-              : Object.keys(rooms).map((room) => (
-                  <li key={room + Math.random()}>
-                    <Link href={`/room/${room}`}>
-                      <a className={styles.linkLittle}>
-                        {trimName(rooms[room].name)}
-                      </a>
-                    </Link>
-                  </li>
-                ))}
+            {user && !user?.favorites ? (
+              <p>No rooms yet</p>
+            ) : (
+              Object.keys(user?.favorites).map((room) => (
+                <li key={room + Math.random()}>
+                  <Link href={`/room/${room}`}>
+                    <a className={styles.linkLittle}>
+                      {trimName(rooms[room].name)}
+                    </a>
+                  </Link>
+                </li>
+              ))
+            )}
           </ul>
         </div>
         <div className={styles.copyright}>© 2022 Clann</div>

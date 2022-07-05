@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import Link from "next/link";
 import { firebaseConfig } from ".";
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth } from "firebase/auth";
 import { handleAllRooms } from "../provider/allRoomsSlice";
 import { addUserToRoom } from "./api/database";
 import { useDispatch, useSelector } from "react-redux";

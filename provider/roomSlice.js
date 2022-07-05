@@ -9,9 +9,12 @@ export const roomSlice = createSlice({
     handleRoom: (state, action) => {
       state.value = action.payload;
     },
+    updateAbout: (state, action) => {
+      state.value.about = action.payload;
+    },
   },
 });
 
-export const { handleRoom } = roomSlice.actions;
+export const { handleRoom, updateAbout } = roomSlice.actions;
 
 export default roomSlice.reducer;
