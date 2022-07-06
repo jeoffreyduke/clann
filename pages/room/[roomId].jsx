@@ -43,6 +43,7 @@ function RoomComp() {
   const [roomActive, setRoomActive] = useState(false);
   const [peers, setPeers] = useState([]);
   const [drop, setDrop] = useState(false);
+  const [showReactions, setShowReactions] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const [about, setAbout] = useState("");
 
@@ -118,10 +119,15 @@ function RoomComp() {
     setDrop(!drop);
   };
 
+  const handleShowReactions = () => {
+    setShowReactions(!showReactions);
+  };
+
   const dropRef = useRef(null);
   const [listening, setListening] = useState(false);
   /* eslint-disable */
   useEffect(toggleHelper(listening, setListening, dropRef, setDrop));
+  useEffect(toggleHelper(listening, setListening, dropRef, setShowReactions));
 
   useEffect(() => {
     //dispatch(refreshFavorite());
@@ -233,47 +239,61 @@ function RoomComp() {
           </div>
 
           <div className={styles.headerIcons}>
-            <div className={styles.react}>
+            <div
+              className={!showReactions ? styles.react : styles.reactActive}
+              onClick={handleShowReactions}
+            >
               <AddReactionOutlinedIcon />
             </div>
             <div className={styles.notif}>
               <NotificationsNoneOutlinedIcon />
             </div>
-            <div className={styles.more} onClick={handleDrop}>
+            <div
+              className={!drop ? styles.more : styles.moreActive}
+              onClick={handleDrop}
+            >
               <MoreHorizOutlined />
             </div>
           </div>
 
-          <div className={styles.reactions}>
+          <div
+            className={showReactions ? styles.reactions : styles.noReactions}
+          >
             <Image
-              src="/../../public/assets/heart.png"
+              className={styles.reactIcons}
+              src="/assets/heart.png"
               alt="logo"
-              height={200}
-              width={200}
+              height={26}
+              width={26}
             />
             <Image
-              src="/../../public/assets/laugh.png"
+              className={styles.reactIcons}
+              src="/assets/laugh.png"
               alt="logo"
-              height={200}
-              width={200}
+              height={26}
+              width={26}
             />
             <Image
-              src="/../../public/assets/congrats.png"
+              className={styles.reactIcons}
+              src="/assets/congrats.png"
               alt="logo"
-              height={200}
-              width={200}
+              height={26}
+              width={26}
+              style={{ marginRight: "1rem" }}
             />
             <Image
-              src="/../../public/assets/support.png"
+              className={styles.reactIcons}
+              src="/assets/support.png"
               alt="logo"
-              height={200}
-              width={200}
+              height={26}
+              width={26}
             />
             <Image
-              src="/../../public/assets/bye.png"
+              className={styles.reactIcons}
+              src="/assets/bye.png"
               alt="logo"
-              height={200}
-              width={200}
+              height={26}
+              width={26}
             />
           </div>
 
@@ -399,25 +419,45 @@ function RoomComp() {
       ) : (
         ""
       )}
+
       <div className={styles.participators}>
-        <div className={styles.pAvatars}>
-          <Avatar
-            alt={rooms[roomId]?.createdBy.name}
-            src={rooms[roomId]?.createdBy.profile_pic}
-          />
-          <div className={styles.userName}>{rooms[roomId]?.createdBy.name}</div>
-          <div className={styles.userRole}>Admin</div>
-          <div>
-            <audio autoPlay ref={userAudio} />
-            {peers.map((peer, index) => {
-              return <Audio key={index} peer={peer} />;
-            })}
+        {user.name !== rooms[roomId]?.createdBy.name ? (
+          <div className={styles.pAvatars}>
+            <Avatar
+              alt={rooms[roomId]?.createdBy.name}
+              src={rooms[roomId]?.createdBy.profile_pic}
+            />
+            <div className={styles.userName}>
+              {rooms[roomId]?.createdBy.name}
+            </div>
+            <div className={styles.userRole}>Admin</div>
+            <div>
+              <audio autoPlay ref={userAudio} />
+              {peers.map((peer, index) => {
+                return <Audio key={index} peer={peer} />;
+              })}
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className={styles.pAvatars}>
+            <Avatar alt={user.name} src={user.profile_pic} />
+            <div className={styles.userName}>{user.name}</div>
+            <div className={styles.userRole}>Admin</div>
+            <div>
+              <audio autoPlay ref={userAudio} />
+              {peers.map((peer, index) => {
+                return <Audio key={index} peer={peer} />;
+              })}
+            </div>
+          </div>
+        )}
+
         {idActive && rooms[roomId]
           ? Object.keys(rooms[roomId]?.users)
               .filter(
-                (user) => users[user].name !== rooms[roomId]?.createdBy.name
+                (user) =>
+                  users[user].name !== rooms[roomId]?.createdBy.name &&
+                  users[user].name !== user.name
               )
               .map((user) => (
                 <div className={styles.pAvatars} key={Math.random() + user}>
@@ -426,7 +466,7 @@ function RoomComp() {
                     src={users[user].profile_pic}
                   />
                   <div className={styles.userName}>{users[user].name}</div>
-                  <div className={styles.userRole}>Admin</div>
+                  <div className={styles.userRole}>Member</div>
                 </div>
               ))
           : ""}

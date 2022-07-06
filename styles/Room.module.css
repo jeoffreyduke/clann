@@ -67,6 +67,8 @@
   border-radius: 2rem;
 }
 
+.moreActive,
+.reactActive,
 .react,
 .notif,
 .more {
@@ -77,6 +79,11 @@
   border-radius: 0.2rem;
 }
 
+.moreActive,
+.reactActive {
+  color: var(--mainColor) !important;
+}
+
 .react:hover,
 .notif:hover,
 .more:hover {
@@ -84,15 +91,32 @@
   background-color: #e7defa;
 }
 
+.reactActive,
 .notif,
 .react {
   margin-right: 0.5rem;
 }
 
 .reactions {
-  position: relative;
-  top: 25rem;
-  border: 1px solid red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 10rem;
+  right: 6rem;
+  padding: 1rem;
+  background-color: #fff;
+  border-radius: 2rem;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 20px;
+}
+
+.noReactions {
+  display: none;
+}
+
+.reactIcons:hover {
+  transform: scale(1.11);
+  transition: 0 3s ease-in;
 }
 
 .dropDown {
