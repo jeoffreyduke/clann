@@ -101,22 +101,25 @@ export const addRoomToFavorite = (
   about
 ) => {
   const db = getDatabase();
-  const userRef = ref(db, "users/" + userId);
+  const userRef = ref(db, "users/" + `${userId}/` + "favorites/" + roomId);
 
-  update(userRef, {
-    favorites: {
-      [roomId]: {
-        name,
-        subject,
-        inviteOnly,
-        adultsOnly,
-        anonymous,
-        createdBy,
-        createdOn,
-        about,
-      },
-    },
+  set(userRef, {
+    name,
+    subject,
+    inviteOnly,
+    adultsOnly,
+    anonymous,
+    createdBy,
+    createdOn,
+    about,
   });
+};
+
+export const removeRoomFromFavorite = (userId, roomId) => {
+  const db = getDatabase();
+  const userRef = ref(db, "users/" + `${userId}/` + "favorites/" + roomId);
+
+  remove(userRef);
 };
 
 // destination specific functions (update)

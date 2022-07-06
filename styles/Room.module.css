@@ -89,6 +89,12 @@
   margin-right: 0.5rem;
 }
 
+.reactions {
+  position: relative;
+  top: 25rem;
+  border: 1px solid red;
+}
+
 .dropDown {
   width: 16rem;
   height: 22.5rem;

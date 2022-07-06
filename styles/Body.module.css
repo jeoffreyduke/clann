@@ -88,12 +88,21 @@
 }
 
 .rooms > ul {
+  height: 7rem;
   position: relative;
   bottom: 2.5rem;
   font-size: 2rem;
   text-transform: uppercase;
   font-weight: 700;
   list-style: none;
+  scrollbar-color: var(--mainColor) transparent;
+  overflow: hidden;
+}
+
+.rooms > ul:hover {
+  overflow-y: scroll;
+  padding-right: 0.5rem;
+  transition-timing-function: ease-in-out;
 }
 
 .options > ul {

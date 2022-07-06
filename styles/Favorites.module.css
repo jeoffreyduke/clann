@@ -23,8 +23,8 @@
 }
 
 .roomUsers {
-  position: relative;
-  right: 28.5rem;
+  display: flex;
+  justify-content: flex-start;
   margin-bottom: 1rem;
 }
 

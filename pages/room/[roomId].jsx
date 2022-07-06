@@ -5,6 +5,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { handleAllRooms } from "../../provider/allRoomsSlice";
+import { updateFavorites, refreshFavorite } from "../../provider/userSlice";
 import { updateAbout } from "../../provider/roomSlice";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,15 +15,18 @@ import Header from "../../components/Header";
 import Body from "../../components/Body";
 import {
   addRoomToFavorite,
+  removeRoomFromFavorite,
   updateRoomAbout,
   removeUserFromRoom,
   deleteRoom,
 } from "../api/database";
+import { getDatabase, onValue, ref } from "firebase/database";
 import toggleHelper from "../../customHooks/toggleHelper";
 import { Avatar, AvatarGroup } from "@mui/material";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import MoreHorizOutlined from "@mui/icons-material/MoreHorizOutlined";
 import AddReactionOutlinedIcon from "@mui/icons-material/AddReactionOutlined";
+import Image from "next/image";
 
 function RoomComp() {
   const app = initializeApp(firebaseConfig);
@@ -61,6 +65,8 @@ function RoomComp() {
   };
 
   const handleLeaveRoom = () => {
+    handleRemoveFromFavorite();
+
     removeUserFromRoom(userr.uid, roomId);
     router.push("/");
   };
@@ -68,6 +74,8 @@ function RoomComp() {
   const handleDeleteRoom = () => {
     router.push("/");
     deleteRoom(roomId);
+
+    handleRemoveFromFavorite();
   };
 
   const handleAddToFavorite = () => {
@@ -83,6 +91,27 @@ function RoomComp() {
       rooms[roomId]?.createdOn,
       rooms[roomId]?.about
     );
+
+    const db = getDatabase();
+    const favRef = ref(db, `users/${userr.uid}/favorites/`);
+
+    onValue(favRef, (snapshot) => {
+      const favorites = snapshot.val();
+      console.log(favorites);
+      dispatch(updateFavorites(favorites));
+    });
+  };
+
+  const handleRemoveFromFavorite = () => {
+    removeRoomFromFavorite(userr.uid, roomId);
+
+    const db = getDatabase();
+    const favRef = ref(db, `users/${userr.uid}/favorites/`);
+
+    onValue(favRef, (snapshot) => {
+      const favorites = snapshot.val();
+      dispatch(updateFavorites(favorites));
+    });
   };
 
   const handleDrop = () => {
@@ -95,6 +124,7 @@ function RoomComp() {
   useEffect(toggleHelper(listening, setListening, dropRef, setDrop));
 
   useEffect(() => {
+    //dispatch(refreshFavorite());
     if (router.isReady) {
       setIdActive(true);
     }
@@ -187,7 +217,7 @@ function RoomComp() {
               total={
                 idActive && rooms[roomId]
                   ? Object.keys(rooms[roomId]?.users).length
-                  : ""
+                  : 0
               }
             >
               {idActive && rooms[roomId]
@@ -213,6 +243,40 @@ function RoomComp() {
               <MoreHorizOutlined />
             </div>
           </div>
+
+          <div className={styles.reactions}>
+            <Image
+              src="/../../public/assets/heart.png"
+              alt="logo"
+              height={200}
+              width={200}
+            />
+            <Image
+              src="/../../public/assets/laugh.png"
+              alt="logo"
+              height={200}
+              width={200}
+            />
+            <Image
+              src="/../../public/assets/congrats.png"
+              alt="logo"
+              height={200}
+              width={200}
+            />
+            <Image
+              src="/../../public/assets/support.png"
+              alt="logo"
+              height={200}
+              width={200}
+            />
+            <Image
+              src="/../../public/assets/bye.png"
+              alt="logo"
+              height={200}
+              width={200}
+            />
+          </div>
+
           <div className={drop ? styles.dropDown : styles.noDrop}>
             <div className={styles.aboutName}>{rooms[roomId]?.name}</div>
             {user.name === rooms[roomId]?.createdBy.name ? (
@@ -296,9 +360,20 @@ function RoomComp() {
               </div>
             </div>
             <div className={styles.aboutBtns}>
-              <button className={styles.favs} onClick={handleAddToFavorite}>
-                Add room to favorites
-              </button>
+              {user.favorites &&
+              Object.keys(user?.favorites).includes(roomId) ? (
+                <button
+                  className={styles.favs}
+                  onClick={handleRemoveFromFavorite}
+                >
+                  Remove room from favorites
+                </button>
+              ) : (
+                <button className={styles.favs} onClick={handleAddToFavorite}>
+                  Add room to favorites
+                </button>
+              )}
+
               <br />
               {user.name === rooms[roomId]?.createdBy.name ? (
                 <button className={styles.leave} onClick={handleDeleteRoom}>

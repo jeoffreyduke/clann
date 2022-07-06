@@ -24,6 +24,12 @@ export const userSlice = createSlice({
     updateCover: (state, action) => {
       state.value.cover_photo = action.payload;
     },
+    updateFavorites: (state, action) => {
+      state.value.favorites = action.payload;
+    },
+    refreshFavorite: (state) => {
+      state.value.favorites = {};
+    },
   },
 });
 
@@ -34,6 +40,8 @@ export const {
   updateBio,
   updateCover,
   updateDP,
+  updateFavorites,
+  refreshFavorite,
 } = userSlice.actions;
 
 export default userSlice.reducer;

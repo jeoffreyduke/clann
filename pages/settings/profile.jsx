@@ -81,10 +81,11 @@ function Profile() {
         ...progress,
         profilePic: progress,
       });
-      router.reload(); // reload the page to update the profile pic
       getDownloadURL(snapshot.ref).then((url) => {
+        console.log(url);
         changeDP(user.uid, url);
         dispatch(updateDP(url));
+        router.reload(); // reload the page to update the profile pic
       });
     });
   }
@@ -98,10 +99,11 @@ function Profile() {
         ...progress,
         coverPhoto: progress,
       });
-      router.reload(); // reload the page to update the cover photo
       getDownloadURL(snapshot.ref).then((url) => {
+        console.log(url);
         changeCover(user.uid, url);
         dispatch(updateCover(url));
+        router.reload(); // reload the page to update the cover photo
       });
     });
   }

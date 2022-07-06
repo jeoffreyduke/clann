@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from "react";
-import { HomeComp } from "../pages/home";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { handleUser, refreshUser } from "../provider/userSlice";
@@ -52,8 +51,8 @@ function Body({ profilePic, midComp }) {
   };
 
   const trimName = (name) => {
-    if (name.length > 10) {
-      return name.substring(0, 10) + "...";
+    if (name?.length > 10) {
+      return name?.substring(0, 10) + "...";
     } else return name;
   };
 
@@ -91,7 +90,7 @@ function Body({ profilePic, midComp }) {
                 <li key={room + Math.random()}>
                   <Link href={`/room/${room}`}>
                     <a className={styles.linkLittle}>
-                      {trimName(rooms[room].name)}
+                      {trimName(rooms[room]?.name)}
                     </a>
                   </Link>
                 </li>
