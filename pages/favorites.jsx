@@ -43,7 +43,9 @@ function FavComp() {
               className={styles.roomBox}
               key={Math.random() + rooms[room]?.name}
             >
-              <div className={styles.roomTitle}>In session</div>
+              <div className={styles.roomTitle}>
+                {rooms[room]?.inSession ? "In session" : "Not in session"}
+              </div>
               <div className={styles.roomName}>{rooms[room]?.name}</div>
               <div className={styles.roomUsers}>
                 {!rooms[room]?.users ? (

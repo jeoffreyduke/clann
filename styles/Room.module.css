@@ -119,6 +119,10 @@
   transition: 0 3s ease-in;
 }
 
+.reaction {
+  z-index: 10;
+}
+
 .dropDown {
   width: 16rem;
   height: 22.5rem;

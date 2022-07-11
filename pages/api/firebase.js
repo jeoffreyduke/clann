@@ -1,22 +1,604 @@
-// Import the functions you need from the SDKs you need
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useContext,
+  useCallback,
+} from "react";
+import styles from "../../styles/Room.module.css";
+import { firebaseConfig } from "../index";
 import { initializeApp } from "firebase/app";
-import { getAnalytics, ref } from "firebase/analytics";
-import { getDatabase } from "firebase/database";
+import { getAuth } from "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { handleAllRooms } from "../../provider/allRoomsSlice";
+import { updateFavorites, refreshFavorite } from "../../provider/userSlice";
+import { updateAbout } from "../../provider/roomSlice";
+import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import io from "socket.io-client";
+import Peer from "simple-peer";
+import Header from "../../components/Header";
+import Body from "../../components/Body";
+import {
+  addReactionToUser,
+  getUserReaction,
+  addRoomToFavorite,
+  removeRoomFromFavorite,
+  updateRoomAbout,
+  removeUserFromRoom,
+  deleteRoom,
+} from "../api/database";
+import { getDatabase, onValue, ref } from "firebase/database";
+import toggleHelper from "../../customHooks/toggleHelper";
+import { Avatar, AvatarGroup } from "@mui/material";
+import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
+import MoreHorizOutlined from "@mui/icons-material/MoreHorizOutlined";
+import AddReactionOutlinedIcon from "@mui/icons-material/AddReactionOutlined";
+import Image from "next/image";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDI4J_cygaTFClHNVmHdPtJHy2uTUh3-u0",
-  authDomain: "clann-web.firebaseapp.com",
-  databaseURL: "https://clann-web-default-rtdb.firebaseio.com",
-  projectId: "clann-web",
-  storageBucket: "clann-web.appspot.com",
-  messagingSenderId: "310101668106",
-  appId: "1:310101668106:web:8977644b0555887ff74af3",
-  measurementId: "G-MNJR2E2C0P",
+let react;
+
+function RoomComp() {
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const [userr] = useAuthState(auth);
+  const dispatch = useDispatch();
+  const selector = useSelector(handleAllRooms);
+  const rooms = selector.payload.allRoomsSlice.value;
+  const user = selector.payload.userSlice.value;
+  const users = selector.payload.allUsersSlice.value;
+  const router = useRouter();
+  const { roomId } = router.query;
+  const [idActive, setIdActive] = useState(false);
+  const [roomActive, setRoomActive] = useState(false);
+  const [peers, setPeers] = useState([]);
+  const [drop, setDrop] = useState(false);
+  const [reaction, setReaction] = useState("");
+  const [showReactions, setShowReactions] = useState(false);
+  const [showEdit, setShowEdit] = useState(false);
+  const [about, setAbout] = useState("");
+
+  //refs for reactions
+  const heartRef = useRef();
+
+  const handleEditAbout = (e) => {
+    setAbout(e.target.value);
+    console.log(about);
+  };
+
+  const handleSave = () => {
+    if (about.length > 0) {
+      updateRoomAbout(roomId, about);
+      dispatch(updateAbout(about));
+      setAbout("");
+      setShowEdit(false);
+    }
+  };
+
+  const handleLeaveRoom = () => {
+    handleRemoveFromFavorite();
+
+    removeUserFromRoom(userr.uid, roomId);
+    router.push("/");
+  };
+
+  const handleDeleteRoom = () => {
+    router.push("/");
+    deleteRoom(roomId);
+
+    handleRemoveFromFavorite();
+  };
+
+  const handleAddToFavorite = () => {
+    addRoomToFavorite(
+      userr.uid,
+      roomId,
+      rooms[roomId]?.name,
+      rooms[roomId]?.subject,
+      rooms[roomId]?.inviteOnly,
+      rooms[roomId]?.adultsOnly,
+      rooms[roomId]?.anonymous,
+      rooms[roomId]?.createdBy,
+      rooms[roomId]?.createdOn,
+      rooms[roomId]?.about
+    );
+
+    const db = getDatabase();
+    const favRef = ref(db, `users/${userr.uid}/favorites/`);
+
+    onValue(favRef, (snapshot) => {
+      const favorites = snapshot.val();
+      console.log(favorites);
+      dispatch(updateFavorites(favorites));
+    });
+  };
+
+  const handleRemoveFromFavorite = () => {
+    removeRoomFromFavorite(userr.uid, roomId);
+
+    const db = getDatabase();
+    const favRef = ref(db, `users/${userr.uid}/favorites/`);
+
+    onValue(favRef, (snapshot) => {
+      const favorites = snapshot.val();
+      dispatch(updateFavorites(favorites));
+    });
+  };
+
+  const handleDrop = () => {
+    setDrop(!drop);
+  };
+
+  const handleShowReactions = () => {
+    setShowReactions(!showReactions);
+  };
+
+  const setReactionOnRender = () => {
+    const db = getDatabase();
+    const reactionRef = ref(db, `users/${userr?.uid}/reaction/`);
+
+    onValue(reactionRef, (snapshot) => {
+      react = snapshot.val();
+      console.log(react);
+      setReaction(snapshot.val());
+      console.log(reaction);
+    });
+  };
+
+  const handleSetReaction = (src) => {
+    addReactionToUser(userr.uid, src);
+
+    const db = getDatabase();
+    const reactionRef = ref(db, `users/${userr.uid}/reaction/`);
+
+    onValue(reactionRef, (snapshot) => {
+      react = snapshot.val();
+      console.log(react);
+      setReaction(snapshot.val());
+      console.log(reaction);
+    });
+  };
+
+  useEffect(() => {
+    /* eslint-disable */
+  }, []);
+
+  const handleReaction = (element) => {
+    console.log(element);
+    document.querySelector(`#${element}`).hidden = false;
+  };
+
+  const dropRef = useRef(null);
+  const [listening, setListening] = useState(false);
+  /* eslint-disable */
+  useEffect(toggleHelper(listening, setListening, dropRef, setDrop));
+  useEffect(toggleHelper(listening, setListening, dropRef, setShowReactions));
+
+  useEffect(() => {
+    //dispatch(refreshFavorite());
+    if (router.isReady) {
+      setIdActive(true);
+      setReactionOnRender();
+    }
+  }, [router.isReady]);
+
+  //socket.io for signaling
+
+  const socketRef = useRef();
+  const userAudio = useRef();
+  const peersRef = useRef([]);
+
+  useEffect(() => {
+    socketRef.current = io.connect("localhost:5000");
+    navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
+      userAudio.current.srcObject = stream;
+      socketRef.current.emit("join room", roomId, user.name);
+      socketRef.current.on("all users", (users) => {
+        const peers = [];
+        console.log(users);
+        users.forEach((userID) => {
+          const peer = createPeer(userID, socketRef.current.id, stream);
+          peersRef.current.push({
+            peerID: userID,
+            peer,
+          });
+
+          peers.push(peer);
+        });
+        setPeers(peers);
+        console.log(peers);
+      });
+
+      socketRef.current.on("user joined", (payload) => {
+        const peer = addPeer(payload.signal, payload.callerID, stream);
+        peersRef.current.push({
+          peerID: payload.callerID,
+          peer,
+        });
+
+        setPeers((users) => [...users, peer]);
+      });
+
+      socketRef.current.on("receiving returned signal", (payload) => {
+        const item = peersRef.current.find((p) => p.peerID === payload.id);
+        item.peer.signal(payload.signal);
+      });
+    });
+  }, [roomId, roomActive]);
+
+  const handleEndSession = () => {
+    setRoomActive(false);
+    socketRef.current.close();
+    router.push("/");
+  };
+
+  function createPeer(userToSignal, callerID, stream) {
+    const peer = new Peer({
+      initiator: true,
+      trickle: false,
+      stream,
+    });
+
+    peer.on("signal", (signal) => {
+      socketRef.current.emit("sending signal", {
+        userToSignal,
+        callerID,
+        signal,
+      });
+    });
+
+    return peer;
+  }
+
+  function addPeer(incomingSignal, callerID, stream) {
+    const peer = new Peer({
+      initiator: false,
+      trickle: false,
+      stream,
+    });
+
+    peer.on("signal", (signal) => {
+      socketRef.current.emit("returning signal", { signal, callerID });
+    });
+
+    peer.signal(incomingSignal);
+
+    return peer;
+  }
+
+  return (
+    <div>
+      <div className={styles.header} ref={dropRef}>
+        <div className={styles.title}>{rooms[roomId]?.name}</div>
+        <div className={styles.headerCon}>
+          <div className={styles.roomUsers}>
+            <AvatarGroup
+              max={3}
+              total={
+                idActive && rooms[roomId]
+                  ? Object.keys(rooms[roomId]?.users).length
+                  : 0
+              }
+            >
+              {idActive && rooms[roomId]
+                ? Object.keys(rooms[roomId]?.users).map((user) => (
+                    <Avatar
+                      key={user + Math.random()}
+                      alt={users[user].name}
+                      src={users[user].profile_pic}
+                    />
+                  ))
+                : ""}
+            </AvatarGroup>
+          </div>
+
+          <div className={styles.headerIcons}>
+            <div
+              className={!showReactions ? styles.react : styles.reactActive}
+              onClick={handleShowReactions}
+            >
+              <AddReactionOutlinedIcon />
+            </div>
+            <div className={styles.notif}>
+              <NotificationsNoneOutlinedIcon />
+            </div>
+            <div
+              className={!drop ? styles.more : styles.moreActive}
+              onClick={handleDrop}
+            >
+              <MoreHorizOutlined />
+            </div>
+          </div>
+
+          <div
+            className={showReactions ? styles.reactions : styles.noReactions}
+          >
+            <Image
+              onClick={() => handleSetReaction("/assets/heart.png")}
+              className={styles.reactIcons}
+              src="/assets/heart.png"
+              alt="logo"
+              height={26}
+              width={26}
+              id="heart"
+            />
+            <Image
+              onClick={() => handleSetReaction("/assets/laugh.png")}
+              className={styles.reactIcons}
+              src="/assets/laugh.png"
+              alt="logo"
+              height={26}
+              width={26}
+            />
+            <Image
+              onClick={() => handleSetReaction("/assets/congrats.png")}
+              className={styles.reactIcons}
+              src="/assets/congrats.png"
+              alt="logo"
+              height={26}
+              width={26}
+              style={{ marginRight: "1rem" }}
+            />
+            <Image
+              onClick={() => handleSetReaction("/assets/support.png")}
+              className={styles.reactIcons}
+              src="/assets/support.png"
+              alt="logo"
+              height={26}
+              width={26}
+            />
+            <Image
+              onClick={() => handleSetReaction("/assets/bye.png")}
+              className={styles.reactIcons}
+              src="/assets/bye.png"
+              alt="logo"
+              height={26}
+              width={26}
+            />
+          </div>
+
+          <div className={drop ? styles.dropDown : styles.noDrop}>
+            <div className={styles.aboutName}>{rooms[roomId]?.name}</div>
+            {user.name === rooms[roomId]?.createdBy.name ? (
+              rooms[roomId]?.about ? (
+                <div className={styles.aboutContent}>
+                  {rooms[roomId]?.about}
+                  <br />
+                  {!showEdit ? (
+                    <button
+                      className={styles.leave}
+                      onClick={() => setShowEdit(!showEdit)}
+                    >
+                      Edit about
+                    </button>
+                  ) : (
+                    <button className={styles.leave} onClick={handleSave}>
+                      Save Changes
+                    </button>
+                  )}
+
+                  {showEdit ? (
+                    <textarea
+                      className={styles.editAbout}
+                      onChange={handleEditAbout}
+                      value={about}
+                      type="text"
+                      placeholder="Edit about"
+                      rows={5}
+                      maxLength={300}
+                    />
+                  ) : (
+                    ""
+                  )}
+                </div>
+              ) : (
+                <div className={styles.aboutContent}>
+                  {!showEdit ? (
+                    <button
+                      className={styles.leave}
+                      onClick={() => setShowEdit(!showEdit)}
+                    >
+                      Add about
+                    </button>
+                  ) : (
+                    <button className={styles.leave} onClick={handleSave}>
+                      Save Changes
+                    </button>
+                  )}
+
+                  {showEdit ? (
+                    <textarea
+                      className={styles.editAbout}
+                      onChange={handleEditAbout}
+                      value={about}
+                      type="text"
+                      placeholder="Edit about"
+                      rows={5}
+                      maxLength={300}
+                    />
+                  ) : (
+                    ""
+                  )}
+                </div>
+              )
+            ) : (
+              <div className={styles.aboutContent}>{rooms[roomId]?.about}</div>
+            )}
+
+            <div className={styles.aboutInfo}>
+              <div className={styles.infoUsers}>
+                {idActive && rooms[roomId] ? (
+                  <p className={styles.userTotal}>
+                    {Object.keys(rooms[roomId]?.users).length} Members
+                  </p>
+                ) : (
+                  ""
+                )}
+              </div>
+              <div className={styles.infoCreated}>
+                <p>Created {rooms[roomId]?.createdOn}</p>
+              </div>
+            </div>
+            <div className={styles.aboutBtns}>
+              {user.favorites &&
+              Object.keys(user?.favorites).includes(roomId) ? (
+                <button
+                  className={styles.favs}
+                  onClick={handleRemoveFromFavorite}
+                >
+                  Remove room from favorites
+                </button>
+              ) : (
+                <button className={styles.favs} onClick={handleAddToFavorite}>
+                  Add room to favorites
+                </button>
+              )}
+
+              <br />
+              {user.name === rooms[roomId]?.createdBy.name ? (
+                <button className={styles.leave} onClick={handleDeleteRoom}>
+                  Delete Room
+                </button>
+              ) : (
+                <button className={styles.leave} onClick={handleLeaveRoom}>
+                  Leave Room
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+      {user.name === rooms[roomId]?.createdBy.name ? (
+        <div className={styles.begin}>
+          {!roomActive ? (
+            <button onClick={() => setRoomActive(true)}>Start</button>
+          ) : (
+            <button onClick={handleEndSession}>End</button>
+          )}
+        </div>
+      ) : (
+        ""
+      )}
+
+      <div className={styles.participators}>
+        {user.name !== rooms[roomId]?.createdBy.name ? (
+          <>
+            <div className={styles.pAvatars}>
+              <Avatar
+                alt={rooms[roomId]?.createdBy.name}
+                src={rooms[roomId]?.createdBy.profile_pic}
+              />
+              <div className={styles.userName}>
+                {rooms[roomId]?.createdBy.name}
+              </div>
+              <div className={styles.userRole}>Admin</div>
+            </div>
+
+            <div
+              className={styles.pAvatars}
+              onClick={() => handleReaction(user.username)}
+            >
+              {reaction ? (
+                <div
+                  className={styles.reaction}
+                  id={`${user.username}`}
+                  hidden={true}
+                >
+                  <Image src={react} alt="logo" height={32} width={32} />
+                </div>
+              ) : (
+                ""
+              )}
+
+              <Avatar alt={user.name} src={user.profile_pic} />
+              <div className={styles.userName}>{user.name}</div>
+              <div className={styles.userRole}>Member</div>
+              <div>
+                <audio autoPlay ref={userAudio} />
+                {peers.map((peer, index) => {
+                  return <Audio key={index} peer={peer} />;
+                })}
+              </div>
+            </div>
+          </>
+        ) : (
+          <div className={styles.pAvatars}>
+            <Avatar
+              alt={rooms[roomId]?.createdBy.name}
+              src={rooms[roomId]?.createdBy.profile_pic}
+            />
+            <div className={styles.userName}>
+              {rooms[roomId]?.createdBy.name}
+            </div>
+            <div className={styles.userRole}>Admin</div>
+            <div>
+              <audio autoPlay ref={userAudio} />
+              {peers.map((peer, index) => {
+                return <Audio key={index} peer={peer} />;
+              })}
+            </div>
+          </div>
+        )}
+
+        {idActive && rooms[roomId]
+          ? Object.keys(rooms[roomId]?.users)
+              .filter(
+                (usertemp) =>
+                  users[usertemp].name !== rooms[roomId]?.createdBy.name &&
+                  users[usertemp].name !== user.name
+              )
+              .map((usertemp) => (
+                <div
+                  className={styles.pAvatars}
+                  key={Math.random() + user}
+                  onClick={() => handleReaction(users[usertemp].name)}
+                >
+                  {reaction ? (
+                    <div
+                      className={styles.reaction}
+                      id={`${users[usertemp].name}`}
+                    >
+                      <Image src={react} alt="logo" height={32} width={32} />
+                    </div>
+                  ) : (
+                    ""
+                  )}
+
+                  <Avatar
+                    alt={users[usertemp].name}
+                    src={users[usertemp].profile_pic}
+                  />
+                  <div className={styles.userName}>{users[usertemp].name}</div>
+                  <div className={styles.userRole}>member</div>
+                </div>
+              ))
+          : ""}
+      </div>
+    </div>
+  );
+}
+
+// Audio Component
+const Audio = (props) => {
+  const ref = useRef();
+
+  useEffect(() => {
+    props.peer.on("stream", (stream) => {
+      ref.current.srcObject = stream;
+    });
+    /* eslint-disable */
+  }, []);
+
+  return <audio autoPlay ref={ref} />;
 };
 
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+function room() {
+  return (
+    <>
+      <Header />
+      <Body midComp={<RoomComp />} />
+    </>
+  );
+}
 
-export const db = getDatabase();
-export const userRef = ref(db, "users/" + userId);
-export default app;
+export default room;

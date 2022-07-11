@@ -84,7 +84,7 @@ function CreateComp() {
     roomName: "",
   });
 
-  const [selectData, setSelectData] = useState();
+  const [selectData, setSelectData] = useState("Alcoholism");
   const [inviteChecked, setInviteChecked] = useState(false);
   const [adulthecked, setAdultChecked] = useState(false);
   const [anonymousChecked, setAnonymousChecked] = useState(false);
@@ -128,7 +128,8 @@ function CreateComp() {
       anonymousChecked,
       user,
       date.format(now, pattern),
-      ""
+      "",
+      false
     );
 
     addUserToRoom(

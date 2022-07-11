@@ -27,6 +27,9 @@ export const userSlice = createSlice({
     updateFavorites: (state, action) => {
       state.value.favorites = action.payload;
     },
+    updateReaction: (state, action) => {
+      state.value.reaction = action.payload;
+    },
     refreshFavorite: (state) => {
       state.value.favorites = {};
     },
@@ -41,6 +44,7 @@ export const {
   updateCover,
   updateDP,
   updateFavorites,
+  updateReaction,
   refreshFavorite,
 } = userSlice.actions;
 

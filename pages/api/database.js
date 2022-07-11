@@ -18,7 +18,8 @@ export function createUser(
   coverUrl,
   bio,
   favorites,
-  joined
+  joined,
+  reaction
 ) {
   const db = getDatabase();
   const userRef = ref(db, "users/" + userId);
@@ -34,6 +35,25 @@ export function createUser(
     bio,
     favorites,
     joined,
+    reaction,
+  });
+}
+
+export function addReactionToUser(userId, reaction) {
+  const db = getDatabase();
+  const userRef = ref(db, "users/" + userId);
+
+  update(userRef, {
+    reaction,
+  });
+}
+
+export function getUserReaction(userId) {
+  const db = getDatabase();
+  const reactionRef = ref(db, "users/" + `${userId}/` + "reaction/");
+
+  return onValue(reactionRef, (snapshot) => {
+    return snapshot.val();
   });
 }
 
@@ -46,7 +66,8 @@ export function createRoom(
   anonymous,
   createdBy,
   createdOn,
-  about
+  about,
+  inSession
 ) {
   const db = getDatabase();
   const roomRef = ref(db, "rooms/" + roomId);
@@ -60,6 +81,7 @@ export function createRoom(
     createdBy,
     createdOn,
     about,
+    inSession,
   });
 }
 
@@ -169,6 +191,15 @@ export function changeCover(userId, coverUrl) {
       cover_photo: coverUrl,
     });
   }
+}
+
+export function updateInSession(roomId, inSession) {
+  const db = getDatabase();
+  const roomRef = ref(db, "rooms/" + `${roomId}`);
+
+  update(roomRef, {
+    inSession,
+  });
 }
 
 export function removeUserFromRoom(userId, roomId) {

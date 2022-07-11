@@ -50,7 +50,8 @@ function Signup() {
         "",
         "",
         "",
-        date.format(now, pattern)
+        date.format(now, pattern),
+        ""
       );
 
       console.log(userCredential.user);
@@ -70,7 +71,7 @@ function Signup() {
     e.preventDefault();
 
     createAccount().then(() => {
-      if (user) router.push("/");
+      if (user) router.push("/signin");
     });
   };
 

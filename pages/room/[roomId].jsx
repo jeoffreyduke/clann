@@ -1,19 +1,25 @@
-import React, { useState, useEffect, useRef, useContext } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styles from "../../styles/Room.module.css";
 import { firebaseConfig } from "../index";
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { handleAllRooms } from "../../provider/allRoomsSlice";
-import { updateFavorites, refreshFavorite } from "../../provider/userSlice";
+import { updateUserReaction } from "../../provider/allUsersSlice";
+import {
+  updateFavorites,
+  refreshFavorite,
+  updateReaction,
+} from "../../provider/userSlice";
 import { updateAbout } from "../../provider/roomSlice";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
-import io from "socket.io-client";
-import Peer from "simple-peer";
 import Header from "../../components/Header";
 import Body from "../../components/Body";
 import {
+  addReactionToUser,
+  getUserReaction,
+  updateInSession,
   addRoomToFavorite,
   removeRoomFromFavorite,
   updateRoomAbout,
@@ -21,12 +27,20 @@ import {
   deleteRoom,
 } from "../api/database";
 import { getDatabase, onValue, ref } from "firebase/database";
+import {
+  config,
+  useClient,
+  useMicrophoneAudioTrack,
+} from "../api/streaming/settings";
 import toggleHelper from "../../customHooks/toggleHelper";
+import { trimName } from "../../customHooks/trimName";
 import { Avatar, AvatarGroup } from "@mui/material";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import MoreHorizOutlined from "@mui/icons-material/MoreHorizOutlined";
 import AddReactionOutlinedIcon from "@mui/icons-material/AddReactionOutlined";
 import Image from "next/image";
+
+let react;
 
 function RoomComp() {
   const app = initializeApp(firebaseConfig);
@@ -41,15 +55,70 @@ function RoomComp() {
   const { roomId } = router.query;
   const [idActive, setIdActive] = useState(false);
   const [roomActive, setRoomActive] = useState(false);
-  const [peers, setPeers] = useState([]);
   const [drop, setDrop] = useState(false);
+  const [reaction, setReaction] = useState(false);
   const [showReactions, setShowReactions] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const [about, setAbout] = useState("");
 
-  const socketRef = useRef();
-  const userAudio = useRef();
-  const peersRef = useRef([]);
+  const client = useClient();
+  const { ready, track } = useMicrophoneAudioTrack();
+  const [roomUsers, setRoomUsers] = useState([]);
+
+  useEffect(() => {
+    if (roomActive === false) {
+      if (track) {
+        track.close();
+      }
+      if (client) {
+        client.leave();
+      }
+      return;
+    }
+
+    let init = async (name) => {
+      client.on("user-published", async (user, mediaType) => {
+        await client.subscribe(user, mediaType);
+        console.log("subscribe success");
+
+        if (mediaType === "audio") {
+          console.log("user added" + user);
+          user.audioTrack.play();
+          setRoomUsers((prev) => [...prev, user]);
+          console.log("user added" + user);
+        }
+      });
+
+      client.on("user-unpublished", async (user) => {
+        if (user.audioTrack) {
+          user.audioTrack.stop();
+        }
+        // Unsubscribe from the track of the remote user.
+        setRoomUsers((prev) => prev.filter((u) => u.id !== user.id));
+        await client.unsubscribe(user);
+      });
+
+      client.on("user-left", async (user) => {
+        setRoomUsers((prev) => prev.filter((u) => u.id !== user.id));
+      });
+
+      try {
+        await client.join(config.appId, name, config.token, userr.uid);
+      } catch (error) {
+        console.log(error);
+      }
+
+      if (track) await client.publish(track);
+    };
+
+    if (ready && track) {
+      try {
+        init(roomId);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }, [client, track, ready, roomId, userr.uid, roomActive]);
 
   const handleEditAbout = (e) => {
     setAbout(e.target.value);
@@ -65,11 +134,41 @@ function RoomComp() {
     }
   };
 
+  const handleStartSession = () => {
+    updateInSession(roomId, true);
+
+    const db = getDatabase();
+    const sessionRef = ref(db, `rooms/${roomId}/inSession`);
+
+    onValue(sessionRef, (snapshot) => {
+      const inSession = snapshot.val();
+      setRoomActive(inSession);
+    });
+  };
+
+  const handleEndSession = () => {
+    updateInSession(roomId, false);
+
+    const db = getDatabase();
+    const sessionRef = ref(db, `rooms/${roomId}/inSession`);
+
+    onValue(sessionRef, (snapshot) => {
+      const inSession = snapshot.val();
+      setRoomActive(inSession);
+    });
+
+    track.close();
+    client.leave();
+  };
+
   const handleLeaveRoom = () => {
     handleRemoveFromFavorite();
 
     removeUserFromRoom(userr.uid, roomId);
     router.push("/");
+
+    track.close();
+    client.leave();
   };
 
   const handleDeleteRoom = () => {
@@ -123,6 +222,32 @@ function RoomComp() {
     setShowReactions(!showReactions);
   };
 
+  const handleSetReaction = (src) => {
+    addReactionToUser(userr.uid, src);
+
+    dispatch(updateReaction(src));
+    dispatch(updateUserReaction({ userId: userr.uid, reaction: src }));
+
+    setReaction(true);
+    console.log("reaction set");
+    setTimeout(() => {
+      addReactionToUser(userr.uid, "");
+
+      dispatch(updateReaction(""));
+      dispatch(updateUserReaction({ userId: userr.uid, reaction: "" }));
+      console.log(users["uEH5CziBggfbWYT0IsvY2RzfVxa2"]);
+
+      setReaction(false);
+      console.log("reaction off");
+    }, 1500);
+  };
+
+  const handleReaction = (element) => {
+    console.log(element);
+
+    //document.querySelector(`#${element}`).hidden = false;
+  };
+
   const dropRef = useRef(null);
   const [listening, setListening] = useState(false);
   /* eslint-disable */
@@ -133,84 +258,20 @@ function RoomComp() {
     //dispatch(refreshFavorite());
     if (router.isReady) {
       setIdActive(true);
+      const db = getDatabase();
+      const sessionRef = ref(db, `rooms/${roomId}/inSession`);
+
+      onValue(sessionRef, (snapshot) => {
+        const inSession = snapshot.val();
+        setRoomActive(inSession);
+      });
+      addReactionToUser(userr.uid, "");
+      dispatch(updateReaction(""));
+      dispatch(updateUserReaction({ userId: userr.uid, reaction: "" }));
     }
   }, [router.isReady]);
 
-  useEffect(() => {
-    if (roomActive === false) return;
-    socketRef.current = io.connect("/");
-    navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
-      userAudio.current.srcObject = stream;
-      socketRef.current.emit("join room", roomId);
-      socketRef.current.on("all users", (users) => {
-        const peers = [];
-        users.forEach((userID) => {
-          const peer = createPeer(userID, socketRef.current.id, stream);
-          peersRef.current.push({
-            peerID: userID,
-            peer,
-          });
-          peers.push(peer);
-        });
-        setPeers(peers);
-      });
-
-      socketRef.current.on("user joined", (payload) => {
-        const peer = addPeer(payload.signal, payload.callerID, stream);
-        peersRef.current.push({
-          peerID: payload.callerID,
-          peer,
-        });
-
-        setPeers((users) => [...users, peer]);
-      });
-
-      socketRef.current.on("receiving returned signal", (payload) => {
-        const item = peersRef.current.find((p) => p.peerID === payload.id);
-        item.peer.signal(payload.signal);
-      });
-    });
-  }, [roomId, roomActive]);
-
-  const handleEndSession = () => {
-    setRoomActive(false);
-    socketRef.current.close();
-    router.push("/");
-  };
-
-  function createPeer(userToSignal, callerID, stream) {
-    const peer = new Peer({
-      initiator: true,
-      trickle: false,
-      stream,
-    });
-
-    peer.on("signal", (signal) => {
-      socketRef.current.emit("sending signal", {
-        userToSignal,
-        callerID,
-        signal,
-      });
-    });
-
-    return peer;
-  }
-
-  function addPeer(incomingSignal, callerID, stream) {
-    const peer = new Peer({
-      initiator: false,
-      trickle: false,
-      stream,
-    });
-
-    peer.on("signal", (signal) => {
-      socketRef.current.emit("returning signal", { signal, callerID });
-    });
-
-    peer.signal(incomingSignal);
-
-    return peer;
-  }
+  //socket.io for signaling
 
   return (
     <div>
@@ -260,13 +321,16 @@ function RoomComp() {
             className={showReactions ? styles.reactions : styles.noReactions}
           >
             <Image
+              onClick={() => handleSetReaction("/assets/heart.png")}
               className={styles.reactIcons}
               src="/assets/heart.png"
               alt="logo"
               height={26}
               width={26}
+              id="heart"
             />
             <Image
+              onClick={() => handleSetReaction("/assets/laugh.png")}
               className={styles.reactIcons}
               src="/assets/laugh.png"
               alt="logo"
@@ -274,6 +338,7 @@ function RoomComp() {
               width={26}
             />
             <Image
+              onClick={() => handleSetReaction("/assets/congrats.png")}
               className={styles.reactIcons}
               src="/assets/congrats.png"
               alt="logo"
@@ -282,6 +347,7 @@ function RoomComp() {
               style={{ marginRight: "1rem" }}
             />
             <Image
+              onClick={() => handleSetReaction("/assets/support.png")}
               className={styles.reactIcons}
               src="/assets/support.png"
               alt="logo"
@@ -289,6 +355,7 @@ function RoomComp() {
               width={26}
             />
             <Image
+              onClick={() => handleSetReaction("/assets/bye.png")}
               className={styles.reactIcons}
               src="/assets/bye.png"
               alt="logo"
@@ -411,7 +478,7 @@ function RoomComp() {
       {user.name === rooms[roomId]?.createdBy.name ? (
         <div className={styles.begin}>
           {!roomActive ? (
-            <button onClick={() => setRoomActive(true)}>Start</button>
+            <button onClick={handleStartSession}>Start</button>
           ) : (
             <button onClick={handleEndSession}>End</button>
           )}
@@ -422,51 +489,106 @@ function RoomComp() {
 
       <div className={styles.participators}>
         {user.name !== rooms[roomId]?.createdBy.name ? (
-          <div className={styles.pAvatars}>
-            <Avatar
-              alt={rooms[roomId]?.createdBy.name}
-              src={rooms[roomId]?.createdBy.profile_pic}
-            />
-            <div className={styles.userName}>
-              {rooms[roomId]?.createdBy.name}
+          <>
+            {Object.keys(users)
+              .filter((User) => User.name !== rooms[roomId]?.createdBy.name)
+              .map((User) => (
+                <div className={styles.pAvatars}>
+                  {console.log(rooms[roomId]?.createdBy.name)}
+                  {users[User].reaction ? (
+                    <div className={styles.reaction}>
+                      <Image
+                        src={users[User].reaction}
+                        alt="logo"
+                        height={26}
+                        width={26}
+                      />
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                  <Avatar
+                    alt={users[User].name}
+                    src={users[User].profile_pic}
+                  />
+                  <div className={styles.userName}>
+                    {trimName(users[User].name, 11)}
+                  </div>
+                  <div className={styles.userRole}>Admin</div>
+                </div>
+              ))}
+
+            <div
+              className={styles.pAvatars}
+              onClick={() => handleReaction(user.username)}
+            >
+              {user.reaction ? (
+                <div className={styles.reaction}>
+                  <Image
+                    src={user.reaction}
+                    alt="logo"
+                    height={26}
+                    width={26}
+                  />
+                </div>
+              ) : (
+                ""
+              )}
+
+              <Avatar alt={user.name} src={user.profile_pic} />
+              <div className={styles.userName}>{trimName(user.name, 11)}</div>
+              <div className={styles.userRole}>Member</div>
             </div>
-            <div className={styles.userRole}>Admin</div>
-            <div>
-              <audio autoPlay ref={userAudio} />
-              {peers.map((peer, index) => {
-                return <Audio key={index} peer={peer} />;
-              })}
-            </div>
-          </div>
+          </>
         ) : (
           <div className={styles.pAvatars}>
+            {user.reaction ? (
+              <div className={styles.reaction}>
+                <Image src={user.reaction} alt="logo" height={26} width={26} />
+              </div>
+            ) : (
+              ""
+            )}
             <Avatar alt={user.name} src={user.profile_pic} />
-            <div className={styles.userName}>{user.name}</div>
+            <div className={styles.userName}>{trimName(user.name, 11)}</div>
             <div className={styles.userRole}>Admin</div>
-            <div>
-              <audio autoPlay ref={userAudio} />
-              {peers.map((peer, index) => {
-                return <Audio key={index} peer={peer} />;
-              })}
-            </div>
           </div>
         )}
 
         {idActive && rooms[roomId]
           ? Object.keys(rooms[roomId]?.users)
               .filter(
-                (user) =>
-                  users[user].name !== rooms[roomId]?.createdBy.name &&
-                  users[user].name !== user.name
+                (usertemp) =>
+                  users[usertemp].name !== rooms[roomId]?.createdBy.name &&
+                  users[usertemp].name !== user.name
               )
-              .map((user) => (
-                <div className={styles.pAvatars} key={Math.random() + user}>
+              .map((usertemp) => (
+                <div
+                  className={styles.pAvatars}
+                  key={Math.random() + user}
+                  onClick={() => handleReaction(users[usertemp].name)}
+                >
+                  {users[usertemp].reaction ? (
+                    <div className={styles.reaction}>
+                      <Image
+                        src={users[usertemp].reaction}
+                        alt="logo"
+                        height={26}
+                        width={26}
+                      />
+                    </div>
+                  ) : (
+                    ""
+                  )}
+
                   <Avatar
-                    alt={users[user].name}
-                    src={users[user].profile_pic}
+                    alt={users[usertemp].name}
+                    src={users[usertemp].profile_pic}
                   />
-                  <div className={styles.userName}>{users[user].name}</div>
-                  <div className={styles.userRole}>Member</div>
+                  <div className={styles.userName}>
+                    {trimName(users[usertemp].name, 11)}
+                  </div>
+                  <div className={styles.userRole}>member</div>
                 </div>
               ))
           : ""}
@@ -474,20 +596,6 @@ function RoomComp() {
     </div>
   );
 }
-
-// Audio Component
-const Audio = (props) => {
-  const ref = useRef();
-
-  useEffect(() => {
-    props.peer.on("stream", (stream) => {
-      ref.current.srcObject = stream;
-    });
-    /* eslint-disable */
-  }, []);
-
-  return <audio autoPlay ref={ref} />;
-};
 
 function room() {
   return (

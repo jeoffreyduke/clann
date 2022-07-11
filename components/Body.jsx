@@ -8,6 +8,7 @@ import { firebaseConfig } from "../pages";
 import { initializeApp } from "firebase/app";
 import { getAuth, signOut } from "firebase/auth";
 import { Avatar } from "@mui/material";
+import { trimName } from "../customHooks/trimName";
 import ExitToAppRoundedIcon from "@mui/icons-material/ExitToAppRounded";
 
 function Body({ profilePic, midComp }) {
@@ -50,12 +51,6 @@ function Body({ profilePic, midComp }) {
     router.push("/");
   };
 
-  const trimName = (name) => {
-    if (name?.length > 10) {
-      return name?.substring(0, 10) + "...";
-    } else return name;
-  };
-
   console.log(user.favorites);
 
   return (
@@ -90,7 +85,7 @@ function Body({ profilePic, midComp }) {
                 <li key={room + Math.random()}>
                   <Link href={`/room/${room}`}>
                     <a className={styles.linkLittle}>
-                      {trimName(rooms[room]?.name)}
+                      {trimName(rooms[room]?.name, 10)}
                     </a>
                   </Link>
                 </li>
