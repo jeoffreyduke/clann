@@ -5,11 +5,15 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { handleAllRooms } from "../../provider/allRoomsSlice";
-import { updateUserReaction } from "../../provider/allUsersSlice";
+import {
+  updateUserReaction,
+  updateUserNotifications,
+} from "../../provider/allUsersSlice";
 import {
   updateFavorites,
   refreshFavorite,
   updateReaction,
+  updateNotifications,
 } from "../../provider/userSlice";
 import { updateAbout } from "../../provider/roomSlice";
 import { useRouter } from "next/router";
@@ -25,6 +29,7 @@ import {
   updateRoomAbout,
   removeUserFromRoom,
   deleteRoom,
+  createNotification,
 } from "../api/database";
 import { getDatabase, onValue, ref } from "firebase/database";
 import {
@@ -39,6 +44,7 @@ import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNone
 import MoreHorizOutlined from "@mui/icons-material/MoreHorizOutlined";
 import AddReactionOutlinedIcon from "@mui/icons-material/AddReactionOutlined";
 import Image from "next/image";
+import Link from "next/link";
 
 let react;
 
@@ -66,15 +72,7 @@ function RoomComp() {
   const [roomUsers, setRoomUsers] = useState([]);
 
   useEffect(() => {
-    if (roomActive === false) {
-      if (track) {
-        track.close();
-      }
-      if (client) {
-        client.leave();
-      }
-      return;
-    }
+    if (roomActive === false) return;
 
     let init = async (name) => {
       client.on("user-published", async (user, mediaType) => {
@@ -118,7 +116,8 @@ function RoomComp() {
         console.log(error);
       }
     }
-  }, [client, track, ready, roomId, userr.uid, roomActive]);
+    /* eslint-disable */
+  }, [client, track, ready, roomId, roomActive]);
 
   const handleEditAbout = (e) => {
     setAbout(e.target.value);
@@ -144,6 +143,31 @@ function RoomComp() {
       const inSession = snapshot.val();
       setRoomActive(inSession);
     });
+
+    Object.keys(users).forEach((key) => {
+      if (
+        users[key].favorites &&
+        Object.keys(users[key]?.favorites).includes(roomId)
+      ) {
+        createNotification(
+          key,
+          ` room in your favorites; is now in session.`,
+          rooms[roomId]
+        );
+
+        const db = getDatabase();
+        const notifsRef = ref(db, "users/" + `${key}/notifications`);
+
+        onValue(notifsRef, (snapshot) => {
+          dispatch(
+            updateUserNotifications({
+              userId: key,
+              notifications: snapshot.val(),
+            })
+          );
+        });
+      }
+    });
   };
 
   const handleEndSession = () => {
@@ -162,13 +186,37 @@ function RoomComp() {
   };
 
   const handleLeaveRoom = () => {
+    track.close();
+    client.leave();
+
     handleRemoveFromFavorite();
 
     removeUserFromRoom(userr.uid, roomId);
     router.push("/");
 
-    track.close();
-    client.leave();
+    Object.keys(users).forEach((key) => {
+      if (
+        users[key].name === rooms[roomId]?.createdBy.name &&
+        key !== userr.uid
+      ) {
+        createNotification(key, ` just left your room.`, user);
+        console.log(users[key].notifications);
+
+        const db = getDatabase();
+        const notifsRef = ref(db, "users/" + `${key}/notifications`);
+
+        onValue(notifsRef, (snapshot) => {
+          dispatch(
+            updateUserNotifications({
+              userId: key,
+              notifications: snapshot.val(),
+            })
+          );
+        });
+
+        console.log(users[key].notifications);
+      }
+    });
   };
 
   const handleDeleteRoom = () => {
@@ -229,23 +277,14 @@ function RoomComp() {
     dispatch(updateUserReaction({ userId: userr.uid, reaction: src }));
 
     setReaction(true);
-    console.log("reaction set");
     setTimeout(() => {
       addReactionToUser(userr.uid, "");
 
       dispatch(updateReaction(""));
       dispatch(updateUserReaction({ userId: userr.uid, reaction: "" }));
-      console.log(users["uEH5CziBggfbWYT0IsvY2RzfVxa2"]);
 
       setReaction(false);
-      console.log("reaction off");
     }, 1500);
-  };
-
-  const handleReaction = (element) => {
-    console.log(element);
-
-    //document.querySelector(`#${element}`).hidden = false;
   };
 
   const dropRef = useRef(null);
@@ -491,26 +530,30 @@ function RoomComp() {
         {user.name !== rooms[roomId]?.createdBy.name ? (
           <>
             {Object.keys(users)
-              .filter((User) => User.name !== rooms[roomId]?.createdBy.name)
+              .filter(
+                (User) => users[User].name === rooms[roomId]?.createdBy.name
+              )
               .map((User) => (
-                <div className={styles.pAvatars}>
-                  {console.log(rooms[roomId]?.createdBy.name)}
+                <div className={styles.pAvatars} key={Math.random() + User}>
                   {users[User].reaction ? (
                     <div className={styles.reaction}>
                       <Image
                         src={users[User].reaction}
                         alt="logo"
-                        height={26}
-                        width={26}
+                        height={30}
+                        width={30}
                       />
                     </div>
                   ) : (
                     ""
                   )}
-                  <Avatar
-                    alt={users[User].name}
-                    src={users[User].profile_pic}
-                  />
+                  <Link href={`/user/${users[User].username}`}>
+                    <Avatar
+                      alt={users[User].name}
+                      src={users[User].profile_pic}
+                    />
+                  </Link>
+
                   <div className={styles.userName}>
                     {trimName(users[User].name, 11)}
                   </div>
@@ -518,24 +561,22 @@ function RoomComp() {
                 </div>
               ))}
 
-            <div
-              className={styles.pAvatars}
-              onClick={() => handleReaction(user.username)}
-            >
+            <div className={styles.pAvatars}>
               {user.reaction ? (
                 <div className={styles.reaction}>
                   <Image
                     src={user.reaction}
                     alt="logo"
-                    height={26}
-                    width={26}
+                    height={30}
+                    width={30}
                   />
                 </div>
               ) : (
                 ""
               )}
-
-              <Avatar alt={user.name} src={user.profile_pic} />
+              <Link href={`/user/${user.username}`}>
+                <Avatar alt={user.name} src={user.profile_pic} />
+              </Link>
               <div className={styles.userName}>{trimName(user.name, 11)}</div>
               <div className={styles.userRole}>Member</div>
             </div>
@@ -544,12 +585,14 @@ function RoomComp() {
           <div className={styles.pAvatars}>
             {user.reaction ? (
               <div className={styles.reaction}>
-                <Image src={user.reaction} alt="logo" height={26} width={26} />
+                <Image src={user.reaction} alt="logo" height={30} width={30} />
               </div>
             ) : (
               ""
             )}
-            <Avatar alt={user.name} src={user.profile_pic} />
+            <Link href={`/user/${user.username}`}>
+              <Avatar alt={user.name} src={user.profile_pic} />
+            </Link>
             <div className={styles.userName}>{trimName(user.name, 11)}</div>
             <div className={styles.userRole}>Admin</div>
           </div>
@@ -563,28 +606,27 @@ function RoomComp() {
                   users[usertemp].name !== user.name
               )
               .map((usertemp) => (
-                <div
-                  className={styles.pAvatars}
-                  key={Math.random() + user}
-                  onClick={() => handleReaction(users[usertemp].name)}
-                >
+                <div className={styles.pAvatars} key={Math.random() + user}>
                   {users[usertemp].reaction ? (
                     <div className={styles.reaction}>
                       <Image
                         src={users[usertemp].reaction}
                         alt="logo"
-                        height={26}
-                        width={26}
+                        height={30}
+                        width={30}
                       />
                     </div>
                   ) : (
                     ""
                   )}
 
-                  <Avatar
-                    alt={users[usertemp].name}
-                    src={users[usertemp].profile_pic}
-                  />
+                  <Link href={`/user/${users[usertemp].username}`}>
+                    <Avatar
+                      alt={users[usertemp].name}
+                      src={users[usertemp].profile_pic}
+                    />
+                  </Link>
+
                   <div className={styles.userName}>
                     {trimName(users[usertemp].name, 11)}
                   </div>

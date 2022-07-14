@@ -11,7 +11,7 @@ import { Avatar } from "@mui/material";
 import { trimName } from "../customHooks/trimName";
 import ExitToAppRoundedIcon from "@mui/icons-material/ExitToAppRounded";
 
-function Body({ profilePic, midComp }) {
+function Body({ midComp }) {
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const dispatch = useDispatch();
@@ -51,8 +51,6 @@ function Body({ profilePic, midComp }) {
     router.push("/");
   };
 
-  console.log(user.favorites);
-
   return (
     <div className={styles.Body}>
       <nav className={styles.nav}>
@@ -60,17 +58,39 @@ function Body({ profilePic, midComp }) {
           <ul>
             <li>
               <Link href="/home">
-                <a className={styles.link}>Home</a>
+                <a
+                  className={
+                    router.pathname == "/" || router.pathname == "/home"
+                      ? styles.active
+                      : styles.link
+                  }
+                >
+                  Home
+                </a>
               </Link>
             </li>
             <li>
               <Link href="/create">
-                <a className={styles.link}>Create</a>
+                <a
+                  className={
+                    router.pathname == "/create" ? styles.active : styles.link
+                  }
+                >
+                  Create
+                </a>
               </Link>
             </li>
             <li>
               <Link href="/favorites">
-                <a className={styles.link}>Favorites</a>
+                <a
+                  className={
+                    router.pathname == "/favorites"
+                      ? styles.active
+                      : styles.link
+                  }
+                >
+                  Favorites
+                </a>
               </Link>
             </li>
           </ul>

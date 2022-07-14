@@ -120,6 +120,8 @@
 }
 
 .reaction {
+  position: fixed;
+  margin-bottom: 2rem;
   z-index: 10;
 }
 

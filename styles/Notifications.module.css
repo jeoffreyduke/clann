@@ -1,0 +1,36 @@
+.Notifications {
+  width: 100%;
+  overflow: hidden;
+  scrollbar-color: var(--mainColor) transparent;
+}
+
+.Notifications:hover {
+  overflow-y: scroll;
+}
+
+.Notifications > header {
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
+.notifications {
+  border-bottom: 1px solid #d9d1eb;
+}
+
+.notification {
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid #d9d1eb;
+  border-bottom: none;
+}
+
+.notificationMsg,
+.notificationsAvatar {
+  padding: 0.5rem;
+}
+
+.notificationMsg > span {
+  font-weight: 700;
+}

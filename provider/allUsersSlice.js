@@ -15,12 +15,19 @@ export const allUsersSlice = createSlice({
     updateUserReaction: (state, action) => {
       const { userId, reaction } = action.payload;
       state.value[userId].reaction = reaction;
-      console.log(state.value);
+    },
+    updateUserNotifications: (state, action) => {
+      const { userId, notifications } = action.payload;
+      state.value[userId].notifications = notifications;
     },
   },
 });
 
-export const { handleAllUsers, refreshAllUsers, updateUserReaction } =
-  allUsersSlice.actions;
+export const {
+  handleAllUsers,
+  refreshAllUsers,
+  updateUserReaction,
+  updateUserNotifications,
+} = allUsersSlice.actions;
 
 export default allUsersSlice.reducer;

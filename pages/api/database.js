@@ -5,6 +5,7 @@ import {
   onValue,
   update,
   remove,
+  push,
 } from "firebase/database";
 
 export function createUser(
@@ -37,6 +38,15 @@ export function createUser(
     joined,
     reaction,
   });
+}
+
+// add notification into the notification array
+export function createNotification(userId, notification, data) {
+  const db = getDatabase();
+  const notifsRef = ref(db, "users/" + `${userId}/notifications`);
+
+  // push the notification and data into the array
+  push(notifsRef, { notification, data });
 }
 
 export function addReactionToUser(userId, reaction) {

@@ -4,7 +4,8 @@ import { firebaseConfig } from ".";
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { handleAllRooms } from "../provider/allRoomsSlice";
-import { addUserToRoom } from "./api/database";
+import { addUserToRoom, createNotification } from "./api/database";
+import { updateUserNotifications } from "../provider/allUsersSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { signOut, useSession } from "next-auth/react";
@@ -13,10 +14,12 @@ import styles from "../styles/Home.module.css";
 import { Avatar, AvatarGroup } from "@mui/material";
 import date from "date-and-time";
 import Header from "../components/Header";
+import { onValue, ref, getDatabase } from "firebase/database";
 
 export function HomeComp() {
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
+  const dispatch = useDispatch();
   const selector = useSelector(handleAllRooms);
   const rooms = selector.payload.allRoomsSlice.value;
   const users = selector.payload.allUsersSlice.value;
@@ -38,6 +41,29 @@ export function HomeComp() {
       date.format(now, pattern),
       id
     );
+
+    // notify the creator of the room
+    Object.keys(users).forEach((key) => {
+      if (
+        users[key].name === rooms[id]?.createdBy.name &&
+        key !== userData.uid
+      ) {
+        createNotification(key, ` just entered your room.`, user);
+
+        const db = getDatabase();
+        const notifsRef = ref(db, "users/" + `${key}/notifications`);
+
+        onValue(notifsRef, (snapshot) => {
+          dispatch(
+            updateUserNotifications({
+              userId: key,
+              notifications: snapshot.val(),
+            })
+          );
+        });
+      }
+    });
+
     console.log(user.name + " added");
   };
 

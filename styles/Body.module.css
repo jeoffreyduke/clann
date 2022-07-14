@@ -67,6 +67,7 @@
   color: #000;
 }
 
+.active:hover,
 .link:hover {
   letter-spacing: 0.5rem;
   right: 3rem;
