@@ -41,12 +41,16 @@ export function createUser(
 }
 
 // add notification into the notification array
-export function createNotification(userId, notification, data) {
+export function createNotification(userId, notification, data, roomId) {
   const db = getDatabase();
   const notifsRef = ref(db, "users/" + `${userId}/notifications`);
 
   // push the notification and data into the array
-  push(notifsRef, { notification, data });
+  if (!roomId) {
+    push(notifsRef, { notification, data });
+  } else {
+    push(notifsRef, { notification, data, roomId });
+  }
 }
 
 export function addReactionToUser(userId, reaction) {

@@ -6,7 +6,7 @@
 
 .nav {
   grid-area: nav;
-  height: fit-content;
+  height: 86.5vh;
   width: fit-content;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
@@ -43,7 +43,7 @@
 }
 
 .userPic {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .userName {
@@ -114,6 +114,9 @@
 }
 
 .copyright {
+  position: absolute;
+  bottom: 2rem;
+  left: 35vw;
   margin-top: 4rem;
   align-items: flex-end;
   font-size: 0.8rem;

@@ -152,7 +152,8 @@ function RoomComp() {
         createNotification(
           key,
           ` room in your favorites; is now in session.`,
-          rooms[roomId]
+          rooms[roomId],
+          roomId
         );
 
         const db = getDatabase();

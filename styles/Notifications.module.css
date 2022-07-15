@@ -20,6 +20,9 @@
 }
 
 .notification {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   font-size: 0.9rem;
   padding: 0.5rem 1rem;
   border: 1px solid #d9d1eb;
@@ -33,4 +36,15 @@
 
 .notificationMsg > span {
   font-weight: 700;
+}
+
+.enterBtn > button {
+  width: 4.5rem;
+  padding: 0.6rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--mainColor);
+  background-color: transparent;
+  border-radius: 5rem;
+  border: 1.8px solid var(--mainColor);
 }

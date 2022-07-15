@@ -83,6 +83,7 @@ function Body({ midComp }) {
             <li>
               <Link href="/favorites">
                 <a
+                  id={styles.fav}
                   className={
                     router.pathname == "/favorites"
                       ? styles.active
@@ -117,7 +118,7 @@ function Body({ midComp }) {
       </nav>
       <main className={styles.main}>{midComp}</main>
       <aside className={styles.aside}>
-        <div onClick={handleSignOut}>
+        <div onClick={handleSignOut} className={styles.leave}>
           <ExitToAppRoundedIcon
             sx={{
               height: "45px",

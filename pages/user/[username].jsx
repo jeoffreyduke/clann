@@ -2,21 +2,26 @@ import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import Body from "../../components/Body";
 import styles from "../../styles/Profile.module.css";
+import { updateUserNotifications } from "../../provider/allUsersSlice";
+import { getDatabase, onValue, ref } from "firebase/database";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { handleUser, refreshUser } from "../../provider/userSlice";
-import { Avatar } from "@mui/material";
+import { createNotification } from "../api/database";
+import { Avatar, keyframes } from "@mui/material";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import Link from "next/link";
 
 function ProfileComp() {
   const router = useRouter();
+  const dispatch = useDispatch();
   const selector = useSelector(handleUser);
   const rooms = selector.payload.allRoomsSlice.value;
   const users = selector.payload.allUsersSlice.value;
   const { username } = router.query;
   const User = selector.payload.userSlice.value;
 
+  const [id, setId] = useState(null);
   const [user, setUser] = useState(user);
   const [ready, setReady] = useState(false);
 
@@ -25,12 +30,33 @@ function ProfileComp() {
       Object.keys(users).forEach((key) => {
         if (users[key].username === username) {
           setUser(users[key]);
+          setId(key);
           setReady(true);
         }
       });
     }
     /* eslint-disable-next-line */
   }, [router.isReady, username]);
+
+  const handleInviteUser = () => {
+    if (ready) {
+      createNotification(id, ` has invited you to their room.`, User);
+
+      const db = getDatabase();
+      const notifsRef = ref(db, "users/" + `${id}/notifications`);
+
+      onValue(notifsRef, (snapshot) => {
+        dispatch(
+          updateUserNotifications({
+            userId: id,
+            notifications: snapshot.val(),
+          })
+        );
+      });
+
+      console.log(user.notifications);
+    }
+  };
 
   return (
     <div className={styles.Profile}>
@@ -78,7 +104,7 @@ function ProfileComp() {
                   <button>Edit profile</button>
                 </Link>
               ) : (
-                <button>Invite user</button>
+                <button onClick={handleInviteUser}>Invite user</button>
               )}
             </div>
           </div>

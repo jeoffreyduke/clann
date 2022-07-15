@@ -41,28 +41,51 @@ function FavComp() {
             .reverse()
             .map((notif) => {
               return notif.notification.includes("your room.") ||
-                notif.notification.includes("in session") ? (
+                notif.notification.includes("in session") ||
+                notif.notification.includes("invited") ? (
                 <div
                   className={styles.notification}
                   key={Math.random() + notif}
                 >
-                  <div className={styles.notificationsAvatar}>
-                    {!notif.notification.includes("in session") ? (
-                      <Avatar
-                        src={notif.data?.profile_pic}
-                        alt={notif.data?.name}
-                      />
-                    ) : (
-                      <OtherHousesRoundedIcon
-                        fontSize="large"
-                        sx={{ color: "#8c52ff", height: "42px", width: "42px" }}
-                      />
-                    )}
+                  <div>
+                    <div className={styles.notificationsAvatar}>
+                      {!notif.notification.includes("in session") ? (
+                        <Avatar
+                          src={notif.data?.profile_pic}
+                          alt={notif.data?.name}
+                          onClick={() =>
+                            router.push(`/user/${notif.data?.username}`)
+                          }
+                        />
+                      ) : (
+                        <OtherHousesRoundedIcon
+                          fontSize="large"
+                          sx={{
+                            color: "#8c52ff",
+                            height: "42px",
+                            width: "42px",
+                          }}
+                          onClick={() => router.push(`/user/${notif.roomId}`)}
+                        />
+                      )}
+                    </div>
+                    <div className={styles.notificationMsg}>
+                      <span>{notif.data?.name}</span>
+                      {notif.notification}
+                    </div>
                   </div>
-                  <div className={styles.notificationMsg}>
-                    <span>{notif.data?.name}</span>
-                    {notif.notification}
-                  </div>
+
+                  {notif.notification.includes("invited") ? (
+                    <div className={styles.enterBtn}>
+                      <button
+                        onClick={() => router.push(`/user/${notif.data}`)}
+                      >
+                        Accept
+                      </button>
+                    </div>
+                  ) : (
+                    ""
+                  )}
                 </div>
               ) : (
                 ""

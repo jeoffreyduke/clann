@@ -1,5 +1,6 @@
 .Signin {
   background-color: #fff;
+  height: 100vh;
   overflow: hidden;
 }
 
@@ -17,13 +18,13 @@
 
 .rightContent {
   position: relative;
-  bottom: 7.2rem;
+  bottom: 9.2rem;
 }
 
 .imageRight {
   position: relative;
   right: 4.5rem;
-  bottom: 3rem;
+  bottom: 5rem;
 }
 
 .bigTxt {
@@ -37,7 +38,7 @@
   width: 30rem;
   font-size: 1.3rem;
   font-weight: 700;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .google,
@@ -53,7 +54,7 @@
   border-radius: 5rem;
   color: #808080;
   background-color: #fff;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .google > span {
@@ -107,6 +108,10 @@
   margin-bottom: 1rem;
 }
 
+.pwd > input {
+  margin-bottom: 0.5rem !important;
+}
+
 .forgot {
   font-size: 0.9rem;
 }
@@ -142,7 +147,7 @@
   height: 1px;
   width: 20rem;
   margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   position: relative;
   right: 10rem;
 }
