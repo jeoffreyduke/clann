@@ -20,6 +20,7 @@ import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNone
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import GroupsOutlinedIcon from "@mui/icons-material/GroupsOutlined";
 import OtherHousesOutlinedIcon from "@mui/icons-material/OtherHousesOutlined";
+import OtherHousesRoundedIcon from "@mui/icons-material/OtherHousesRounded";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 function Header() {
@@ -31,10 +32,40 @@ function Header() {
   const selector = useSelector(handleUser);
   const user = selector.payload.userSlice.value;
   const users = selector.payload.allUsersSlice.value;
+  const rooms = selector.payload.allRoomsSlice.value;
   const prev = selector.payload.countSlice.prev;
   const curr = selector.payload.countSlice.curr;
   const [drop, setDrop] = useState(false);
   const [count, setCount] = useState(0);
+
+  // add search functionality
+  const [search, setSearch] = useState("");
+  const [usersSearchResults, setUsersSearchResults] = useState([]);
+  const [roomsSearchResults, setRoomsSearchResults] = useState([]);
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+  };
+
+  // search functionality
+  useEffect(() => {
+    if (search.length > 0) {
+      // search for users and rooms
+      const userResults = Object.keys(users).filter((user) =>
+        users[user].name.toLowerCase().includes(search.toLowerCase())
+      );
+      const roomResults = Object.keys(rooms).filter((room) =>
+        rooms[room].name.toLowerCase().includes(search.toLowerCase())
+      );
+      setUsersSearchResults(userResults);
+      setRoomsSearchResults(roomResults);
+      console.log("filled", [userResults, roomResults]);
+    } else {
+      setUsersSearchResults([]);
+      setRoomsSearchResults([]);
+      console.log("empty");
+    }
+  }, [search]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleDrop = () => {
     setDrop(!drop);
@@ -95,12 +126,73 @@ function Header() {
               />
             </div>
             <input
+              value={search}
+              onChange={handleSearch}
               type="search"
               name=""
               id=""
               placeholder={`Looking for a room, ${user.name}?`}
             />
           </div>
+          {usersSearchResults.length > 0 || roomsSearchResults.length > 0 ? (
+            <div className={styles.searchDrop}>
+              {usersSearchResults.length > 0
+                ? usersSearchResults.map((user) => (
+                    <div
+                      className={styles.searchCon}
+                      key={Math.random() + users[user].name}
+                      onClick={() => {
+                        router.push(`/user/${users[user].username}`);
+                      }}
+                    >
+                      <div className={styles.searchPic}>
+                        <Avatar
+                          src={users[user].profile_pic}
+                          alt={users[user].name}
+                          sx={{
+                            height: "25px",
+                            width: "25px",
+                          }}
+                        />
+                      </div>
+                      <div className={styles.desCon}>
+                        <div className={styles.searchName}>
+                          {users[user].name}
+                        </div>
+                        <div className={styles.searchDesc}>User</div>
+                      </div>
+                    </div>
+                  ))
+                : null}
+              {roomsSearchResults.length > 0
+                ? roomsSearchResults.map((room) => (
+                    <div
+                      className={styles.searchCon}
+                      key={Math.random() + rooms[room].name}
+                      onClick={() => {
+                        router.push(`/room/${room}`);
+                      }}
+                    >
+                      <div className={styles.searchPic}>
+                        <OtherHousesRoundedIcon
+                          sx={{
+                            color: "#8c52ff",
+                            height: "25px",
+                            width: "25px",
+                          }}
+                        />
+                      </div>
+                      <div className={styles.desCon}>
+                        <div className={styles.searchName}>
+                          {rooms[room].name}
+                        </div>
+                        <div className={styles.searchDesc}>Room</div>
+                      </div>
+                    </div>
+                  ))
+                : null}
+            </div>
+          ) : null}
           <div className={styles.profile}>
             <Link href="/popular">
               <WhatshotOutlinedIcon
