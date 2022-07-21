@@ -1,12 +1,20 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import toggleHelper from "../customHooks/toggleHelper";
-import { useSelector } from "react-redux";
-import { handleUser } from "../provider/userSlice";
+import { useRouter } from "next/router";
+import { useSelector, useDispatch } from "react-redux";
+import { firebaseConfig } from "../pages/index";
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { getDatabase, onValue, ref } from "firebase/database";
+import { handleUser, updateNotifications } from "../provider/userSlice";
+import { handleCount, refreshCount } from "../provider/countSlice";
 import Image from "next/image";
 import styles from "../styles/Header.module.css";
 import { signOut, useSession } from "next-auth/react";
 import { Avatar } from "@mui/material";
+import Badge from "@mui/material/Badge";
 import WhatshotOutlinedIcon from "@mui/icons-material/WhatshotOutlined";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
@@ -15,10 +23,18 @@ import OtherHousesOutlinedIcon from "@mui/icons-material/OtherHousesOutlined";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 function Header() {
-  const { data: session, status } = useSession();
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const [User] = useAuthState(auth);
+  const dispatch = useDispatch();
+  const router = useRouter();
   const selector = useSelector(handleUser);
   const user = selector.payload.userSlice.value;
+  const users = selector.payload.allUsersSlice.value;
+  const prev = selector.payload.countSlice.prev;
+  const curr = selector.payload.countSlice.curr;
   const [drop, setDrop] = useState(false);
+  const [count, setCount] = useState(0);
 
   const handleDrop = () => {
     setDrop(!drop);
@@ -28,6 +44,28 @@ function Header() {
   const [listening, setListening] = useState(false);
   /* eslint-disable */
   useEffect(toggleHelper(listening, setListening, dropRef, setDrop));
+
+  const db = getDatabase();
+  const notifCountRef = ref(db, "users/" + `${User?.uid}/notifCount`);
+
+  useEffect(() => {
+    if (router.pathname === "/notifications") {
+      setCount(0);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (router.isReady) {
+      if (user.notifications && User) {
+        dispatch(updateNotifications(users[User.uid]?.notifications));
+        // filter the unseen notifications and set the count to the number of unseen notifications
+        const unseen = Object.keys(user.notifications).filter(
+          (key) => user.notifications[key].seen === false
+        );
+        setCount(unseen.length);
+      }
+    }
+  }, [users, user, dispatch, router]);
 
   return (
     <div ref={dropRef} onClick={drop ? () => setDrop(false) : () => {}}>
@@ -77,10 +115,17 @@ function Header() {
             </Link>
 
             <Link href="/notifications">
-              <NotificationsNoneOutlinedIcon
-                fontSize="small"
-                sx={{ color: "#707070", position: "relative", top: "0.7rem" }}
-              />
+              <Badge
+                badgeContent={count}
+                color="error"
+                sx={{
+                  color: "#707070",
+                  position: "relative",
+                  top: "0.7rem",
+                }}
+              >
+                <NotificationsNoneOutlinedIcon fontSize="small" />
+              </Badge>
             </Link>
 
             <Link href="/friends">

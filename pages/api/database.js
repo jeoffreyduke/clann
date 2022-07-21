@@ -8,6 +8,13 @@ import {
   push,
 } from "firebase/database";
 
+export function clearAllUsers() {
+  const db = getDatabase();
+  const userRef = ref(db, "users/");
+
+  remove(userRef);
+}
+
 export function createUser(
   userId,
   name,
@@ -41,16 +48,22 @@ export function createUser(
 }
 
 // add notification into the notification array
-export function createNotification(userId, notification, data, roomId) {
+export function createNotification(userId, notification, data, seen, roomId) {
   const db = getDatabase();
   const notifsRef = ref(db, "users/" + `${userId}/notifications`);
 
   // push the notification and data into the array
   if (!roomId) {
-    push(notifsRef, { notification, data });
+    push(notifsRef, { notification, data, seen });
   } else {
-    push(notifsRef, { notification, data, roomId });
+    push(notifsRef, { notification, data, seen, roomId });
   }
+}
+
+export function updateSeen(userId, notifId) {
+  const db = getDatabase();
+  const notifRef = ref(db, "users/" + `${userId}/notifications/${notifId}`);
+  update(notifRef, { seen: true });
 }
 
 export function addReactionToUser(userId, reaction) {
@@ -213,6 +226,15 @@ export function updateInSession(roomId, inSession) {
 
   update(roomRef, {
     inSession,
+  });
+}
+
+export function refreshCount(userId) {
+  const db = getDatabase();
+  const userRef = ref(db, "users/" + `${userId}/`);
+
+  update(userRef, {
+    notifCount: 0,
   });
 }
 

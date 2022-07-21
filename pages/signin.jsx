@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { handleUser } from "../provider/userSlice";
 import { handleAllUsers } from "../provider/allUsersSlice";
-import { handleAuth } from "../provider/authSlice";
 import { firebaseConfig } from ".";
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { getDatabase, onValue, ref } from "firebase/database";
+import { clearAllUsers } from "./api/database";
 import Link from "next/link";
 import Image from "next/image";
 import { signIn } from "next-auth/react";
@@ -68,12 +68,14 @@ function Signin() {
     }
   };
 
+  useEffect(() => {}, []);
+
   return (
     <div className={styles.Signin}>
       <div className={styles.con}>
         <section className={styles.left}>
           <Image
-            src="/../public/assets/cover.jpg"
+            src="/assets/cover.jpg"
             alt="logo"
             layout="fill"
             objectFit="cover"
@@ -82,7 +84,7 @@ function Signin() {
         <section className={styles.right}>
           <div className={styles.imageRight}>
             <Image
-              src="/../public/assets/clann/1.png"
+              src="/assets/clann/1.png"
               alt="logo"
               height={200}
               width={200}

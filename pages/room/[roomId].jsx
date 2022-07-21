@@ -71,6 +71,8 @@ function RoomComp() {
   const { ready, track } = useMicrophoneAudioTrack();
   const [roomUsers, setRoomUsers] = useState([]);
 
+  console.log(["user"]);
+
   useEffect(() => {
     if (roomActive === false) return;
 
@@ -116,8 +118,24 @@ function RoomComp() {
         console.log(error);
       }
     }
+
     /* eslint-disable */
   }, [client, track, ready, roomId, roomActive]);
+
+  // kick a specific user from the channel
+  const kickUser = async (userId) => {
+    await removeUserFromRoom(userId, roomId);
+    // check if channel is active
+
+    // find user in roomUsers array
+    const user = roomUsers.find((u) => u.id === userId);
+
+    if (roomActive) {
+      await client.unsubscribe(user);
+    }
+    setRoomUsers((prev) => prev.filter((u) => u.id !== userId));
+  };
+  console.log([roomUsers]);
 
   const handleEditAbout = (e) => {
     setAbout(e.target.value);
@@ -153,6 +171,7 @@ function RoomComp() {
           key,
           ` room in your favorites; is now in session.`,
           rooms[roomId],
+          false,
           roomId
         );
 
@@ -167,6 +186,8 @@ function RoomComp() {
             })
           );
         });
+
+        console.log("notification sent");
       }
     });
   };
@@ -200,7 +221,7 @@ function RoomComp() {
         users[key].name === rooms[roomId]?.createdBy.name &&
         key !== userr.uid
       ) {
-        createNotification(key, ` just left your room.`, user);
+        createNotification(key, ` just left your room.`, user, false);
         console.log(users[key].notifications);
 
         const db = getDatabase();
@@ -214,8 +235,6 @@ function RoomComp() {
             })
           );
         });
-
-        console.log(users[key].notifications);
       }
     });
   };
@@ -346,9 +365,7 @@ function RoomComp() {
             >
               <AddReactionOutlinedIcon />
             </div>
-            <div className={styles.notif}>
-              <NotificationsNoneOutlinedIcon />
-            </div>
+
             <div
               className={!drop ? styles.more : styles.moreActive}
               onClick={handleDrop}
@@ -632,6 +649,7 @@ function RoomComp() {
                     {trimName(users[usertemp].name, 11)}
                   </div>
                   <div className={styles.userRole}>member</div>
+                  <div className={styles.kickOut}></div>
                 </div>
               ))
           : ""}

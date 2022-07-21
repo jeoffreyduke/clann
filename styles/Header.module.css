@@ -11,6 +11,7 @@
   justify-content: space-around;
   position: relative;
   right: 3.5rem;
+  height: inherit;
 }
 
 .logo {

@@ -4,8 +4,6 @@ import Header from "../components/Header";
 import { useDispatch, useSelector } from "react-redux";
 import { handleAllUsers, refreshAllUsers } from "../provider/allUsersSlice";
 import { handleAllRooms, refreshAllRooms } from "../provider/allRoomsSlice";
-import { refreshAuth } from "../provider/authSlice";
-import { useSession } from "next-auth/react";
 import Home from "./home";
 import { initializeApp } from "firebase/app";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -41,7 +39,6 @@ export default function Index() {
   const allRooms = selector.payload.allRoomsSlice.value;
 
   useEffect(() => {
-    dispatch(refreshAuth());
     dispatch(refreshAllUsers());
     dispatch(refreshAllRooms());
     onValue(userRef, (snapshot) => {

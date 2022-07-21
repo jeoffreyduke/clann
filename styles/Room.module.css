@@ -70,7 +70,6 @@
 .moreActive,
 .reactActive,
 .react,
-.notif,
 .more {
   height: 1.65rem;
   position: relative;
@@ -85,14 +84,12 @@
 }
 
 .react:hover,
-.notif:hover,
 .more:hover {
   color: var(--mainColor);
   background-color: #e7defa;
 }
 
 .reactActive,
-.notif,
 .react {
   margin-right: 0.5rem;
 }
@@ -127,13 +124,15 @@
 
 .dropDown {
   width: 16rem;
-  height: 22.5rem;
+  min-height: fit-content;
+  max-height: 18.5rem;
   position: absolute;
   top: 11.5rem;
   right: 0.3rem;
   background-color: #fff;
   padding: 1rem;
   padding-top: 2rem;
+  padding-bottom: 1.5rem;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 3px 10px;
   overflow: hidden;
   scrollbar-color: var(--mainColor) transparent;

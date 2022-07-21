@@ -9,13 +9,13 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { ref, getDatabase, onValue } from "firebase/database";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
-import { handleUser } from "../provider/userSlice";
-import { updateUserNotifications } from "../provider/allUsersSlice";
-import { updateNotifications } from "../provider/userSlice";
+import { handleUser, updateNotifications } from "../provider/userSlice";
+import { updateSeen } from "./api/database";
 import { Avatar } from "@mui/material";
 import OtherHousesRoundedIcon from "@mui/icons-material/OtherHousesRounded";
+import Link from "next/link";
 
-function FavComp() {
+function NotifComp() {
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const [User] = useAuthState(auth);
@@ -27,10 +27,16 @@ function FavComp() {
   const users = selector.payload.allUsersSlice.value;
 
   useEffect(() => {
-    if (router.isReady) {
-      dispatch(updateNotifications(users[User.uid].notifications));
+    if (router.isReady && User) {
+      dispatch(updateNotifications(users[User?.uid].notifications));
+      // update the seen field in the database for all the notifications
+      if (user.notifications) {
+        Object.keys(user.notifications).forEach((key) => {
+          updateSeen(User?.uid, key);
+        });
+      }
     }
-  }, [dispatch, User, users, router.isReady]);
+  }, [dispatch, User, users, router.isReady, user.notifications]);
 
   return (
     <div className={styles.Notifications}>
@@ -47,45 +53,51 @@ function FavComp() {
                   className={styles.notification}
                   key={Math.random() + notif}
                 >
-                  <div>
-                    <div className={styles.notificationsAvatar}>
-                      {!notif.notification.includes("in session") ? (
-                        <Avatar
-                          src={notif.data?.profile_pic}
-                          alt={notif.data?.name}
-                          onClick={() =>
-                            router.push(`/user/${notif.data?.username}`)
-                          }
-                        />
+                  <Link
+                    href={
+                      (notif.notification.includes("your room.") &&
+                        `/user/${notif.data?.username}`) ||
+                      (notif.notification.includes("in session") &&
+                        `/room/${notif.roomId}`) ||
+                      (notif.notification.includes("invited") && ``)
+                    }
+                  >
+                    <div>
+                      <div className={styles.notificationsAvatar}>
+                        {!notif.notification.includes("in session") ? (
+                          <Avatar
+                            src={notif.data?.profile_pic}
+                            alt={notif.data?.name}
+                          />
+                        ) : (
+                          <OtherHousesRoundedIcon
+                            fontSize="large"
+                            sx={{
+                              color: "#8c52ff",
+                              height: "42px",
+                              width: "42px",
+                            }}
+                          />
+                        )}
+                      </div>
+                      <div className={styles.notificationMsg}>
+                        <span>{notif.data?.name}</span>
+                        {notif.notification}
+                      </div>
+
+                      {notif.notification.includes("invited") ? (
+                        <div className={styles.enterBtn}>
+                          <button
+                            onClick={() => router.push(`/room/${notif.roomId}`)}
+                          >
+                            Accept
+                          </button>
+                        </div>
                       ) : (
-                        <OtherHousesRoundedIcon
-                          fontSize="large"
-                          sx={{
-                            color: "#8c52ff",
-                            height: "42px",
-                            width: "42px",
-                          }}
-                          onClick={() => router.push(`/user/${notif.roomId}`)}
-                        />
+                        ""
                       )}
                     </div>
-                    <div className={styles.notificationMsg}>
-                      <span>{notif.data?.name}</span>
-                      {notif.notification}
-                    </div>
-                  </div>
-
-                  {notif.notification.includes("invited") ? (
-                    <div className={styles.enterBtn}>
-                      <button
-                        onClick={() => router.push(`/user/${notif.data}`)}
-                      >
-                        Accept
-                      </button>
-                    </div>
-                  ) : (
-                    ""
-                  )}
+                  </Link>
                 </div>
               ) : (
                 ""
@@ -100,7 +112,7 @@ function Notifications() {
   return (
     <>
       <Header />
-      <Body midComp={<FavComp />} />
+      <Body midComp={<NotifComp />} />
     </>
   );
 }

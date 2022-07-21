@@ -48,7 +48,7 @@ export function HomeComp() {
         users[key].name === rooms[id]?.createdBy.name &&
         key !== userData.uid
       ) {
-        createNotification(key, ` just entered your room.`, user);
+        createNotification(key, ` just entered your room.`, user, false);
 
         const db = getDatabase();
         const notifsRef = ref(db, "users/" + `${key}/notifications`);
@@ -63,8 +63,6 @@ export function HomeComp() {
         });
       }
     });
-
-    console.log(user.name + " added");
   };
 
   return (

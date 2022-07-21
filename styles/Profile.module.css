@@ -91,10 +91,62 @@
   border: 1.8px solid var(--mainColor);
 }
 
+.drop {
+  height: fit-content;
+  max-height: 5.95rem;
+  width: 6.5rem;
+  position: absolute;
+  font-size: 0.82rem;
+  padding: 0.2rem 0.9rem;
+  margin-top: 0.3rem;
+  border: 1px solid #d8d8d8;
+  overflow: scroll;
+  scrollbar-color: var(--mainColor) transparent;
+  z-index: 100;
+}
+
+.dropItem {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid #d9d1eb;
+}
+
+.addRoom {
+  font-size: 0.7rem;
+}
+
 .profileBio {
   position: relative;
   bottom: 6rem;
   left: 1.3rem;
   font-size: 0.9rem;
   padding-right: 2rem;
+}
+
+.backdrop {
+  height: inherit;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.backdropCon {
+  height: 25rem;
+  width: 25rem;
+}
+
+.close {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-size: 1.2rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+.close:hover {
+  transform: scale(1.1);
+  transition: 0.3s ease-in;
+  color: var(--mainColor);
 }
