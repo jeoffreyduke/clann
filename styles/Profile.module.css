@@ -91,6 +91,10 @@
   border: 1.8px solid var(--mainColor);
 }
 
+.editProfile > button:hover {
+  color: var(--mainColorHover);
+}
+
 .drop {
   height: fit-content;
   max-height: 5.95rem;

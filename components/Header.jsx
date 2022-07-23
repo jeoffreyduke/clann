@@ -15,6 +15,7 @@ import styles from "../styles/Header.module.css";
 import { signOut, useSession } from "next-auth/react";
 import { Avatar } from "@mui/material";
 import Badge from "@mui/material/Badge";
+import Tooltip from "@mui/material/Tooltip";
 import WhatshotOutlinedIcon from "@mui/icons-material/WhatshotOutlined";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
@@ -195,42 +196,51 @@ function Header() {
           ) : null}
           <div className={styles.profile}>
             <Link href="/popular">
-              <WhatshotOutlinedIcon
-                fontSize="small"
-                sx={{
-                  color: "#707070",
-                  position: "relative",
-                  top: "0.7rem",
-                  left: "0.2rem",
-                }}
-              />
+              <Tooltip title="Popular" arrow>
+                <WhatshotOutlinedIcon
+                  fontSize="small"
+                  sx={{
+                    color: "#707070",
+                    position: "relative",
+                    top: "0.7rem",
+                    left: "0.2rem",
+                  }}
+                />
+              </Tooltip>
             </Link>
 
             <Link href="/notifications">
-              <Badge
-                badgeContent={count}
-                color="error"
-                sx={{
-                  color: "#707070",
-                  position: "relative",
-                  top: "0.7rem",
-                }}
-              >
-                <NotificationsNoneOutlinedIcon fontSize="small" />
-              </Badge>
+              <Tooltip title="Notifications" arrow>
+                <Badge
+                  badgeContent={count}
+                  color="error"
+                  sx={{
+                    height: "fit-content",
+                    color: "#707070",
+                    position: "relative",
+                    top: "0.7rem",
+                  }}
+                >
+                  <NotificationsNoneOutlinedIcon fontSize="small" />
+                </Badge>
+              </Tooltip>
             </Link>
 
             <Link href="/friends">
-              <GroupsOutlinedIcon
-                sx={{ color: "#707070", position: "relative", top: "0.7rem" }}
-              />
+              <Tooltip title="Friends" arrow>
+                <GroupsOutlinedIcon
+                  sx={{ color: "#707070", position: "relative", top: "0.7rem" }}
+                />
+              </Tooltip>
             </Link>
 
             <Link href="/favorites">
-              <OtherHousesOutlinedIcon
-                fontSize="small"
-                sx={{ color: "#707070", position: "relative", top: "0.7rem" }}
-              />
+              <Tooltip title="Favorites" arrow>
+                <OtherHousesOutlinedIcon
+                  fontSize="small"
+                  sx={{ color: "#707070", position: "relative", top: "0.7rem" }}
+                />
+              </Tooltip>
             </Link>
 
             <div

@@ -57,10 +57,26 @@ function Signin() {
     e.preventDefault();
 
     for (const key in users) {
+      // if email is wrong set the error message
+      if (users[key].email !== userdata.email) {
+        setError("Your email does not seem to be correct");
+        console.log(error);
+      }
+
+      // if email is correct and password is wrong set the error message
+      if (
+        users[key].email === userdata.email &&
+        users[key].password !== userdata.password
+      ) {
+        setError("Wrong password, please try again");
+        console.log("wrong password");
+      }
+
       if (
         users[key].email === userdata.email &&
         users[key].password === userdata.password
       ) {
+        setError("");
         dispatch(handleUser(users[key]));
         loginEmailPassword();
         console.log(users[key]);
@@ -157,7 +173,7 @@ function Signin() {
                     placeholder="Password"
                   />
                 </div>
-                <p>{}</p>
+                <p className={styles.err}>{error}</p>
                 <div className={styles.forgot}>Forgot your password?</div>
                 <div className={styles.login}>
                   <input onClick={handleLogin} type="button" value="LOG IN" />

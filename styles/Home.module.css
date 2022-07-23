@@ -53,3 +53,8 @@
   border: 1px solid #fff;
   border-radius: 1rem;
 }
+
+.roomJoin > button:hover {
+  background-color: var(--mainColorHover);
+  cursor: pointer;
+}

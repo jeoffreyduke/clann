@@ -112,6 +112,11 @@
   margin-bottom: 0.5rem !important;
 }
 
+.err {
+  color: #ff3333;
+  font-size: 0.7rem;
+}
+
 .forgot {
   font-size: 0.9rem;
 }

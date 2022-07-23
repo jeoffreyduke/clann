@@ -44,6 +44,11 @@
 
 .userPic {
   margin-bottom: 1.5rem;
+  cursor: pointer;
+}
+
+.leave {
+  cursor: pointer;
 }
 
 .userName {

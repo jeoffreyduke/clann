@@ -83,6 +83,12 @@
   margin-bottom: 1rem;
 }
 
+.err {
+  color: #ff3333;
+  font-size: 0.7rem;
+  text-align: center;
+}
+
 .signin {
   font-size: 0.93rem;
   text-align: center;

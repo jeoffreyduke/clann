@@ -6,6 +6,16 @@ body {
   background-color: #dae0e6;
   font-family: var(--fontFamRegular);
   overflow-x: hidden;
+  scrollbar-color: var(--mainColor) transparent;
+}
+
+button {
+  cursor: pointer;
+}
+
+body::-webkit-scrollbar,
+html::-webkit-scrollbar {
+  color: var(--mainColor);
 }
 
 @font-face {
@@ -20,6 +30,7 @@ body {
 
 :root {
   --mainColor: #8c52ff;
+  --mainColorHover: #925efa;
   --fontFamRegular: "Sora Regular";
   --fontFamBold: "Sora Strong";
 }

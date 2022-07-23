@@ -9,6 +9,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth, signOut } from "firebase/auth";
 import { Avatar } from "@mui/material";
 import { trimName } from "../customHooks/trimName";
+import Tooltip from "@mui/material/Tooltip";
 import ExitToAppRoundedIcon from "@mui/icons-material/ExitToAppRounded";
 
 function Body({ midComp }) {
@@ -119,12 +120,14 @@ function Body({ midComp }) {
       <main className={styles.main}>{midComp}</main>
       <aside className={styles.aside}>
         <div onClick={handleSignOut} className={styles.leave}>
-          <ExitToAppRoundedIcon
-            sx={{
-              height: "45px",
-              width: "45px",
-            }}
-          />
+          <Tooltip title="Sign Out" arrow placement="right">
+            <ExitToAppRoundedIcon
+              sx={{
+                height: "45px",
+                width: "45px",
+              }}
+            />
+          </Tooltip>
         </div>
         <div className={styles.userPic}>
           <Link href={`/user/${user.username}`}>

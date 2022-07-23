@@ -6,7 +6,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { firebaseConfig } from ".";
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  AuthErrorCodes,
+} from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { createUser } from "./api/database";
 import date from "date-and-time";
@@ -22,6 +26,7 @@ function Signup() {
   const now = new Date();
   const pattern = date.compile("MMM, DD YYYY");
 
+  const [error, setError] = useState("");
   const [userData, setUserData] = useState({
     firstName: "",
     surName: "",
@@ -56,7 +61,21 @@ function Signup() {
 
       console.log(userCredential.user);
     } catch (error) {
-      console.log(error);
+      // check for error codes
+      if (error.code === AuthErrorCodes.EMAIL_ALREADY_IN_USE) {
+        setError("Email already in use");
+        console.log(error);
+      }
+      if (error.code === AuthErrorCodes.INVALID_EMAIL) {
+        setError("Invalid email");
+        console.log(error);
+      }
+      if (error.code === AuthErrorCodes.WEAK_PASSWORD) {
+        setError("Weak password");
+        console.log(error);
+      } else {
+        setError("Something went wrong");
+      }
     }
   };
 
@@ -69,6 +88,20 @@ function Signup() {
 
   const handleSignup = (e) => {
     e.preventDefault();
+
+    // check if all fields are filled in
+    if (
+      userData.firstName === "" ||
+      userData.surName === "" ||
+      userData.username === "" ||
+      userData.mobOrEmail === ""
+    ) {
+      setError("Please fill in all fields");
+      console.log(error);
+      return;
+    }
+
+    setError("");
 
     createAccount().then(() => {
       if (user) router.push("/signin");
@@ -177,6 +210,7 @@ function Signup() {
               value="SIGN UP"
             />
           </div>
+          <p className={styles.err}>{error}</p>
           <div className={styles.signin}>
             Already have an account?
             <span>

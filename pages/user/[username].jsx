@@ -14,6 +14,7 @@ import { Avatar, keyframes } from "@mui/material";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import CloseIcon from "@mui/icons-material/Close";
 import Backdrop from "@mui/material/Backdrop";
+import Tooltip from "@mui/material/Tooltip";
 import Link from "next/link";
 
 function BackdropComp({ profilePic, coverPhoto }) {
@@ -27,7 +28,9 @@ function BackdropComp({ profilePic, coverPhoto }) {
         }}
       >
         <div className={styles.close}>
-          <CloseIcon />
+          <Tooltip title="Close" arrow>
+            <CloseIcon />
+          </Tooltip>
         </div>
         <div className={styles.backdropCon}>
           {profilePic ? (
@@ -149,6 +152,7 @@ function ProfileComp() {
                 ? {
                     backgroundImage: `url(${user?.cover_photo})`,
                     backgroundSize: "cover",
+                    cursor: "pointer",
                   }
                 : {}
             }
@@ -157,9 +161,16 @@ function ProfileComp() {
               ""
             ) : (
               <Link href="/settings">
-                <EditOutlinedIcon
-                  sx={{ color: "#fff", height: "22px", width: "22px" }}
-                />
+                <Tooltip title="Edit Cover Photo" arrow>
+                  <EditOutlinedIcon
+                    sx={{
+                      color: "#fff",
+                      height: "22px",
+                      width: "22px",
+                      cursor: "pointer",
+                    }}
+                  />
+                </Tooltip>
               </Link>
             )}
           </div>
@@ -189,6 +200,7 @@ function ProfileComp() {
               sx={{
                 height: "110px",
                 width: "110px",
+                cursor: "pointer",
               }}
             />
           </div>

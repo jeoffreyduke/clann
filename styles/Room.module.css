@@ -36,6 +36,16 @@
   );
   border: none;
   border-radius: 0.2rem;
+  cursor: pointer;
+}
+
+.begin > button:hover {
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgb(132, 72, 253) 100%,
+    rgba(39, 118, 234, 1) 35%
+  );
 }
 
 .title {
@@ -76,6 +86,7 @@
   top: 0.07rem;
   place-items: center;
   border-radius: 0.2rem;
+  cursor: pointer;
 }
 
 .moreActive,
@@ -114,6 +125,7 @@
 .reactIcons:hover {
   transform: scale(1.11);
   transition: 0 3s ease-in;
+  cursor: pointer;
 }
 
 .reaction {
@@ -162,6 +174,10 @@
   margin-top: 1rem;
 }
 
+.aboutContent > button:hover {
+  background-color: var(--mainColorHover);
+}
+
 .editAbout {
   height: 2.5rem;
   width: 100%;
@@ -190,6 +206,11 @@
   border: 1px solid var(--mainColor) !important;
 }
 
+.favs:hover {
+  color: var(--mainColorHover) !important;
+  border: 1px solid var(--mainColorHover) !important;
+}
+
 .favs,
 .leave {
   font-size: 0.75rem;
@@ -200,6 +221,11 @@
   margin-bottom: 0.5rem;
   border-radius: 1rem;
   border: none;
+  cursor: pointer;
+}
+
+.leave:hover {
+  background-color: var(--mainColorHover);
 }
 
 .participators {

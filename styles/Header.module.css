@@ -56,21 +56,6 @@
   border-bottom-right-radius: 2rem;
 }
 
-.searchDropped {
-  height: fit-content;
-  width: 20rem;
-  display: flex;
-  position: absolute;
-  top: 3.6rem;
-  left: 15vw;
-  font-size: 0.78rem;
-  padding: 1.5rem;
-  padding-top: 2rem;
-  background-color: #fff;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  z-index: 120;
-}
-
 .searchDrop {
   height: 7.8rem;
   width: 20rem;
@@ -126,6 +111,12 @@
   display: flex;
   justify-content: space-around;
   width: 16rem;
+}
+
+.profile > span:hover,
+.profile > svg:hover {
+  color: var(--mainColor);
+  cursor: pointer;
 }
 
 .pdActive,
