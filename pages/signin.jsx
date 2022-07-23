@@ -4,7 +4,11 @@ import { handleUser } from "../provider/userSlice";
 import { handleAllUsers } from "../provider/allUsersSlice";
 import { firebaseConfig } from ".";
 import { initializeApp } from "firebase/app";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  AuthErrorCodes,
+} from "firebase/auth";
 import { getDatabase, onValue, ref } from "firebase/database";
 import { clearAllUsers } from "./api/database";
 import Link from "next/link";
@@ -39,10 +43,19 @@ function Signin() {
       );
       console.log(userCredential.user);
     } catch (error) {
-      error === "FirebaseError: Firebase: Error (auth/wrong-password)."
-        ? setError("Wrong password, please try again")
-        : setError("Your email does not seem to be correct");
-      console.log(error);
+      switch (error.code) {
+        case AuthErrorCodes.INVALID_EMAIL:
+          setError("Invalid email");
+          break;
+        case AuthErrorCodes.USER_NOT_FOUND:
+          setError("User not found");
+          break;
+        case AuthErrorCodes.WRONG_PASSWORD:
+          setError("Wrong password");
+          break;
+        default:
+          setError("Something went wrong");
+      }
     }
   };
 
