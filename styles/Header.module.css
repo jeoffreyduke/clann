@@ -174,3 +174,143 @@
   margin-top: 3rem;
   font-size: 0.6rem;
 }
+
+/* media queries max width 900 */
+@media (max-width: 900px) {
+  .headerCon {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    right: 3.5rem;
+    height: inherit;
+  }
+  .logo {
+    right: 0rem;
+  }
+  .search {
+    position: relative;
+    top: 0.5rem;
+  }
+  .search > input {
+    height: 2rem;
+    width: 10rem;
+  }
+  .search > input::placeholder {
+    color: #6c6e70;
+  }
+  .search > .btn {
+    top: 0.1rem;
+    height: 2rem;
+  }
+  .searchDrop {
+    height: 7.8rem;
+    width: 15rem;
+    position: absolute;
+    top: 3.6rem;
+    left: 15vw;
+    font-size: 0.78rem;
+    padding: 1.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 2rem;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    z-index: 120;
+    overflow-y: scroll;
+  }
+  .searchCon {
+    display: flex;
+    margin-top: 1rem;
+  }
+  .searchPic {
+    border-radius: 50%;
+  }
+  .profile {
+    position: relative;
+    top: 0.5rem;
+    left: 2rem;
+    display: flex;
+    justify-content: space-around;
+    width: 16rem;
+  }
+
+  .pdActive,
+  .profileDrop {
+    top: 0;
+  }
+  .dropDown {
+    width: fit-content;
+    left: 75vw;
+    font-size: 0.75rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  .dropCon {
+    height: 7rem;
+    overflow-y: scroll;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .copyRight {
+    margin-left: 1rem;
+  }
+}
+
+/* media queries max width 767 */
+@media (max-width: 767px) {
+  .headerCon {
+    right: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .logo {
+    width: 7rem;
+    height: 7rem;
+    top: -1.7rem;
+    left: -2rem;
+  }
+  .search {
+    position: relative;
+    bottom: -0.1rem;
+    right: 3rem;
+    width: 8rem;
+  }
+  .search > input {
+    width: 5rem;
+  }
+  .search > .btn {
+    top: 0.1rem;
+    height: 2rem;
+  }
+  .searchDrop {
+    width: 15rem;
+  }
+  .dropDown {
+    width: fit-content;
+    left: 55vw;
+    font-size: 0.75rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  .dropCon {
+    height: 7rem;
+    overflow-y: scroll;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .copyRight {
+    margin-left: 1rem;
+  }
+
+  .profile {
+    right: 1rem;
+    left: 1rem;
+  }
+
+  .profile,
+  .pdActive,
+  .profileDrop {
+    width: fit-content;
+  }
+}
+
+/* media queries for  */

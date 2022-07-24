@@ -21,30 +21,15 @@ function Body({ midComp }) {
   const user = selector.payload.userSlice.value;
   const router = useRouter();
 
-  const [createActive, setCreateActive] = useState(true);
-  const [disActive, setDisActive] = useState(false);
-  const [favActive, setFavActive] = useState(false);
-
-  const switchCreate = () => {
-    setCreateActive(true);
-    setDisActive(false);
-    setFavActive(false);
-    console.log("create");
-  };
-
-  const switchDiscover = () => {
-    setDisActive(true);
-    setCreateActive(false);
-    setFavActive(false);
-    console.log("discover");
-  };
-
-  const switchFav = () => {
-    setFavActive(true);
-    setCreateActive(false);
-    setDisActive(false);
-    console.log("fav");
-  };
+  // check if the screen is a mobile screen
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    if (window.innerWidth < 768) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+  }, []);
 
   const handleSignOut = () => {
     dispatch(refreshUser());

@@ -154,3 +154,48 @@
   transition: 0.3s ease-in;
   color: var(--mainColor);
 }
+
+/* media queries max width 480 */
+@media (max-width: 480px) {
+  .header {
+    height: 8rem;
+  }
+  .profilePic {
+    bottom: 4rem;
+    left: 0.5rem;
+  }
+  .profileName {
+    bottom: 4rem;
+    left: 0.5rem;
+    font-size: 0.9rem;
+  }
+  .profileUserName {
+    bottom: 4rem;
+    left: 0.5rem;
+    font-size: 0.7rem;
+  }
+  .editProfile {
+    bottom: 6.5rem;
+    right: 0.5rem;
+  }
+  .editProfile > button {
+    width: 5rem;
+    padding: 0.5rem;
+    font-size: 0.65rem;
+  }
+  .profileBio {
+    bottom: 4rem;
+    left: 0.5rem;
+    font-size: 0.8rem;
+  }
+  .drop {
+    width: 100%;
+  }
+  .dropItem {
+    border-bottom: 1px solid #d9d1eb;
+  }
+  .backdropCon {
+    height: 20rem;
+    width: 20rem;
+  }
+}

@@ -17,7 +17,7 @@ import Backdrop from "@mui/material/Backdrop";
 import Tooltip from "@mui/material/Tooltip";
 import Link from "next/link";
 
-function BackdropComp({ profilePic, coverPhoto }) {
+function BackdropComp({ profilePic, coverPhoto, isMobile }) {
   return (
     <>
       <Backdrop
@@ -51,13 +51,13 @@ function BackdropComp({ profilePic, coverPhoto }) {
               style={
                 coverPhoto
                   ? {
-                      height: "20rem",
-                      width: "50rem",
+                      height: isMobile ? "7.5rem" : "20rem",
+                      width: isMobile ? "25rem" : "50rem",
                       position: "relative",
-                      top: "2.5rem",
-                      right: "12rem",
+                      top: isMobile ? "5.5rem" : "2.5rem",
+                      right: isMobile ? "1rem" : "12rem",
                       backgroundImage: `url(${coverPhoto})`,
-                      backgroundSize: "cover",
+                      backgroundSize: isMobile ? "contain" : "cover",
                     }
                   : {}
               }
@@ -80,6 +80,7 @@ function ProfileComp() {
   const { username } = router.query;
   const User = selector.payload.userSlice.value;
 
+  const [isMobile, setIsMobile] = useState(false);
   const [id, setId] = useState(null);
   const [user, setUser] = useState(user);
   const [ready, setReady] = useState(false);
@@ -136,6 +137,14 @@ function ProfileComp() {
     }
   };
 
+  useEffect(() => {
+    if (window.innerWidth <= 900) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+  }, []);
+
   return (
     <div className={styles.Profile}>
       {ready ? (
@@ -180,7 +189,10 @@ function ProfileComp() {
               className={styles.backdrop}
               onClick={() => setBackdrop({ ...backdrop, coverPhoto: false })}
             >
-              <BackdropComp coverPhoto={user?.cover_photo} />
+              <BackdropComp
+                coverPhoto={user?.cover_photo}
+                isMobile={isMobile}
+              />
             </div>
           ) : (
             ""
@@ -198,8 +210,8 @@ function ProfileComp() {
               alt="profile Picture"
               src={user?.profile_pic}
               sx={{
-                height: "110px",
-                width: "110px",
+                height: isMobile ? "55px" : "110px",
+                width: isMobile ? "55px" : "110px",
                 cursor: "pointer",
               }}
             />
@@ -210,7 +222,10 @@ function ProfileComp() {
               className={styles.backdrop}
               onClick={() => setBackdrop({ ...backdrop, profilePic: false })}
             >
-              <BackdropComp profilePic={user?.profile_pic} />
+              <BackdropComp
+                profilePic={user?.profile_pic}
+                isMobile={isMobile}
+              />
             </div>
           ) : (
             ""

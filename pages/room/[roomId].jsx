@@ -70,6 +70,7 @@ function RoomComp() {
   const client = useClient();
   const { ready, track } = useMicrophoneAudioTrack();
   const [roomUsers, setRoomUsers] = useState([]);
+  const [isMobile, setIsMobile] = useState(false);
 
   console.log(["user"]);
 
@@ -330,7 +331,13 @@ function RoomComp() {
     }
   }, [router.isReady]);
 
-  //socket.io for signaling
+  useEffect(() => {
+    if (window.innerWidth <= 900) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+  }, []);
 
   return (
     <div>
@@ -352,6 +359,10 @@ function RoomComp() {
                       key={user + Math.random()}
                       alt={users[user].name}
                       src={users[user].profile_pic}
+                      sx={{
+                        height: isMobile ? "26px" : "50px",
+                        width: isMobile ? "26px" : "50px",
+                      }}
                     />
                   ))
                 : ""}
@@ -558,8 +569,8 @@ function RoomComp() {
                       <Image
                         src={users[User].reaction}
                         alt="logo"
-                        height={30}
-                        width={30}
+                        height={isMobile ? 20 : 30}
+                        width={isMobile ? 20 : 30}
                       />
                     </div>
                   ) : (
@@ -569,6 +580,10 @@ function RoomComp() {
                     <Avatar
                       alt={users[User].name}
                       src={users[User].profile_pic}
+                      sx={{
+                        height: isMobile ? "26px" : "50px",
+                        width: isMobile ? "26px" : "50px",
+                      }}
                     />
                   </Link>
 
@@ -585,15 +600,22 @@ function RoomComp() {
                   <Image
                     src={user.reaction}
                     alt="logo"
-                    height={30}
-                    width={30}
+                    height={isMobile ? 20 : 30}
+                    width={isMobile ? 20 : 30}
                   />
                 </div>
               ) : (
                 ""
               )}
               <Link href={`/user/${user.username}`}>
-                <Avatar alt={user.name} src={user.profile_pic} />
+                <Avatar
+                  alt={user.name}
+                  src={user.profile_pic}
+                  sx={{
+                    height: isMobile ? "26px" : "50px",
+                    width: isMobile ? "26px" : "50px",
+                  }}
+                />
               </Link>
               <div className={styles.userName}>{trimName(user.name, 11)}</div>
               <div className={styles.userRole}>Member</div>
@@ -603,13 +625,25 @@ function RoomComp() {
           <div className={styles.pAvatars}>
             {user.reaction ? (
               <div className={styles.reaction}>
-                <Image src={user.reaction} alt="logo" height={30} width={30} />
+                <Image
+                  src={user.reaction}
+                  alt="logo"
+                  height={isMobile ? 20 : 30}
+                  width={isMobile ? 20 : 30}
+                />
               </div>
             ) : (
               ""
             )}
             <Link href={`/user/${user.username}`}>
-              <Avatar alt={user.name} src={user.profile_pic} />
+              <Avatar
+                alt={user.name}
+                src={user.profile_pic}
+                sx={{
+                  height: isMobile ? "26px" : "50px",
+                  width: isMobile ? "26px" : "50px",
+                }}
+              />
             </Link>
             <div className={styles.userName}>{trimName(user.name, 11)}</div>
             <div className={styles.userRole}>Admin</div>
@@ -630,8 +664,8 @@ function RoomComp() {
                       <Image
                         src={users[usertemp].reaction}
                         alt="logo"
-                        height={30}
-                        width={30}
+                        height={isMobile ? 20 : 30}
+                        width={isMobile ? 20 : 30}
                       />
                     </div>
                   ) : (
@@ -642,6 +676,10 @@ function RoomComp() {
                     <Avatar
                       alt={users[usertemp].name}
                       src={users[usertemp].profile_pic}
+                      sx={{
+                        height: isMobile ? "26px" : "50px",
+                        width: isMobile ? "26px" : "50px",
+                      }}
                     />
                   </Link>
 

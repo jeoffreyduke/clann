@@ -5,14 +5,13 @@ import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import { firebaseConfig } from "../pages/index";
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { getAuth, signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { getDatabase, onValue, ref } from "firebase/database";
 import { handleUser, updateNotifications } from "../provider/userSlice";
 import { handleCount, refreshCount } from "../provider/countSlice";
 import Image from "next/image";
 import styles from "../styles/Header.module.css";
-import { signOut, useSession } from "next-auth/react";
 import { Avatar } from "@mui/material";
 import Badge from "@mui/material/Badge";
 import Tooltip from "@mui/material/Tooltip";
@@ -38,6 +37,7 @@ function Header() {
   const curr = selector.payload.countSlice.curr;
   const [drop, setDrop] = useState(false);
   const [count, setCount] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
   // add search functionality
   const [search, setSearch] = useState("");
@@ -64,7 +64,6 @@ function Header() {
     } else {
       setUsersSearchResults([]);
       setRoomsSearchResults([]);
-      console.log("empty");
     }
   }, [search]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -99,6 +98,14 @@ function Header() {
     }
   }, [users, user, dispatch, router]);
 
+  useEffect(() => {
+    if (window.innerWidth <= 900) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+  }, [window.innerWidth]);
+
   return (
     <div ref={dropRef} onClick={drop ? () => setDrop(false) : () => {}}>
       <header className={styles.Header}>
@@ -106,10 +113,10 @@ function Header() {
           <Link href="/">
             <div className={styles.logo}>
               <Image
-                src="/../public/assets/clann/3.png"
+                src={isMobile ? "/assets/clann/1.png" : "/assets/clann/3.png"}
                 alt="logo"
-                height={250}
-                width={250}
+                height={window.innerWidth < 768 ? 150 : 250}
+                width={window.innerWidth < 768 ? 150 : 250}
               />
             </div>
           </Link>
@@ -118,10 +125,10 @@ function Header() {
               <SearchOutlinedIcon
                 sx={{
                   color: "#707070",
-                  width: "20px",
-                  height: "20px",
+                  width: isMobile ? "18px" : "20px",
+                  height: isMobile ? "18px" : "20px",
                   position: "relative",
-                  top: "0.3rem",
+                  top: isMobile ? "0.4rem" : "0.3rem",
                   left: "1rem",
                 }}
               />
@@ -132,7 +139,9 @@ function Header() {
               type="search"
               name=""
               id=""
-              placeholder={`Looking for a room, ${user.name}?`}
+              placeholder={
+                !isMobile ? `Looking for a room, ${user.name}?` : "Search"
+              }
             />
           </div>
           {usersSearchResults.length > 0 || roomsSearchResults.length > 0 ? (
@@ -195,53 +204,69 @@ function Header() {
             </div>
           ) : null}
           <div className={styles.profile}>
-            <Link href="/popular">
-              <Tooltip title="Popular" arrow>
-                <WhatshotOutlinedIcon
-                  fontSize="small"
-                  sx={{
-                    color: "#707070",
-                    position: "relative",
-                    top: "0.7rem",
-                    left: "0.2rem",
-                  }}
-                />
-              </Tooltip>
-            </Link>
+            {window.innerWidth < 768 ? null : (
+              <Link href="/popular">
+                <Tooltip title="Popular" arrow>
+                  <WhatshotOutlinedIcon
+                    fontSize="small"
+                    sx={{
+                      color: "#707070",
+                      position: "relative",
+                      top: "0.7rem",
+                      left: "0.2rem",
+                    }}
+                  />
+                </Tooltip>
+              </Link>
+            )}
 
-            <Link href="/notifications">
-              <Tooltip title="Notifications" arrow>
-                <Badge
-                  badgeContent={count}
-                  color="error"
-                  sx={{
-                    height: "fit-content",
-                    color: "#707070",
-                    position: "relative",
-                    top: "0.7rem",
-                  }}
-                >
-                  <NotificationsNoneOutlinedIcon fontSize="small" />
-                </Badge>
-              </Tooltip>
-            </Link>
+            {window.innerWidth < 768 ? null : (
+              <Link href="/notifications">
+                <Tooltip title="Notifications" arrow>
+                  <Badge
+                    badgeContent={count}
+                    color="error"
+                    sx={{
+                      height: "fit-content",
+                      color: "#707070",
+                      position: "relative",
+                      top: "0.7rem",
+                    }}
+                  >
+                    <NotificationsNoneOutlinedIcon fontSize="small" />
+                  </Badge>
+                </Tooltip>
+              </Link>
+            )}
 
-            <Link href="/friends">
-              <Tooltip title="Friends" arrow>
-                <GroupsOutlinedIcon
-                  sx={{ color: "#707070", position: "relative", top: "0.7rem" }}
-                />
-              </Tooltip>
-            </Link>
+            {window.innerWidth < 768 ? null : (
+              <Link href="/friends">
+                <Tooltip title="Friends" arrow>
+                  <GroupsOutlinedIcon
+                    sx={{
+                      color: "#707070",
+                      position: "relative",
+                      top: "0.7rem",
+                    }}
+                  />
+                </Tooltip>
+              </Link>
+            )}
 
-            <Link href="/favorites">
-              <Tooltip title="Favorites" arrow>
-                <OtherHousesOutlinedIcon
-                  fontSize="small"
-                  sx={{ color: "#707070", position: "relative", top: "0.7rem" }}
-                />
-              </Tooltip>
-            </Link>
+            {window.innerWidth < 768 ? null : (
+              <Link href="/favorites">
+                <Tooltip title="Favorites" arrow>
+                  <OtherHousesOutlinedIcon
+                    fontSize="small"
+                    sx={{
+                      color: "#707070",
+                      position: "relative",
+                      top: "0.7rem",
+                    }}
+                  />
+                </Tooltip>
+              </Link>
+            )}
 
             <div
               className={drop ? styles.pdActive : styles.profileDrop}
@@ -251,8 +276,8 @@ function Header() {
                 alt={user.name}
                 src={user.profile_pic}
                 sx={{
-                  height: "28px",
-                  width: "28px",
+                  height: isMobile ? "25px" : "30px",
+                  width: isMobile ? "25px" : "30px",
                   position: "relative",
                   top: "0.4rem",
                   right: "0.12rem",
@@ -271,19 +296,41 @@ function Header() {
         </div>
       </header>
       <div className={drop ? styles.dropDown : styles.noDrop}>
-        <Link href={`/user/${user.username}`}>
-          <div className={styles.dropDownItem}>Profile</div>
-        </Link>
+        <div className={styles.dropCon}>
+          {isMobile ? (
+            <>
+              <Link href={"/"}>
+                <div className={styles.dropDownItem}>Home</div>
+              </Link>
 
-        <Link href="/settings">
-          <div className={styles.dropDownItem}>User settings</div>
-        </Link>
+              <Link href="/create">
+                <div className={styles.dropDownItem}>Create</div>
+              </Link>
 
-        <Link href="/">
-          <div className={styles.dropDownItem}>About</div>
-        </Link>
+              <Link href="/favorites">
+                <div className={styles.dropDownItem}>Favorites</div>
+              </Link>
+            </>
+          ) : null}
+          <Link href={`/user/${user.username}`}>
+            <div className={styles.dropDownItem}>Profile</div>
+          </Link>
 
-        <div className={styles.dropDownItem}>Dark Mode</div>
+          <Link href="/settings">
+            <div className={styles.dropDownItem}>User settings</div>
+          </Link>
+
+          <Link href="/">
+            <div className={styles.dropDownItem}>About</div>
+          </Link>
+
+          <div className={styles.dropDownItem}>Dark Mode</div>
+          {!isMobile ? null : (
+            <div className={styles.dropDownItem} onClick={() => signOut()}>
+              Sign Out
+            </div>
+          )}
+        </div>
 
         <div className={styles.copyRight}>© 2022 Clann</div>
       </div>

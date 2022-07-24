@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { firebaseConfig } from ".";
 import { initializeApp } from "firebase/app";
@@ -25,6 +25,7 @@ export function HomeComp() {
   const users = selector.payload.allUsersSlice.value;
   const user = selector.payload.userSlice.value;
   const [userData, loading, error] = useAuthState(auth);
+  const [isMobile, setIsMobile] = useState(false);
 
   const now = new Date();
   const pattern = date.compile("MMM, DD YYYY");
@@ -65,6 +66,14 @@ export function HomeComp() {
     });
   };
 
+  useEffect(() => {
+    if (window.innerWidth < 768) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+  }, []);
+
   return (
     <>
       <section className={styles.first}>
@@ -82,6 +91,10 @@ export function HomeComp() {
                     key={user + Math.random()}
                     alt={users[user].name}
                     src={users[user].profile_pic}
+                    sx={{
+                      height: isMobile ? "26px" : "50px",
+                      width: isMobile ? "26px" : "50px",
+                    }}
                   />
                 ))}
               </AvatarGroup>
@@ -132,6 +145,10 @@ export function HomeComp() {
                               key={user + Math.random()}
                               alt={users[user]?.name}
                               src={users[user]?.profile_pic}
+                              sx={{
+                                height: isMobile ? "26px" : "50px",
+                                width: isMobile ? "26px" : "50px",
+                              }}
                             />
                           ))}
                     </AvatarGroup>
@@ -161,6 +178,10 @@ export function HomeComp() {
                     key={user + Math.random()}
                     alt={users[user].name}
                     src={users[user].profile_pic}
+                    sx={{
+                      height: isMobile ? "26px" : "50px",
+                      width: isMobile ? "26px" : "50px",
+                    }}
                   />
                 ))}
               </AvatarGroup>

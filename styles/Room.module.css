@@ -258,3 +258,25 @@
 .audio {
   border: 1px solid red;
 }
+
+/* media queries max width 480 */
+@media (max-width: 480px) {
+  .header {
+    height: 8rem;
+  }
+  .title {
+    top: 2rem;
+    font-size: 1.1rem;
+  }
+  .userName {
+    font-size: 0.8rem;
+  }
+
+  .userRole {
+    font-size: 0.7rem;
+  }
+  .dropDown {
+    top: 7.5rem;
+    right: 1.2rem;
+  }
+}

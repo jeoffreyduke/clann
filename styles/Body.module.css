@@ -127,3 +127,25 @@
   font-size: 0.8rem;
   font-family: var(--fontFamRegular);
 }
+
+/* media queries max width 900 */
+@media (max-width: 900px) {
+  .Body {
+    grid-template-areas: "main";
+    overflow-y: hidden;
+  }
+  .main {
+    width: 100vw;
+    height: 100vh;
+    margin-left: 7rem;
+  }
+  .rooms {
+    display: none;
+  }
+  .options > ul {
+    display: none;
+  }
+  .copyright {
+    display: none;
+  }
+}
