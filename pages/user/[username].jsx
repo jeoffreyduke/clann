@@ -174,8 +174,8 @@ function ProfileComp() {
                   <EditOutlinedIcon
                     sx={{
                       color: "#fff",
-                      height: "22px",
-                      width: "22px",
+                      height: isMobile ? "18px" : "22px",
+                      width: isMobile ? "18px" : "22px",
                       cursor: "pointer",
                     }}
                   />

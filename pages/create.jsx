@@ -148,7 +148,7 @@ function CreateComp() {
   };
 
   return (
-    <>
+    <div className={styles.Create}>
       <div className={styles.heading}>Create your room</div>
       <div className={styles.title}>
         <div className={styles.inputLabel}>
@@ -214,7 +214,7 @@ function CreateComp() {
       <div className={styles.btn}>
         <button onClick={handleCreateRoom}>Start it up</button>
       </div>
-    </>
+    </div>
   );
 }
 

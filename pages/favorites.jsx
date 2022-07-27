@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../styles/Favorites.module.css";
 import Header from "../components/Header";
 import Body from "../components/Body";
@@ -20,17 +20,16 @@ function FavComp() {
   const rooms = selector.payload.allRoomsSlice.value;
   const user = selector.payload.userSlice.value;
   const router = useRouter();
-  {
-    /*useEffect(() => {
-    
 
-    for (const key in rooms) {
-      console.log(
-        Object.keys(user?.favorites).filter((favId) => key === favId)
-      );
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    if (window.innerWidth <= 900) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
     }
-  }, []);*/
-  }
+  }, []);
 
   return (
     <>
@@ -60,6 +59,10 @@ function FavComp() {
                         key={user + Math.random()}
                         alt={rooms[room]?.users[user].name}
                         src={rooms[room]?.users[user].profile_pic}
+                        sx={{
+                          height: isMobile ? "26px" : "50px",
+                          width: isMobile ? "26px" : "50px",
+                        }}
                       />
                     ))}
                   </AvatarGroup>

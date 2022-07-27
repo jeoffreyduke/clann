@@ -34,7 +34,7 @@
 .notificationMsg,
 .notificationsAvatar {
   padding: 0.5rem;
-  z-index: 10000000000;
+  z-index: 100;
 }
 
 .notificationMsg > span {
@@ -50,4 +50,29 @@
   background-color: transparent;
   border-radius: 5rem;
   border: 1.8px solid var(--mainColor);
+}
+
+/* media queries max width 480 */
+@media screen and (max-width: 480px) {
+  .Notifications > header {
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .notification {
+    font-size: 0.7rem;
+    padding-right: 1rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid #d9d1eb;
+    border-bottom: none;
+  }
+
+  .enterBtn > button {
+    width: 4rem;
+    padding: 0.3rem;
+    margin-right: 0.5rem;
+    font-size: 0.7rem;
+  }
 }

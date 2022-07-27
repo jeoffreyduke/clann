@@ -263,20 +263,66 @@
 @media (max-width: 480px) {
   .header {
     height: 8rem;
+    margin-bottom: 1rem;
+  }
+  .begin > button {
+    height: 1.5rem;
+    width: 3rem;
+    font-size: 0.7rem;
   }
   .title {
     top: 2rem;
-    font-size: 1.1rem;
+    font-size: 0.95rem;
   }
   .userName {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
   }
 
   .userRole {
-    font-size: 0.7rem;
+    font-size: 0.6rem;
   }
   .dropDown {
-    top: 7.5rem;
+    top: 7rem;
     right: 1.2rem;
+    width: 14rem;
+  }
+  .aboutName {
+    font-size: 0.8rem;
+    font-weight: 600;
+    border-bottom: 1px solid #e7defa;
+    padding-bottom: 0.2rem;
+    margin-bottom: 0.5rem;
+  }
+  .aboutContent {
+    font-size: 0.7rem;
+  }
+  .editAbout {
+    height: 2rem;
+    font-size: 0.65rem;
+  }
+  .userTotal {
+    font-size: 0.69rem;
+  }
+  .totalTxt {
+    font-size: 0.65rem;
+  }
+  .infoCreated {
+    font-size: 0.69rem;
+    font-weight: 300;
+  }
+  .favs,
+  .leave {
+    font-size: 0.65rem;
+  }
+  .moreActive,
+  .reactActive,
+  .react,
+  .more {
+    height: 1.15rem;
+    top: -0.1rem;
+  }
+  .reactions {
+    top: 6.5rem;
+    right: 2rem;
   }
 }

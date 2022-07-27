@@ -28,6 +28,7 @@ function Signin() {
   });
 
   const [error, setError] = useState("");
+  const [isMobile, setIsMobile] = useState(false);
 
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
@@ -97,7 +98,13 @@ function Signin() {
     }
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (window.innerWidth <= 900) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+  }, []);
 
   return (
     <div className={styles.Signin}>
@@ -115,8 +122,8 @@ function Signin() {
             <Image
               src="/assets/clann/1.png"
               alt="logo"
-              height={200}
-              width={200}
+              height={isMobile ? 130 : 200}
+              width={isMobile ? 130 : 200}
             />
           </div>
           <div className={styles.rightContent}>
@@ -191,7 +198,6 @@ function Signin() {
                 <div className={styles.login}>
                   <input onClick={handleLogin} type="button" value="LOG IN" />
                 </div>
-                <hr className={styles.lastline} />
                 <div className={styles.signup}>
                   New to Clann?
                   <span>

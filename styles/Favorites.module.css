@@ -41,3 +41,44 @@
   border: 1px solid #fff;
   border-radius: 1rem;
 }
+
+/* media queries max width 480 */
+.roomBox {
+  height: 12.5rem;
+  width: 100%;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  color: #fff;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(140, 82, 255, 1) 100%,
+    rgba(39, 118, 234, 1) 35%
+  );
+}
+.roomTitle {
+  font-size: 0.8rem;
+}
+.roomName {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+.roomUsers {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 1rem;
+}
+.roomJoin {
+  position: relative;
+}
+.roomJoin > button {
+  height: 2rem;
+  width: 100%;
+  font-weight: 600;
+  font-size: 0.7rem;
+}
+.roomJoin > button:hover {
+  background-color: var(--mainColorHover);
+  cursor: pointer;
+}

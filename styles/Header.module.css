@@ -72,6 +72,19 @@
   overflow-y: scroll;
 }
 
+.searchDrop::-webkit-scrollbar {
+  width: 3px;
+}
+
+.searchDrop::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.searchDrop::-webkit-scrollbar-thumb {
+  background-color: var(--mainColor);
+  border-radius: 10px;
+}
+
 .searchCon {
   display: flex;
   margin-top: 1rem;
@@ -152,6 +165,20 @@
   background-color: #fff;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   z-index: 120;
+  overflow-y: scroll;
+}
+
+.dropDown::-webkit-scrollbar {
+  width: 3px;
+}
+
+.dropDown::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dropDown::-webkit-scrollbar-thumb {
+  background-color: var(--mainColor);
+  border-radius: 10px;
 }
 
 .noDrop {
@@ -205,17 +232,12 @@
   .searchDrop {
     height: 7.8rem;
     width: 15rem;
-    position: absolute;
     top: 3.6rem;
-    left: 15vw;
-    font-size: 0.78rem;
+    left: 30vw;
+    font-size: 0.7rem;
     padding: 1.5rem;
     padding-top: 0.5rem;
     padding-bottom: 2rem;
-    background-color: #fff;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    z-index: 120;
-    overflow-y: scroll;
   }
   .searchCon {
     display: flex;
@@ -255,6 +277,24 @@
   }
 }
 
+/* media queries max width 1400 */
+@media (max-width: 1400px) {
+  .search > .btn {
+    top: 0.25rem;
+    height: 2rem;
+  }
+  .searchDrop {
+    left: 20vw;
+  }
+  .dropDown {
+    width: fit-content;
+    left: 76.5vw;
+    font-size: 0.75rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}
+
 /* media queries max width 767 */
 @media (max-width: 767px) {
   .headerCon {
@@ -271,7 +311,7 @@
   .search {
     position: relative;
     bottom: -0.1rem;
-    right: 3rem;
+    right: 1rem;
     width: 8rem;
   }
   .search > input {
@@ -282,7 +322,8 @@
     height: 2rem;
   }
   .searchDrop {
-    width: 15rem;
+    width: 10rem;
+    left: 25vw;
   }
   .dropDown {
     width: fit-content;
@@ -312,5 +353,3 @@
     width: fit-content;
   }
 }
-
-/* media queries for  */

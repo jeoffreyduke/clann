@@ -205,6 +205,10 @@ export function HomeComp() {
                     key={user + Math.random()}
                     alt={users[user].name}
                     src={users[user].profile_pic}
+                    sx={{
+                      height: isMobile ? "26px" : "50px",
+                      width: isMobile ? "26px" : "50px",
+                    }}
                   />
                 ))}
               </AvatarGroup>

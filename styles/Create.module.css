@@ -81,7 +81,7 @@
 .btn {
   width: 30rem;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .btn > button {
@@ -91,4 +91,62 @@
   background-color: var(--mainColor);
   border: none;
   border-radius: 2rem;
+}
+
+/* media queries max width 480 */
+@media (max-width: 480px) {
+  .heading {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+  }
+  .title {
+    font-size: 1rem;
+  }
+  .inputLabel {
+    margin-bottom: 0.5rem;
+  }
+  .title > input {
+    height: 2.5rem;
+    width: 100%;
+    font-size: 0.7rem;
+    margin-bottom: 0.5rem;
+  }
+  .select {
+    margin-bottom: 0.5rem;
+  }
+  .selectLabel {
+    position: relative;
+    top: 0.5rem;
+    left: 0.2rem;
+    font-size: 0.5rem;
+    padding: 0.2rem;
+  }
+
+  .subject {
+    height: 2.5rem;
+    width: 100%;
+  }
+  .swCon {
+    width: 100%;
+    margin-bottom: 0.8rem;
+  }
+  .switchLabel {
+    position: relative;
+    top: 0.2rem;
+    font-weight: 500;
+    font-size: 0.9rem;
+  }
+  .switch {
+    width: 100%;
+    justify-content: space-between;
+    padding: 0.2rem;
+  }
+  .btn {
+    width: 100%;
+    justify-content: flex-end;
+  }
+  .btn > button {
+    height: 2rem;
+    width: 8rem;
+  }
 }

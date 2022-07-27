@@ -31,6 +31,19 @@
   scrollbar-color: var(--mainColor) transparent;
 }
 
+.main::-webkit-scrollbar {
+  width: 3px;
+}
+
+.main::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.main::-webkit-scrollbar-thumb {
+  background-color: var(--mainColor);
+  border-radius: 1rem;
+}
+
 .main:hover {
   overflow-y: scroll;
 }
@@ -105,6 +118,19 @@
   overflow: hidden;
 }
 
+.rooms > ul::-webkit-scrollbar {
+  width: 3px;
+}
+
+.rooms > ul::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.rooms > ul::-webkit-scrollbar-thumb {
+  background-color: var(--mainColor);
+  border-radius: 10px;
+}
+
 .rooms > ul:hover {
   overflow-y: scroll;
   padding-right: 0.5rem;
@@ -128,16 +154,31 @@
   font-family: var(--fontFamRegular);
 }
 
+/* media queries max width 1400 */
+@media (max-width: 1400px) {
+  .rooms > ul {
+    font-size: 1.5rem;
+  }
+  .options > ul {
+    font-size: 3.5rem;
+  }
+  .copyright {
+    bottom: 1rem;
+    left: 33vw;
+  }
+}
+
 /* media queries max width 900 */
 @media (max-width: 900px) {
   .Body {
     grid-template-areas: "main";
-    overflow-y: hidden;
   }
   .main {
     width: 100vw;
-    height: 100vh;
+    height: 91.5vh;
+    margin-top: 0;
     margin-left: 7rem;
+    overflow-y: scroll !important;
   }
   .rooms {
     display: none;

@@ -2,7 +2,8 @@ html,
 body {
   padding: 0;
   margin: 0;
-  height: 100vh;
+  min-height: 100vh;
+  width: 100vw;
   overflow-y: hidden;
   color: #000;
   background-color: #dae0e6;
@@ -15,9 +16,23 @@ button {
   cursor: pointer;
 }
 
-body::-webkit-scrollbar,
-html::-webkit-scrollbar {
-  color: var(--mainColor);
+button,
+input {
+  outline: none;
+}
+
+body::-webkit-scrollbar {
+  width: 12px; /* width of the entire scrollbar */
+}
+
+body::-webkit-scrollbar-track {
+  background: orange; /* color of the tracking area */
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: blue; /* color of the scroll thumb */
+  border-radius: 20px; /* roundness of the scroll thumb */
+  border: 3px solid orange; /* creates padding around scroll thumb */
 }
 
 @font-face {

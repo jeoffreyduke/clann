@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Body from "../components/Body";
 import Header from "../components/Header";
 import styles from "../styles/Notifications.module.css";
@@ -26,6 +26,8 @@ function NotifComp() {
   const user = selector.payload.userSlice.value;
   const users = selector.payload.allUsersSlice.value;
 
+  const [isMobile, setIsMobile] = useState(false);
+
   useEffect(() => {
     if (router.isReady && User) {
       dispatch(updateNotifications(users[User?.uid].notifications));
@@ -37,6 +39,14 @@ function NotifComp() {
       }
     }
   }, [dispatch, User, users, router.isReady, user.notifications]);
+
+  useEffect(() => {
+    if (window.innerWidth <= 900) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+  }, []);
 
   return (
     <div className={styles.Notifications}>
@@ -68,14 +78,18 @@ function NotifComp() {
                           <Avatar
                             src={notif.data?.profile_pic}
                             alt={notif.data?.name}
+                            sx={{
+                              height: isMobile ? "26px" : null,
+                              width: isMobile ? "26px" : null,
+                            }}
                           />
                         ) : (
                           <OtherHousesRoundedIcon
                             fontSize="large"
                             sx={{
                               color: "#8c52ff",
-                              height: "42px",
-                              width: "42px",
+                              height: isMobile ? "26px" : "42px",
+                              width: isMobile ? "26px" : "42px",
                             }}
                           />
                         )}

@@ -167,12 +167,12 @@
   .profileName {
     bottom: 4rem;
     left: 0.5rem;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
   }
   .profileUserName {
     bottom: 4rem;
     left: 0.5rem;
-    font-size: 0.7rem;
+    font-size: 0.6rem;
   }
   .editProfile {
     bottom: 6.5rem;
@@ -181,12 +181,57 @@
   .editProfile > button {
     width: 5rem;
     padding: 0.5rem;
-    font-size: 0.65rem;
+    font-size: 0.6rem;
   }
   .profileBio {
     bottom: 4rem;
     left: 0.5rem;
+    font-size: 0.7rem;
+  }
+  .drop {
+    width: 100%;
+  }
+  .dropItem {
+    border-bottom: 1px solid #d9d1eb;
+  }
+  .backdropCon {
+    height: 20rem;
+    width: 20rem;
+  }
+}
+
+/* media queries max width 900 */
+@media (max-width: 900px) {
+  .header {
+    height: 8rem;
+  }
+  .profilePic {
+    bottom: 4rem;
+    left: 0.5rem;
+  }
+  .profileName {
+    bottom: 4rem;
+    left: 0.5rem;
     font-size: 0.8rem;
+  }
+  .profileUserName {
+    bottom: 4rem;
+    left: 0.5rem;
+    font-size: 0.6rem;
+  }
+  .editProfile {
+    bottom: 6.5rem;
+    right: 0.5rem;
+  }
+  .editProfile > button {
+    width: 5rem;
+    padding: 0.5rem;
+    font-size: 0.6rem;
+  }
+  .profileBio {
+    bottom: 4rem;
+    left: 0.5rem;
+    font-size: 0.7rem;
   }
   .drop {
     width: 100%;

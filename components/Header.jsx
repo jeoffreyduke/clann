@@ -9,7 +9,7 @@ import { getAuth, signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { getDatabase, onValue, ref } from "firebase/database";
 import { handleUser, updateNotifications } from "../provider/userSlice";
-import { handleCount, refreshCount } from "../provider/countSlice";
+import { refreshUser } from "../provider/userSlice";
 import Image from "next/image";
 import styles from "../styles/Header.module.css";
 import { Avatar } from "@mui/material";
@@ -46,6 +46,12 @@ function Header() {
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
+  };
+
+  const handleSignOut = () => {
+    dispatch(refreshUser());
+    signOut(auth);
+    router.push("/");
   };
 
   // search functionality
@@ -113,7 +119,11 @@ function Header() {
           <Link href="/">
             <div className={styles.logo}>
               <Image
-                src={isMobile ? "/assets/clann/1.png" : "/assets/clann/3.png"}
+                src={
+                  window.innerWidth < 768
+                    ? "/assets/clann/1.png"
+                    : "/assets/clann/3.png"
+                }
                 alt="logo"
                 height={window.innerWidth < 768 ? 150 : 250}
                 width={window.innerWidth < 768 ? 150 : 250}
@@ -310,6 +320,18 @@ function Header() {
               <Link href="/favorites">
                 <div className={styles.dropDownItem}>Favorites</div>
               </Link>
+
+              <Link href="/notifications">
+                <div className={styles.dropDownItem}>
+                  {count > 0 ? (
+                    <Badge color="error" variant="dot">
+                      Notifications
+                    </Badge>
+                  ) : (
+                    "Notifications"
+                  )}
+                </div>
+              </Link>
             </>
           ) : null}
           <Link href={`/user/${user.username}`}>
@@ -326,7 +348,7 @@ function Header() {
 
           <div className={styles.dropDownItem}>Dark Mode</div>
           {!isMobile ? null : (
-            <div className={styles.dropDownItem} onClick={() => signOut()}>
+            <div className={styles.dropDownItem} onClick={handleSignOut}>
               Sign Out
             </div>
           )}

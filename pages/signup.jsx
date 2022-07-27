@@ -126,7 +126,7 @@ function Signup() {
               value={userData.firstName}
               name="firstName"
               required
-              id="user"
+              id="firstName"
               type="text"
               placeholder="First Name"
             />
@@ -135,7 +135,7 @@ function Signup() {
               value={userData.surName}
               name="surName"
               required
-              id="user"
+              id="surName"
               type="text"
               placeholder="Surname"
             />
@@ -147,7 +147,7 @@ function Signup() {
               value={userData.username}
               name="username"
               required
-              id="user"
+              id="username"
               type="text"
               placeholder="Clann Alias - username"
             />
@@ -159,7 +159,7 @@ function Signup() {
               value={userData.mobOrEmail}
               name="mobOrEmail"
               required
-              id="user"
+              id="mobOrEmail"
               type="text"
               placeholder="Mobile number or email address"
             />

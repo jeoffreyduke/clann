@@ -75,6 +75,14 @@ function RoomComp() {
   console.log(["user"]);
 
   useEffect(() => {
+    const db = getDatabase();
+    const sessionRef = ref(db, `rooms/${roomId}/inSession`);
+
+    onValue(sessionRef, (snapshot) => {
+      const inSession = snapshot.val();
+      setRoomActive(inSession);
+    });
+
     if (roomActive === false) return;
 
     let init = async (name) => {
@@ -318,13 +326,7 @@ function RoomComp() {
     //dispatch(refreshFavorite());
     if (router.isReady) {
       setIdActive(true);
-      const db = getDatabase();
-      const sessionRef = ref(db, `rooms/${roomId}/inSession`);
 
-      onValue(sessionRef, (snapshot) => {
-        const inSession = snapshot.val();
-        setRoomActive(inSession);
-      });
       addReactionToUser(userr.uid, "");
       dispatch(updateReaction(""));
       dispatch(updateUserReaction({ userId: userr.uid, reaction: "" }));
@@ -374,14 +376,24 @@ function RoomComp() {
               className={!showReactions ? styles.react : styles.reactActive}
               onClick={handleShowReactions}
             >
-              <AddReactionOutlinedIcon />
+              <AddReactionOutlinedIcon
+                sx={{
+                  height: isMobile ? "20px" : null,
+                  width: isMobile ? "20px" : null,
+                }}
+              />
             </div>
 
             <div
               className={!drop ? styles.more : styles.moreActive}
               onClick={handleDrop}
             >
-              <MoreHorizOutlined />
+              <MoreHorizOutlined
+                sx={{
+                  height: isMobile ? "20px" : null,
+                  width: isMobile ? "20px" : null,
+                }}
+              />
             </div>
           </div>
 
@@ -393,8 +405,8 @@ function RoomComp() {
               className={styles.reactIcons}
               src="/assets/heart.png"
               alt="logo"
-              height={26}
-              width={26}
+              height={isMobile ? 20 : 26}
+              width={isMobile ? 20 : 26}
               id="heart"
             />
             <Image
@@ -402,16 +414,16 @@ function RoomComp() {
               className={styles.reactIcons}
               src="/assets/laugh.png"
               alt="logo"
-              height={26}
-              width={26}
+              height={isMobile ? 20 : 26}
+              width={isMobile ? 20 : 26}
             />
             <Image
               onClick={() => handleSetReaction("/assets/congrats.png")}
               className={styles.reactIcons}
               src="/assets/congrats.png"
               alt="logo"
-              height={26}
-              width={26}
+              height={isMobile ? 20 : 26}
+              width={isMobile ? 20 : 26}
               style={{ marginRight: "1rem" }}
             />
             <Image
@@ -419,16 +431,16 @@ function RoomComp() {
               className={styles.reactIcons}
               src="/assets/support.png"
               alt="logo"
-              height={26}
-              width={26}
+              height={isMobile ? 20 : 26}
+              width={isMobile ? 20 : 26}
             />
             <Image
               onClick={() => handleSetReaction("/assets/bye.png")}
               className={styles.reactIcons}
               src="/assets/bye.png"
               alt="logo"
-              height={26}
-              width={26}
+              height={isMobile ? 20 : 26}
+              width={isMobile ? 20 : 26}
             />
           </div>
 
