@@ -287,11 +287,7 @@
     left: 20vw;
   }
   .dropDown {
-    width: fit-content;
-    left: 76.5vw;
-    font-size: 0.75rem;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+    left: 80.5vw;
   }
 }
 

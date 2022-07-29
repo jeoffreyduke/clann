@@ -59,6 +59,7 @@ function Signup() {
         ""
       );
 
+      router.push("/");
       console.log(userCredential.user);
     } catch (error) {
       // check for error codes
@@ -181,8 +182,7 @@ function Signup() {
             <input
               onChange={handleUserData}
               value={userData.data}
-              name="data"
-              required
+              name="date"
               type="date"
             />
           </div>
