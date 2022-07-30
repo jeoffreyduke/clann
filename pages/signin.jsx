@@ -13,7 +13,6 @@ import { getDatabase, onValue, ref } from "firebase/database";
 import { clearAllUsers } from "./api/database";
 import Link from "next/link";
 import Image from "next/image";
-import { signIn } from "next-auth/react";
 import styles from "../styles/Signin.module.css";
 
 function Signin() {
