@@ -239,6 +239,9 @@
     padding-top: 0.5rem;
     padding-bottom: 2rem;
   }
+  .searchDesc {
+    font-size: 0.55rem;
+  }
   .searchCon {
     display: flex;
     margin-top: 1rem;
@@ -291,6 +294,63 @@
   }
 }
 
+/* media queries max width 900 */
+@media (max-width: 900px) {
+  .headerCon {
+    right: 3.5rem;
+    height: inherit;
+  }
+  .logo {
+    right: 0rem;
+  }
+  .search {
+    position: relative;
+    top: 0.5rem;
+  }
+  .search > input {
+    height: 2rem;
+    width: 10rem;
+  }
+  .search > .btn {
+    top: 0.1rem;
+    height: 2rem;
+  }
+  .searchDrop {
+    height: 7.8rem;
+    width: 15rem;
+    top: 3.6rem;
+    left: 30vw;
+    font-size: 0.7rem;
+    padding: 1.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 2rem;
+  }
+  .searchCon {
+    margin-top: 1rem;
+  }
+  .profile {
+    top: 0.5rem;
+    left: 2rem;
+    width: 16rem;
+  }
+
+  .pdActive,
+  .profileDrop {
+    top: 0;
+  }
+  .dropDown {
+    left: 75vw;
+    font-size: 0.75rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  .dropCon {
+    height: 7rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
 /* media queries max width 767 */
 @media (max-width: 767px) {
   .headerCon {
@@ -320,6 +380,7 @@
   .searchDrop {
     width: 10rem;
     left: 25vw;
+    font-size: 0.6rem;
   }
   .dropDown {
     width: fit-content;
