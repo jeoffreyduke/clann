@@ -314,7 +314,6 @@
     overflow-y: scroll;
     padding-top: 3.2rem;
   }
-
   .right {
     width: 100vw;
   }
@@ -323,7 +322,7 @@
   }
   .imageRight {
     right: 3.2rem;
-    bottom: 5rem;
+    bottom: 5.5rem;
     margin-top: 1rem;
     margin-bottom: rem;
   }
