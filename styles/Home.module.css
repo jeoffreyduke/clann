@@ -59,6 +59,28 @@
   cursor: pointer;
 }
 
+.Loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: #fff;
+}
+
+.Loading > footer {
+  position: absolute;
+  bottom: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.Loading > footer > span {
+  font-family: var(--fontFamBold);
+  color: var(--mainColor);
+}
+
 /* media queries max width 1400 */
 @media (max-width: 1400px) {
   .header {
@@ -143,5 +165,8 @@
   .roomJoin > button:hover {
     background-color: var(--mainColorHover);
     cursor: pointer;
+  }
+  .Loading > footer {
+    font-size: 0.8rem;
   }
 }
