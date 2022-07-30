@@ -39,6 +39,8 @@ export default function Index() {
   const allUsers = selector.payload.allUsersSlice.value;
   const allRooms = selector.payload.allRoomsSlice.value;
 
+  const [deviceWidth, setDeviceWidth] = useState(0);
+
   useEffect(() => {
     //clearAllUsers();
     dispatch(refreshAllUsers());
@@ -50,6 +52,14 @@ export default function Index() {
       dispatch(handleAllRooms(snapshot.val()));
     });
   }, [dispatch]);
+
+  useEffect(() => {
+    // if width has changed, re-render
+    window.addEventListener("resize", () => {
+      setDeviceWidth(window.innerWidth);
+      router.reload();
+    });
+  }, [deviceWidth, router]);
 
   if (error) {
     return <p>{error}</p>;
