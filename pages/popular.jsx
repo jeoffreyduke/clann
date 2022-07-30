@@ -5,7 +5,7 @@ import Body from "../components/Body";
 function PopularComp() {
   return (
     <>
-      <div>popular</div>
+      <div>Coming soon</div>
     </>
   );
 }

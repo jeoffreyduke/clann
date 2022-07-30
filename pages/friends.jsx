@@ -5,7 +5,7 @@ import Body from "../components/Body";
 function FriendsComp() {
   return (
     <>
-      <div>friends</div>
+      <div>Coming soon</div>
     </>
   );
 }
