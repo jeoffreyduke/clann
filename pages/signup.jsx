@@ -104,9 +104,7 @@ function Signup() {
 
     setError("");
 
-    createAccount().then(() => {
-      if (user) router.push("/signin");
-    });
+    createAccount();
   };
 
   return (
