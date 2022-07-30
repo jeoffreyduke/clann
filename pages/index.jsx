@@ -53,14 +53,6 @@ export default function Index() {
     });
   }, [dispatch]);
 
-  useEffect(() => {
-    // if width has changed, re-render
-    window.addEventListener("resize", () => {
-      setDeviceWidth(window.innerWidth);
-      router.reload();
-    });
-  }, [deviceWidth, router]);
-
   if (error) {
     return <p>{error}</p>;
   }
