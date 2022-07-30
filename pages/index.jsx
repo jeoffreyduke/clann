@@ -58,7 +58,5 @@ export default function Index() {
     return <Loading />;
   }
 
-  return (
-    <div className={styles.container}>{user ? <Home /> : <Loading />}</div>
-  );
+  return <div className={styles.container}>{user ? <Home /> : <Signin />}</div>;
 }
