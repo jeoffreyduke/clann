@@ -46,7 +46,8 @@ function NotifComp() {
     } else {
       setIsMobile(false);
     }
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [window.innerWidth]);
 
   return (
     <div className={styles.Notifications}>

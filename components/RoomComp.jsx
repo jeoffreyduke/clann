@@ -343,7 +343,7 @@ function RoomComp() {
     } else {
       setIsMobile(false);
     }
-  }, []);
+  }, [window.innerWidth]);
 
   return (
     <div>

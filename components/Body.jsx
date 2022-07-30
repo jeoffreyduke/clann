@@ -29,7 +29,8 @@ function Body({ midComp }) {
     } else {
       setIsMobile(false);
     }
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [window.innerWidth]);
 
   const handleSignOut = () => {
     dispatch(refreshUser());
