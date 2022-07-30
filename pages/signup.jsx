@@ -59,7 +59,7 @@ function Signup() {
         ""
       );
 
-      router.push("/");
+      router.push("/signin");
       console.log(userCredential.user);
     } catch (error) {
       // check for error codes
@@ -75,7 +75,7 @@ function Signup() {
         setError("Weak password");
         console.log(error);
       } else {
-        setError("Something went wrong");
+        setError("Check your email and password");
       }
     }
   };
