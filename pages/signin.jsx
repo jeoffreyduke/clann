@@ -71,21 +71,6 @@ function Signin() {
     e.preventDefault();
 
     for (const key in users) {
-      // if email is wrong set the error message
-      if (users[key].email !== userdata.email) {
-        setError("Your email does not seem to be correct");
-        console.log(error);
-      }
-
-      // if email is correct and password is wrong set the error message
-      if (
-        users[key].email === userdata.email &&
-        users[key].password !== userdata.password
-      ) {
-        setError("Wrong password, please try again");
-        console.log("wrong password");
-      }
-
       if (
         users[key].email === userdata.email &&
         users[key].password === userdata.password
@@ -94,6 +79,18 @@ function Signin() {
         dispatch(handleUser(users[key]));
         loginEmailPassword();
         console.log(users[key]);
+      } else if (
+        users[key].password === userdata.password &&
+        users[key].email !== userdata.email
+      ) {
+        setError("Your email does not seem to be correct");
+        console.log(error);
+      } else if (
+        users[key].email === userdata.email &&
+        users[key].password !== userdata.password
+      ) {
+        setError("Wrong password, please try again");
+        console.log("wrong password");
       }
     }
   };

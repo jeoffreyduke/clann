@@ -12,6 +12,7 @@ import { getDatabase, onValue, ref } from "firebase/database";
 import { createUser, createRoom } from "./api/database";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import Loading from "../components/Loading";
 
 export const firebaseConfig = {
   apiKey: "AIzaSyDI4J_cygaTFClHNVmHdPtJHy2uTUh3-u0",
@@ -54,7 +55,7 @@ export default function Index() {
   }
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <Loading />;
   }
 
   return <div className={styles.container}>{user ? <Home /> : <Signin />}</div>;
