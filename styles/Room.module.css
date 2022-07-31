@@ -110,8 +110,8 @@
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: 10rem;
-  right: 6rem;
+  top: 9.5rem;
+  right: 4.7rem;
   padding: 1rem;
   background-color: #fff;
   border-radius: 2rem;
@@ -260,12 +260,16 @@
   width: 50px;
 }
 
-/* media queries max width 768 */
-@media (max-width: 768px) {
+/* media queries max width 900 */
+@media (max-width: 900px) {
   .AvatarGroup > *:first-child {
     height: 26px;
     width: 26px;
     font-size: 0.8rem;
+  }
+  .reactions {
+    top: 9.8rem;
+    right: 3.8rem;
   }
 }
 
@@ -332,7 +336,7 @@
     top: -0.1rem;
   }
   .reactions {
-    top: 6.5rem;
-    right: 2rem;
+    top: 6.2rem;
+    right: 3rem;
   }
 }
