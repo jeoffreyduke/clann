@@ -306,6 +306,95 @@
   }
 }
 
+/* media queries max width 900 */
+@media (max-width: 900px) {
+  .rightContent {
+    bottom: 2.5rem;
+  }
+  .imageRight {
+    right: 3.5rem;
+    bottom: 0.5rem;
+    margin-top: 1rem;
+    margin-bottom: rem;
+  }
+  .bigTxt {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    font-family: var(--fontFamBold);
+  }
+  .smTxt {
+    width: 100%;
+    font-size: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  .google,
+  .facebook {
+    height: 2rem;
+    width: 100%;
+    font-size: 0.6rem;
+    margin-bottom: 1rem;
+  }
+  .google > span {
+    height: 20px;
+    width: 20px;
+    margin-right: 0.3rem;
+  }
+  .facebook > span {
+    margin-right: 0.3rem;
+  }
+  .pwd,
+  .user {
+    font-size: 0.75rem;
+  }
+  .pwd > input,
+  .user > input {
+    height: 2rem;
+    width: 100%;
+    font-size: 0.7rem;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  .pwd > input {
+    margin-bottom: 0.5rem !important;
+  }
+  .err {
+    font-size: 0.7rem;
+  }
+  .forgot {
+    font-size: 0.75rem;
+  }
+  .login > input {
+    height: 2rem;
+    width: 100%;
+    font-size: 0.75rem;
+    margin-top: 1rem;
+  }
+  .orCon {
+    margin-top: 1rem;
+  }
+  .or {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  .or > span {
+    font-size: 0.75rem;
+    margin-left: 0.45rem;
+    margin-right: 0.45rem;
+  }
+  .mobilePic {
+    height: 45vh;
+    width: 100vw;
+  }
+  .signup {
+    font-size: 0.75rem;
+  }
+  .footer {
+    font-size: 0.55rem;
+  }
+}
+
 /* media queries max width 480 */
 @media (max-width: 480px) {
   .Signin {
@@ -411,5 +500,27 @@
   }
   .footer {
     font-size: 0.55rem;
+  }
+}
+
+/* media queries max height 480 */
+@media (max-height: 480px) {
+  .Signin {
+    background-color: #fff;
+    height: 200vh;
+    overflow-y: scroll;
+    padding-top: 3.2rem;
+  }
+  .right {
+    width: 100vw;
+  }
+  .rightContent {
+    bottom: 8.2rem;
+  }
+  .imageRight {
+    right: 3.2rem;
+    bottom: 5.5rem;
+    margin-top: 1rem;
+    margin-bottom: rem;
   }
 }
