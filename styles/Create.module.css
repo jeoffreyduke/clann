@@ -152,7 +152,7 @@
 }
 
 /* media queries max height 480 */
-@media (max-height: 480px) {
+@media (max-height: 600px) {
   .heading {
     margin-top: 0rem;
     margin-bottom: 1rem;

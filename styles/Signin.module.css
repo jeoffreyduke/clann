@@ -503,7 +503,7 @@
   }
 }
 
-/* media queries max height 480 */
+/* media queries max height 600 */
 @media (max-height: 600px) {
   .Signin {
     background-color: #fff;
