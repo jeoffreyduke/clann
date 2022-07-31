@@ -96,7 +96,7 @@
 /* media queries max width 480 */
 @media (max-width: 480px) {
   .heading {
-    margin-top: 1rem;
+    margin-top: 4rem;
     font-size: 1.5rem;
   }
   .title {
@@ -148,5 +148,13 @@
   .btn > button {
     height: 2rem;
     width: 8rem;
+  }
+}
+
+/* media queries max height 480 */
+@media (max-height: 480px) {
+  .heading {
+    margin-top: 0rem;
+    margin-bottom: 1rem;
   }
 }
