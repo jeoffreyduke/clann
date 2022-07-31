@@ -42,6 +42,20 @@
   border-radius: 1rem;
 }
 
+.AvatarGroup > *:first-child {
+  height: 50px;
+  width: 50px;
+}
+
+/* media queries max width 768 */
+@media (max-width: 768px) {
+  .AvatarGroup > *:first-child {
+    height: 26px;
+    width: 26px;
+    font-size: 0.8rem;
+  }
+}
+
 /* media queries max width 480 */
 .roomBox {
   height: 12.5rem;

@@ -352,6 +352,7 @@ function RoomComp() {
         <div className={styles.headerCon}>
           <div className={styles.roomUsers}>
             <AvatarGroup
+              className={styles.AvatarGroup}
               max={3}
               total={
                 idActive && rooms[roomId]

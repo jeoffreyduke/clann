@@ -52,6 +52,7 @@ function FavComp() {
                   ""
                 ) : (
                   <AvatarGroup
+                    className={styles.AvatarGroup}
                     max={3}
                     total={Object.keys(rooms[room]?.users).length}
                   >

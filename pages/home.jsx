@@ -8,7 +8,6 @@ import { addUserToRoom, createNotification } from "./api/database";
 import { updateUserNotifications } from "../provider/allUsersSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { signOut, useSession } from "next-auth/react";
 import Body from "../components/Body";
 import styles from "../styles/Home.module.css";
 import { Avatar, AvatarGroup } from "@mui/material";
@@ -86,7 +85,11 @@ export function HomeComp() {
             {!users ? (
               <div className={styles.noUsers}>No users</div>
             ) : (
-              <AvatarGroup max={3} total={Object.keys(users).length}>
+              <AvatarGroup
+                className={styles.AvatarGroup}
+                max={3}
+                total={Object.keys(users).length}
+              >
                 {Object.keys(users).map((user) => (
                   <Avatar
                     key={user + Math.random()}
@@ -132,6 +135,7 @@ export function HomeComp() {
                     <div className={styles.noUsers}>No users</div>
                   ) : (
                     <AvatarGroup
+                      className={styles.AvatarGroup}
                       max={3}
                       total={
                         rooms[room].users
@@ -173,7 +177,11 @@ export function HomeComp() {
             {!users ? (
               <div className={styles.noUsers}>No users</div>
             ) : (
-              <AvatarGroup max={3} total={Object.keys(users).length}>
+              <AvatarGroup
+                className={styles.AvatarGroup}
+                max={3}
+                total={Object.keys(users).length}
+              >
                 {Object.keys(users).map((user) => (
                   <Avatar
                     key={user + Math.random()}
@@ -200,7 +208,11 @@ export function HomeComp() {
             {!users ? (
               <div className={styles.noUsers}>No users</div>
             ) : (
-              <AvatarGroup max={3} total={Object.keys(users).length}>
+              <AvatarGroup
+                className={styles.AvatarGroup}
+                max={3}
+                total={Object.keys(users).length}
+              >
                 {Object.keys(users).map((user) => (
                   <Avatar
                     key={user + Math.random()}
@@ -225,8 +237,6 @@ export function HomeComp() {
 }
 
 function Home() {
-  const { data: session, status } = useSession();
-
   return (
     <>
       <Header />

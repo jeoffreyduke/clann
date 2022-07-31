@@ -40,6 +40,12 @@
   margin-bottom: 1rem;
 }
 
+/* first child of .AvatarGroup*/
+.AvatarGroup > *:first-child {
+  height: 50px;
+  width: 50px;
+}
+
 .roomJoin {
   position: relative;
 }
@@ -116,6 +122,15 @@
     height: 2.5rem;
     width: 100%;
     font-size: 0.7rem;
+  }
+}
+
+/* media queries max width 768 */
+@media (max-width: 768px) {
+  .AvatarGroup > *:first-child {
+    height: 26px;
+    width: 26px;
+    font-size: 0.8rem;
   }
 }
 
