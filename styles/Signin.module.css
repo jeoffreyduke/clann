@@ -520,8 +520,8 @@
   .imageRight {
     right: 3.2rem;
     bottom: 8rem;
-    margin-top: 1rem;
-    margin-bottom: rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0rem;
   }
   .bigTxt {
     font-size: 1.2rem;
@@ -532,14 +532,14 @@
   .smTxt {
     width: 100%;
     font-size: 0.7rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
   }
   .google,
   .facebook {
-    height: 1.5rem;
+    height: 1.8rem;
     width: 100%;
-    font-size: 0.6rem;
-    margin-bottom: 1rem;
+    font-size: 0.55rem;
+    margin-bottom: 0.5rem;
   }
   .google > span {
     height: 20px;
@@ -559,9 +559,9 @@
 
   .pwd > input,
   .user > input {
-    height: 1.5rem;
+    height: 1.8rem;
     width: 100%;
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     border: 1px solid #000;
     padding: 0.5rem;
     margin-top: 0.5rem;
@@ -578,14 +578,14 @@
   }
 
   .forgot {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
   }
 
   .login > input {
-    height: 1.5rem;
+    height: 1.8rem;
     width: 100%;
-    font-size: 0.75rem;
-    margin-top: 1rem;
+    font-size: 0.7rem;
+    margin-top: 0.5rem;
   }
   .orCon {
     margin-top: 0.5rem;
@@ -595,7 +595,7 @@
     margin-bottom: 0.5rem;
   }
   .or > span {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     margin-left: 0.45rem;
     margin-right: 0.45rem;
   }
@@ -604,9 +604,9 @@
     width: 100vw;
   }
   .signup {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
   }
   .footer {
-    font-size: 0.55rem;
+    font-size: 0.5rem;
   }
 }
