@@ -189,9 +189,14 @@ function Header() {
                     <div
                       className={styles.searchCon}
                       key={Math.random() + rooms[room].name}
-                      onClick={() => {
-                        router.push(`/room/${room}`);
-                      }}
+                      onClick={
+                        rooms[room].inSession === false &&
+                        rooms[room]?.createdBy.name !== user.name
+                          ? null
+                          : () => {
+                              router.push(`/room/${room}`);
+                            }
+                      }
                     >
                       <div className={styles.searchPic}>
                         <OtherHousesRoundedIcon
@@ -206,7 +211,12 @@ function Header() {
                         <div className={styles.searchName}>
                           {rooms[room].name}
                         </div>
-                        <div className={styles.searchDesc}>Room</div>
+                        <div className={styles.searchDesc}>{`Room(${
+                          rooms[room].inSession === false &&
+                          rooms[room]?.createdBy.name !== user.name
+                            ? "Locked"
+                            : "Open"
+                        })`}</div>
                       </div>
                     </div>
                   ))

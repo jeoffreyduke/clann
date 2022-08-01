@@ -108,9 +108,18 @@ function NotifComp() {
                       {notif.notification.includes("invited") ? (
                         <div className={styles.enterBtn}>
                           <button
+                            disabled={
+                              !rooms[notif.roomId].inSession === false &&
+                              rooms[notif.roomId]?.createdBy.name !== User.name
+                                ? true
+                                : false
+                            }
                             onClick={() => router.push(`/room/${notif.roomId}`)}
                           >
-                            Accept
+                            {!rooms[notif.roomId].inSession === false &&
+                            rooms[notif.roomId]?.createdBy.name !== User.name
+                              ? "Locked"
+                              : "Enter"}
                           </button>
                         </div>
                       ) : (

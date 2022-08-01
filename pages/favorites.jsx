@@ -76,9 +76,13 @@ function FavComp() {
                 )}
               </div>
               <div className={styles.roomJoin}>
-                <Link href={`/room/${room}`}>
-                  <button>Enter</button>
-                </Link>
+                {rooms[room].inSession ? (
+                  <Link href={`/room/${room}`}>
+                    <button>Enter</button>
+                  </Link>
+                ) : (
+                  <button>Locked</button>
+                )}
               </div>
             </div>
           ))

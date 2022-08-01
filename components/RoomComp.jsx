@@ -346,6 +346,11 @@ function RoomComp() {
     }
   }, [window.innerWidth]);
 
+  useEffect(() => {
+    if (roomActive === false && rooms[roomId]?.createdBy.name !== user.name)
+      router.push("/");
+  }, [roomActive]);
+
   return (
     <div>
       <Head>
@@ -708,7 +713,7 @@ function RoomComp() {
                   <div className={styles.userName}>
                     {trimName(users[usertemp].name, 11)}
                   </div>
-                  <div className={styles.userRole}>member</div>
+                  <div className={styles.userRole}>Member</div>
                   <div className={styles.kickOut}></div>
                 </div>
               ))

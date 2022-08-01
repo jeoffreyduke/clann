@@ -91,7 +91,14 @@ function Body({ midComp }) {
             ) : (
               Object.keys(user?.favorites).map((room) => (
                 <li key={room + Math.random()}>
-                  <Link href={`/room/${room}`}>
+                  <Link
+                    href={
+                      rooms[room]?.inSession === false &&
+                      rooms[room]?.createdBy.name !== user.name
+                        ? ""
+                        : `/room/${room}`
+                    }
+                  >
                     <a className={styles.linkLittle}>
                       {trimName(rooms[room]?.name, 10)}
                     </a>

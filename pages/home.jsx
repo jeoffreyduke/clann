@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Body from "../components/Body";
 import styles from "../styles/Home.module.css";
-import { Avatar, AvatarGroup } from "@mui/material";
+import { Avatar, AvatarGroup, formLabelClasses } from "@mui/material";
 import date from "date-and-time";
 import Header from "../components/Header";
 import { onValue, ref, getDatabase } from "firebase/database";
@@ -166,7 +166,20 @@ export function HomeComp() {
                 </div>
                 <div className={styles.roomJoin}>
                   <Link href={`/room/${room}`}>
-                    <button onClick={() => handleAddUser(room)}>Enter</button>
+                    <button
+                      disabled={
+                        rooms[room].inSession === false &&
+                        rooms[room]?.createdBy.name !== user.name
+                          ? true
+                          : false
+                      }
+                      onClick={() => handleAddUser(room)}
+                    >
+                      {rooms[room].inSession === false &&
+                      rooms[room]?.createdBy.name !== user.name
+                        ? "Locked"
+                        : "Enter"}
+                    </button>
                   </Link>
                 </div>
               </div>
