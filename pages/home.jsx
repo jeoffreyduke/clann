@@ -84,7 +84,7 @@ export function HomeComp() {
       <section className={styles.first}>
         <div className={styles.header}>In session</div>
         <div className={styles.roomBox}>
-          <div className={styles.roomTitle}>In session</div>
+          <div className={styles.roomTitle}>Not in session</div>
           <div className={styles.roomName}>Alcoholics Anonymous</div>
           <div className={styles.roomUsers}>
             {!users ? (
@@ -189,7 +189,7 @@ export function HomeComp() {
       <section className={styles.third}>
         <div className={styles.header}>Rooms you might be interested in</div>
         <div className={styles.roomBox}>
-          <div className={styles.roomTitle}>In session</div>
+          <div className={styles.roomTitle}>Not in session</div>
           <div className={styles.roomName}>Gamblers Anonymous</div>
           <div className={styles.roomUsers}>
             {!users ? (
@@ -220,7 +220,7 @@ export function HomeComp() {
         </div>
 
         <div className={styles.roomBox}>
-          <div className={styles.roomTitle}>In session</div>
+          <div className={styles.roomTitle}>Not in session</div>
           <div className={styles.roomName}>Alcoholics Anonymous</div>
           <div className={styles.roomUsers}>
             {!users ? (
