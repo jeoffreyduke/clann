@@ -112,6 +112,12 @@ function Header() {
     }
   }, [window.innerWidth]);
 
+  useEffect(() => {
+    if (!User) {
+      router.push("/");
+    }
+  }, [User]);
+
   return (
     <div ref={dropRef} onClick={drop ? () => setDrop(false) : () => {}}>
       <header className={styles.Header}>
