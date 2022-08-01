@@ -399,8 +399,7 @@
 @media (max-width: 480px) {
   .Signin {
     background-color: #fff;
-    height: 200vh;
-    overflow-y: scroll;
+    height: 100vh;
     padding-top: 3.2rem;
   }
   .right {
@@ -499,16 +498,19 @@
     font-size: 0.75rem;
   }
   .footer {
+    width: 100%;
     font-size: 0.55rem;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 0.5rem;
   }
 }
 
 /* media queries max height 600 */
 @media (max-height: 600px) {
   .Signin {
-    background-color: #fff;
-    height: 200vh;
-    overflow-y: scroll;
+    height: 100vh;
     padding-top: 3.2rem;
   }
   .right {
@@ -573,7 +575,6 @@
   }
 
   .err {
-    color: #ff3333;
     font-size: 0.7rem;
   }
 
@@ -608,5 +609,10 @@
   }
   .footer {
     font-size: 0.5rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 0.2rem;
   }
 }

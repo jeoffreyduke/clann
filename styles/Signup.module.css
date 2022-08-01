@@ -204,16 +204,15 @@
     padding: 1rem;
     padding-top: 0;
   }
-
   .logo {
     position: relative;
-    top: -4rem;
+    top: -1.5rem;
     right: 1rem;
   }
 
   .loginForm {
     position: relative;
-    bottom: 11.5rem;
+    bottom: 9.5rem;
   }
 
   .date,
@@ -277,5 +276,19 @@
   }
   .signin {
     font-size: 0.76rem;
+  }
+}
+
+/* media queries max height 600 */
+@media (max-height: 600px) {
+  .logo {
+    position: relative;
+    top: -4rem;
+    right: 1rem;
+  }
+
+  .loginForm {
+    position: relative;
+    bottom: 11.5rem;
   }
 }
