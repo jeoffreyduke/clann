@@ -507,8 +507,8 @@
   }
 }
 
-/* media queries max height 500 */
-@media (max-height: 500px) {
+/* media queries max height 550 */
+@media (max-height: 550px) {
   .Signin {
     height: 100vh;
     padding-top: 3.2rem;
