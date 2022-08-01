@@ -118,7 +118,7 @@ function Body({ midComp }) {
         <div className={styles.userPic}>
           <Link href={`/user/${user.username}`}>
             <Avatar
-              alt="profile Picture"
+              alt={user.name}
               src={user.profile_pic}
               sx={{
                 height: "42px",
