@@ -110,7 +110,7 @@ export function HomeComp() {
             )}
           </div>
           <div className={styles.roomJoin}>
-            <button>Enter</button>
+            <button>Locked</button>
           </div>
         </div>
       </section>
@@ -215,7 +215,7 @@ export function HomeComp() {
             )}
           </div>
           <div className={styles.roomJoin}>
-            <button>Enter</button>
+            <button>Locked</button>
           </div>
         </div>
 
@@ -246,7 +246,7 @@ export function HomeComp() {
             )}
           </div>
           <div className={styles.roomJoin}>
-            <button>Enter</button>
+            <button>Locked</button>
           </div>
         </div>
       </section>

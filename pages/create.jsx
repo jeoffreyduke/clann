@@ -84,7 +84,7 @@ function CreateComp() {
     roomName: "",
   });
 
-  const [selectData, setSelectData] = useState("Alcoholism");
+  const [selectData, setSelectData] = useState("Fun");
   const [inviteChecked, setInviteChecked] = useState(false);
   const [adulthecked, setAdultChecked] = useState(false);
   const [anonymousChecked, setAnonymousChecked] = useState(false);
@@ -171,14 +171,14 @@ function CreateComp() {
           <label htmlFor="subject">Subject</label>
         </div>
         <select name="subject" className={styles.subject}>
-          <option onClick={handleSelectData} value="Alcoholism">
-            Alcoholism
+          <option onClick={handleSelectData} value="Professional">
+            Professional
           </option>
-          <option onClick={handleSelectData} value="Drug Abuse">
-            Drug Abuse
+          <option onClick={handleSelectData} value="Support Group">
+            Support Group
           </option>
-          <option onClick={handleSelectData} value="Gambling">
-            Gambling
+          <option onClick={handleSelectData} value="Fun">
+            Fun
           </option>
         </select>
       </div>

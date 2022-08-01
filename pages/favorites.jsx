@@ -76,12 +76,13 @@ function FavComp() {
                 )}
               </div>
               <div className={styles.roomJoin}>
-                {rooms[room].inSession ? (
+                {rooms[room].inSession === false &&
+                rooms[room]?.createdBy.name !== user.name ? (
+                  <button>Locked</button>
+                ) : (
                   <Link href={`/room/${room}`}>
                     <button>Enter</button>
                   </Link>
-                ) : (
-                  <button>Locked</button>
                 )}
               </div>
             </div>
