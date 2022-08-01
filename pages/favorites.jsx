@@ -39,7 +39,7 @@ function FavComp() {
         <title>Favorites / Clann</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div>
+      <div className={styles.Favorites}>
         {user && !user?.favorites ? (
           <p>No rooms yet</p>
         ) : (
