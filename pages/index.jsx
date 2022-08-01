@@ -54,6 +54,17 @@ export default function Index() {
     });
   }, [dispatch]);
 
+  // set listener for device width change, then reload page if device width changes
+  useEffect(() => {
+    window.addEventListener(
+      "resize",
+      () => {
+        setDeviceWidth(window.innerWidth);
+      },
+      false
+    );
+  }, [deviceWidth]);
+
   if (error) {
     return <p>{error}</p>;
   }

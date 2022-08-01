@@ -42,7 +42,6 @@ function Signin() {
         userdata.email,
         userdata.password
       );
-      console.log(userCredential.user);
     } catch (error) {
       switch (error.code) {
         case AuthErrorCodes.INVALID_EMAIL:
@@ -78,7 +77,6 @@ function Signin() {
         setError("");
         dispatch(handleUser(users[key]));
         loginEmailPassword();
-        console.log(users[key]);
       } else if (
         users[key].password === userdata.password &&
         users[key].email !== userdata.email
