@@ -14,6 +14,7 @@ import { Avatar, AvatarGroup } from "@mui/material";
 import date from "date-and-time";
 import Header from "../components/Header";
 import { onValue, ref, getDatabase } from "firebase/database";
+import Head from "next/head";
 
 export function HomeComp() {
   const app = initializeApp(firebaseConfig);
@@ -76,6 +77,10 @@ export function HomeComp() {
 
   return (
     <>
+      <Head>
+        <title>Home / Clann</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <section className={styles.first}>
         <div className={styles.header}>In session</div>
         <div className={styles.roomBox}>

@@ -1,6 +1,7 @@
 import styles from "../styles/Home.module.css";
 import Signin from "./signin";
 import Header from "../components/Header";
+import Head from "next/head";
 import { useDispatch, useSelector } from "react-redux";
 import { handleAllUsers, refreshAllUsers } from "../provider/allUsersSlice";
 import { handleAllRooms, refreshAllRooms } from "../provider/allRoomsSlice";
@@ -61,5 +62,13 @@ export default function Index() {
     return <Loading />;
   }
 
-  return <div className={styles.container}>{user ? <Home /> : <Signin />}</div>;
+  return (
+    <div className={styles.container}>
+      <Head>
+        <title>Home / Clann</title>
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+      </Head>
+      {user ? <Home /> : <Signin />}
+    </div>
+  );
 }

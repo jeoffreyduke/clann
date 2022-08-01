@@ -5,6 +5,7 @@ import styles from "../../styles/Settings.module.css";
 import Account from "./account";
 import Profile from "./profile";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import Head from "next/head";
 
 function Settings() {
   const router = useRouter();
@@ -24,6 +25,10 @@ function Settings() {
 
   return (
     <>
+      <Head>
+        <title>Settings / Clann</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <Header />
       <div className={styles.Settings}>
         <ArrowBackIosIcon

@@ -43,6 +43,7 @@ import MoreHorizOutlined from "@mui/icons-material/MoreHorizOutlined";
 import AddReactionOutlinedIcon from "@mui/icons-material/AddReactionOutlined";
 import Image from "next/image";
 import Link from "next/link";
+import Head from "next/head";
 
 function RoomComp() {
   const app = initializeApp(firebaseConfig);
@@ -347,6 +348,10 @@ function RoomComp() {
 
   return (
     <div>
+      <Head>
+        <title>{rooms[roomId]?.name} / Clann</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div className={styles.header} ref={dropRef}>
         <div className={styles.title}>{rooms[roomId]?.name}</div>
         <div className={styles.headerCon}>

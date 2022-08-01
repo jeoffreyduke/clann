@@ -11,6 +11,7 @@ import { getAuth } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { handleUser } from "../provider/userSlice";
 import { Avatar, AvatarGroup } from "@mui/material";
+import Head from "next/head";
 
 function FavComp() {
   const app = initializeApp(firebaseConfig);
@@ -34,6 +35,10 @@ function FavComp() {
 
   return (
     <>
+      <Head>
+        <title>Favorites / Clann</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div>
         {user && !user?.favorites ? (
           <p>No rooms yet</p>

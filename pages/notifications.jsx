@@ -14,6 +14,7 @@ import { updateSeen } from "./api/database";
 import { Avatar } from "@mui/material";
 import OtherHousesRoundedIcon from "@mui/icons-material/OtherHousesRounded";
 import Link from "next/link";
+import Head from "next/head";
 
 function NotifComp() {
   const app = initializeApp(firebaseConfig);
@@ -51,6 +52,10 @@ function NotifComp() {
 
   return (
     <div className={styles.Notifications}>
+      <Head>
+        <title>Notifications / Clann</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <header>Notifications</header>
       <div className={styles.notifications}>
         {user.notifications &&

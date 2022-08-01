@@ -14,6 +14,7 @@ import { clearAllUsers } from "./api/database";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "../styles/Signin.module.css";
+import Head from "next/head";
 
 function Signin() {
   const dispatch = useDispatch();
@@ -105,6 +106,10 @@ function Signin() {
 
   return (
     <div className={styles.Signin}>
+      <Head>
+        <title>Sign In / Clann</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div className={styles.con}>
         <section className={styles.left}>
           <Image

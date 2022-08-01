@@ -16,6 +16,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import Backdrop from "@mui/material/Backdrop";
 import Tooltip from "@mui/material/Tooltip";
 import Link from "next/link";
+import Head from "next/head";
 
 function BackdropComp({ profilePic, coverPhoto, isMobile }) {
   return (
@@ -147,6 +148,10 @@ function ProfileComp() {
 
   return (
     <div className={styles.Profile}>
+      <Head>
+        <title>{user?.name} / Clann</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       {ready ? (
         <>
           <div

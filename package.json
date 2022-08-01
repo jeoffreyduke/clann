@@ -20,7 +20,6 @@
     "date-and-time": "^2.4.0",
     "firebase": "^9.8.3",
     "next": "12.1.6",
-    "next-auth": "^4.3.4",
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "react-error-boundary": "^3.1.4",
@@ -30,7 +29,7 @@
     "redux-persist": "^6.0.0",
     "simple-peer": "^9.11.1",
     "socket.io-client": "^4.5.1",
-    "uuidv4": "^6.2.13"
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "eslint": "8.15.0",

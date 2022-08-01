@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../components/Header";
 import Body from "../components/Body";
+import Head from "next/head";
 
 function PopularComp() {
   return (
@@ -13,6 +14,10 @@ function PopularComp() {
 function Popular() {
   return (
     <>
+      <Head>
+        <title>Popular / Clann</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <Header />
       <Body midComp={<PopularComp />} />
     </>

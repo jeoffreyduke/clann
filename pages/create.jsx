@@ -7,15 +7,15 @@ import { createRoom, addUserToRoom } from "./api/database";
 import { useSelector, useDispatch } from "react-redux";
 import { handleAllUsers } from "../provider/allUsersSlice";
 import styles from "../styles/Create.module.css";
-import { signOut, useSession } from "next-auth/react";
 import Body from "../components/Body";
 import Switch from "@mui/material/Switch";
 import { styled } from "@mui/material/styles";
 import Header from "../components/Header";
 import { useRef, useEffect } from "react";
 import { useRouter } from "next/router";
-import { uuid } from "uuidv4";
+import { v4 as uuid } from "uuid";
 import date from "date-and-time";
+import Head from "next/head";
 
 const label = { inputProps: { "aria-label": "Record Switch" } };
 
@@ -149,6 +149,10 @@ function CreateComp() {
 
   return (
     <div className={styles.Create}>
+      <Head>
+        <title>Create / Clann</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div className={styles.heading}>Create your room</div>
       <div className={styles.title}>
         <div className={styles.inputLabel}>
@@ -219,8 +223,6 @@ function CreateComp() {
 }
 
 function Create() {
-  const { data: session, status } = useSession();
-
   return (
     <>
       <Header />

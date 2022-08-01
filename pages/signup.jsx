@@ -15,6 +15,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { createUser } from "./api/database";
 import date from "date-and-time";
 import styles from "../styles/Signup.module.css";
+import Head from "next/head";
 
 function Signup() {
   const app = initializeApp(firebaseConfig);
@@ -109,6 +110,10 @@ function Signup() {
 
   return (
     <div className={styles.Signup}>
+      <Head>
+        <title>Sign Up / Clann</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div className={styles.logo}>
         <Image
           src="/../public/assets/clann/3.png"
