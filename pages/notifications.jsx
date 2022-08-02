@@ -51,6 +51,14 @@ function NotifComp() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [window.innerWidth]);
 
+  useEffect(() => {
+    if (background) {
+      document.body.classList.add("bodyDark");
+    } else {
+      document.body.classList.remove("bodyDark");
+    }
+  }, [background]);
+
   return (
     <div className={styles.Notifications}>
       <Head>

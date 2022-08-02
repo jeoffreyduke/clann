@@ -127,6 +127,14 @@ function Header() {
     });
   }, [background, dispatch]);
 
+  useEffect(() => {
+    if (background) {
+      document.body.classList.add("bodyDark");
+    } else {
+      document.body.classList.remove("bodyDark");
+    }
+  }, [background]);
+
   return (
     <div ref={dropRef} onClick={drop ? () => setDrop(false) : () => {}}>
       <header
