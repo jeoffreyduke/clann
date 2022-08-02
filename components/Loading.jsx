@@ -1,8 +1,13 @@
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { handleBgSwitch } from "../provider/darkSlice";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
-import React, { useEffect, useState } from "react";
 
 function Loading() {
+  const selector = useSelector(handleBgSwitch);
+  const background = selector.payload.darkSlice.value;
+
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -15,7 +20,10 @@ function Loading() {
   }, [window.innerWidth]);
 
   return (
-    <div className={styles.Loading}>
+    <div
+      className={styles.Loading}
+      id={background === true ? styles.LoadingDark : null}
+    >
       <Image
         src="/assets/clann/1.png"
         alt="Loading"

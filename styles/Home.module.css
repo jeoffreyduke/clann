@@ -187,3 +187,8 @@
     margin-bottom: 0.5rem;
   }
 }
+
+#LoadingDark {
+  background-color: var(--darkModeBg);
+  color: var(--darkModeTxt);
+}
