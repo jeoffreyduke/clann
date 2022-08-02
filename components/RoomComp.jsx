@@ -54,6 +54,7 @@ function RoomComp() {
   const rooms = selector.payload.allRoomsSlice.value;
   const user = selector.payload.userSlice.value;
   const users = selector.payload.allUsersSlice.value;
+  const background = selector.payload.darkSlice.value;
   const router = useRouter();
   const { roomId } = router.query;
   const [idActive, setIdActive] = useState(false);
@@ -386,9 +387,19 @@ function RoomComp() {
             </AvatarGroup>
           </div>
 
-          <div className={styles.headerIcons}>
+          <div
+            className={styles.headerIcons}
+            id={background === true ? styles.headerIconsDark : null}
+          >
             <div
               className={!showReactions ? styles.react : styles.reactActive}
+              id={
+                !showReactions
+                  ? background === true
+                    ? styles.activeDark
+                    : null
+                  : null
+              }
               onClick={handleShowReactions}
             >
               <AddReactionOutlinedIcon
@@ -401,6 +412,13 @@ function RoomComp() {
 
             <div
               className={!drop ? styles.more : styles.moreActive}
+              id={
+                !showReactions
+                  ? background === true
+                    ? styles.activeDark
+                    : null
+                  : null
+              }
               onClick={handleDrop}
             >
               <MoreHorizOutlined
@@ -414,6 +432,7 @@ function RoomComp() {
 
           <div
             className={showReactions ? styles.reactions : styles.noReactions}
+            id={background === true ? styles.dropDownDark : null}
           >
             <Image
               onClick={() => handleSetReaction("/assets/heart.png")}
@@ -459,7 +478,10 @@ function RoomComp() {
             />
           </div>
 
-          <div className={drop ? styles.dropDown : styles.noDrop}>
+          <div
+            className={drop ? styles.dropDown : styles.noDrop}
+            id={background === true ? styles.dropDownDark : null}
+          >
             <div className={styles.aboutName}>{rooms[roomId]?.name}</div>
             {user.name === rooms[roomId]?.createdBy.name ? (
               rooms[roomId]?.about ? (

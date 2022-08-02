@@ -15,12 +15,14 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "../styles/Signin.module.css";
 import Head from "next/head";
+import { handleBgSwitch } from "../provider/darkSlice";
 
 function Signin() {
   const dispatch = useDispatch();
   const selector = useSelector(handleUser);
   const user = selector.payload.userSlice.value;
   const users = selector.payload.allUsersSlice.value;
+  const background = selector.payload.darkSlice.value;
 
   const [userdata, setUserdata] = useState({
     email: "",
@@ -76,6 +78,9 @@ function Signin() {
       ) {
         setError("");
         dispatch(handleUser(users[key]));
+        dispatch(handleBgSwitch(users[key].background));
+        console.log(background);
+        console.log(users[key]);
         loginEmailPassword();
       } else if (
         users[key].password === userdata.password &&
@@ -103,7 +108,10 @@ function Signin() {
   }, [window.innerWidth]);
 
   return (
-    <div className={styles.Signin}>
+    <div
+      className={styles.Signin}
+      id={background === true ? styles.SigninDark : null}
+    >
       <Head>
         <title>Sign In / Clann</title>
         <link rel="icon" href="/favicon.ico" />
@@ -132,10 +140,18 @@ function Signin() {
               At Clann we make sure you feel heard and understood.
             </div>
             <div className={styles.btnCon}>
-              <div onClick={() => signIn()} className={styles.google}>
+              <div
+                onClick={() => signIn()}
+                className={styles.google}
+                id={background === true ? styles.googleDark : null}
+              >
                 <span /> CONTINUE WITH GOOGLE
               </div>
-              <div onClick={() => signIn()} className={styles.facebook}>
+              <div
+                onClick={() => signIn()}
+                className={styles.facebook}
+                id={background === true ? styles.facebookDark : null}
+              >
                 <span>
                   <svg
                     role="img"
@@ -165,7 +181,10 @@ function Signin() {
 
             <div className={styles.loginForm}>
               <form action="get" onSubmit={(e) => e.preventDefault()}>
-                <div className={styles.user}>
+                <div
+                  className={styles.user}
+                  id={background === true ? styles.userDark : null}
+                >
                   <div>
                     <label htmlFor="user">Email address</label>
                   </div>
@@ -179,7 +198,10 @@ function Signin() {
                     placeholder="Email address"
                   />
                 </div>
-                <div className={styles.pwd}>
+                <div
+                  className={styles.pwd}
+                  id={background === true ? styles.pwdDark : null}
+                >
                   <div>
                     <label htmlFor="pwd">Password</label>
                   </div>

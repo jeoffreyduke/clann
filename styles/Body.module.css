@@ -190,3 +190,10 @@
     display: none;
   }
 }
+
+/* styles for dark mode */
+#mainDark {
+  background-color: var(--darkModeBg) !important;
+  color: var(--darkModeTxt) !important;
+  border-color: rgb(22, 22, 22) !important;
+}

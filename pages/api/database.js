@@ -27,7 +27,8 @@ export function createUser(
   bio,
   favorites,
   joined,
-  reaction
+  reaction,
+  background
 ) {
   const db = getDatabase();
   const userRef = ref(db, "users/" + userId);
@@ -44,6 +45,7 @@ export function createUser(
     favorites,
     joined,
     reaction,
+    background,
   });
 }
 
@@ -235,6 +237,15 @@ export function refreshCount(userId) {
 
   update(userRef, {
     notifCount: 0,
+  });
+}
+
+export function switchBg(userId, background) {
+  const db = getDatabase();
+  const userRef = ref(db, "users/" + `${userId}/`);
+
+  update(userRef, {
+    background,
   });
 }
 

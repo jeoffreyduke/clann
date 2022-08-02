@@ -39,6 +39,7 @@ export default function Index() {
   const selector = useSelector(handleAllUsers);
   const allUsers = selector.payload.allUsersSlice.value;
   const allRooms = selector.payload.allRoomsSlice.value;
+  const background = selector.payload.darkSlice.value;
 
   const [deviceWidth, setDeviceWidth] = useState(0);
 
@@ -64,6 +65,14 @@ export default function Index() {
       false
     );
   }, [deviceWidth]);
+
+  useEffect(() => {
+    if (background) {
+      document.body.classList.add("bodyDark");
+    } else {
+      document.body.classList.remove("bodyDark");
+    }
+  }, [background]);
 
   if (error) {
     return <p>{error}</p>;

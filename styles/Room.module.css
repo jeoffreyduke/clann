@@ -150,6 +150,19 @@
   scrollbar-color: var(--mainColor) transparent;
 }
 
+.dropDown::-webkit-scrollbar {
+  width: 3px;
+}
+
+.dropDown::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dropDown::-webkit-scrollbar-thumb {
+  background-color: var(--mainColor);
+  border-radius: 10px;
+}
+
 .dropDown:hover {
   overflow-y: scroll;
 }
@@ -339,4 +352,17 @@
     top: 6.2rem;
     right: 3rem;
   }
+}
+
+/* styles for dark mode */
+#headerIconsDark {
+  background-color: var(--darkModeBg);
+}
+
+#dropDownDark {
+  background-color: var(--darkModeBg);
+}
+
+#activeDark {
+  background-color: transparent;
 }

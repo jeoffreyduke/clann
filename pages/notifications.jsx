@@ -26,6 +26,7 @@ function NotifComp() {
   const rooms = selector.payload.allRoomsSlice.value;
   const user = selector.payload.userSlice.value;
   const users = selector.payload.allUsersSlice.value;
+  const background = selector.payload.darkSlice.value;
 
   const [isMobile, setIsMobile] = useState(false);
 
@@ -57,7 +58,10 @@ function NotifComp() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header>Notifications</header>
-      <div className={styles.notifications}>
+      <div
+        className={styles.notifications}
+        id={background === true ? styles.notificationsDark : null}
+      >
         {user.notifications &&
           Object.values(user.notifications)
             .reverse()
@@ -67,6 +71,7 @@ function NotifComp() {
                 notif.notification.includes("invited") ? (
                 <div
                   className={styles.notification}
+                  id={background === true ? styles.notificationDark : null}
                   key={Math.random() + notif}
                 >
                   <Link
@@ -109,14 +114,14 @@ function NotifComp() {
                         <div className={styles.enterBtn}>
                           <button
                             disabled={
-                              !rooms[notif.roomId].inSession === false &&
+                              !rooms[notif.roomId]?.inSession === false &&
                               rooms[notif.roomId]?.createdBy.name !== User.name
                                 ? true
                                 : false
                             }
                             onClick={() => router.push(`/room/${notif.roomId}`)}
                           >
-                            {!rooms[notif.roomId].inSession === false &&
+                            {!rooms[notif.roomId]?.inSession === false &&
                             rooms[notif.roomId]?.createdBy.name !== User.name
                               ? "Locked"
                               : "Enter"}

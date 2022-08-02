@@ -1,11 +1,5 @@
 .Notifications {
   width: 100%;
-  overflow: hidden;
-  scrollbar-color: var(--mainColor) transparent;
-}
-
-.Notifications:hover {
-  overflow-y: scroll;
 }
 
 .Notifications > header {
@@ -17,6 +11,7 @@
 
 .notifications {
   border-bottom: 1px solid #d9d1eb;
+  overflow: hidden;
 }
 
 .notification {
@@ -34,6 +29,7 @@
 .notificationMsg,
 .notificationsAvatar {
   padding: 0.5rem;
+  padding-right: 1rem;
   z-index: 100;
 }
 
@@ -75,4 +71,14 @@
     margin-right: 0.5rem;
     font-size: 0.7rem;
   }
+}
+
+/* styles for dark mode */
+#notificationsDark {
+  border-bottom: 1px rgb(22, 22, 22) solid;
+}
+
+#notificationDark {
+  border: 1px rgb(22, 22, 22) solid;
+  border-bottom: none;
 }

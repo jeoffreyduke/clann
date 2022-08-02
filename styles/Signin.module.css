@@ -616,3 +616,16 @@
     bottom: 0.2rem;
   }
 }
+
+/* styles for dark mode */
+#SigninDark {
+  background-color: var(--darkModeBg);
+  color: var(--darkModeTxt);
+}
+
+#userDark > input,
+#pwdDark > input,
+#facebookDark,
+#googleDark {
+  border: 1px var(--darkModeTxt) solid;
+}

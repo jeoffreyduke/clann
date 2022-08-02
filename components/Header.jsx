@@ -22,6 +22,8 @@ import GroupsOutlinedIcon from "@mui/icons-material/GroupsOutlined";
 import OtherHousesOutlinedIcon from "@mui/icons-material/OtherHousesOutlined";
 import OtherHousesRoundedIcon from "@mui/icons-material/OtherHousesRounded";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import { switchBg } from "../pages/api/database";
+import { handleBgSwitch } from "../provider/darkSlice";
 
 function Header() {
   const app = initializeApp(firebaseConfig);
@@ -33,8 +35,7 @@ function Header() {
   const user = selector.payload.userSlice.value;
   const users = selector.payload.allUsersSlice.value;
   const rooms = selector.payload.allRoomsSlice.value;
-  const prev = selector.payload.countSlice.prev;
-  const curr = selector.payload.countSlice.curr;
+  const background = selector.payload.darkSlice.value;
   const [drop, setDrop] = useState(false);
   const [count, setCount] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
@@ -46,6 +47,11 @@ function Header() {
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
+  };
+
+  const handleBackground = () => {
+    switchBg(User.uid, !background);
+    // change the background of the document.body
   };
 
   const handleSignOut = () => {
@@ -112,9 +118,21 @@ function Header() {
     }
   }, [window.innerWidth]);
 
+  useEffect(() => {
+    // set the background to the value of the user's background in the database
+    const bgRef = ref(db, "users/" + `${User?.uid}/background`);
+    onValue(bgRef, (snapshot) => {
+      dispatch(handleBgSwitch(snapshot.val()));
+      console.log(background);
+    });
+  }, [background, dispatch]);
+
   return (
     <div ref={dropRef} onClick={drop ? () => setDrop(false) : () => {}}>
-      <header className={styles.Header}>
+      <header
+        className={styles.Header}
+        id={background === true ? styles.HeaderDark : null}
+      >
         <div className={styles.headerCon}>
           <Link href="/">
             <div className={styles.logo}>
@@ -122,6 +140,8 @@ function Header() {
                 src={
                   window.innerWidth < 768
                     ? "/assets/clann/1.png"
+                    : background === true
+                    ? "/assets/clann/2.png"
                     : "/assets/clann/3.png"
                 }
                 alt="logo"
@@ -130,8 +150,14 @@ function Header() {
               />
             </div>
           </Link>
-          <div className={styles.search}>
-            <div className={styles.btn}>
+          <div
+            className={styles.search}
+            id={background === true ? styles.searchDark : null}
+          >
+            <div
+              className={styles.btn}
+              id={background === true ? styles.btnDark : null}
+            >
               <SearchOutlinedIcon
                 sx={{
                   color: "#707070",
@@ -155,7 +181,10 @@ function Header() {
             />
           </div>
           {usersSearchResults.length > 0 || roomsSearchResults.length > 0 ? (
-            <div className={styles.searchDrop}>
+            <div
+              className={styles.searchDrop}
+              id={background === true ? styles.searchDropDark : null}
+            >
               {usersSearchResults.length > 0
                 ? usersSearchResults.map((user) => (
                     <div
@@ -290,6 +319,15 @@ function Header() {
 
             <div
               className={drop ? styles.pdActive : styles.profileDrop}
+              id={
+                drop
+                  ? background === true
+                    ? styles.pdActiveDark
+                    : null
+                  : background === true
+                  ? styles.profileDropDark
+                  : null
+              }
               onClick={handleDrop}
             >
               <Avatar
@@ -315,7 +353,10 @@ function Header() {
           </div>
         </div>
       </header>
-      <div className={drop ? styles.dropDown : styles.noDrop}>
+      <div
+        className={drop ? styles.dropDown : styles.noDrop}
+        id={background === true ? styles.dropDownDark : null}
+      >
         <div className={styles.dropCon}>
           {isMobile ? (
             <>
@@ -356,7 +397,9 @@ function Header() {
             <div className={styles.dropDownItem}>About</div>
           </Link>
 
-          <div className={styles.dropDownItem}>Dark Mode</div>
+          <div className={styles.dropDownItem} onClick={handleBackground}>
+            {background === false ? "Dark Mode" : "Light Mode"}
+          </div>
           {!isMobile ? null : (
             <div className={styles.dropDownItem} onClick={handleSignOut}>
               Sign Out

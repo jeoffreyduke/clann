@@ -43,10 +43,6 @@
   padding: 0.2rem;
 }
 
-.subject > option {
-  background-color: #fff;
-}
-
 .subject {
   height: 3.5rem;
   width: 30rem;
@@ -157,4 +153,19 @@
     margin-top: 0rem;
     margin-bottom: 1rem;
   }
+}
+
+/* styles for dark mode */
+#titleDark > input {
+  background-color: #111;
+}
+
+#selectLabelDark {
+  background-color: var(--darkModeBg);
+  color: var(--darkModeTxt);
+}
+
+#subjectDark {
+  background-color: transparent;
+  color: var(--darkModeTxt);
 }

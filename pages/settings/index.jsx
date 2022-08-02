@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+import { handleBgSwitch } from "../../provider/darkSlice";
 import Header from "../../components/Header";
 import styles from "../../styles/Settings.module.css";
 import Account from "./account";
@@ -9,6 +11,8 @@ import Head from "next/head";
 
 function Settings() {
   const router = useRouter();
+  const selector = useSelector(handleBgSwitch);
+  const background = selector.payload.darkSlice.value;
 
   const [active, setActive] = useState({
     account: false,
@@ -30,7 +34,10 @@ function Settings() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <div className={styles.Settings}>
+      <div
+        className={styles.Settings}
+        id={background === true ? styles.SettingsDark : null}
+      >
         <ArrowBackIosIcon
           onClick={() => router.back()}
           sx={{ color: "#8c52ff", position: "relative", left: "0.2rem" }}

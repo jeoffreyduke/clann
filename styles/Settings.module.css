@@ -296,3 +296,10 @@
     height: 160vh;
   }
 }
+
+/* styles for dark mode */
+#SettingsDark {
+  background-color: var(--darkModeBg);
+  color: var(--darkModeTxt);
+  border: 1px rgb(22, 22, 22) solid;
+}

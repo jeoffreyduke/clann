@@ -61,7 +61,7 @@
   width: 20rem;
   position: absolute;
   top: 3.6rem;
-  left: 15vw;
+  left: 17vw;
   font-size: 0.78rem;
   padding: 1.5rem;
   padding-top: 0.5rem;
@@ -409,4 +409,31 @@
   .profileDrop {
     width: fit-content;
   }
+}
+
+/* styles for dark mode */
+#HeaderDark {
+  background-color: var(--darkModeBg);
+  color: var(--darkModeTxt);
+}
+
+#dropDownDark {
+  background-color: var(--darkModeBg);
+  color: var(--darkModeTxt);
+}
+
+#btnDark,
+#searchDark > input {
+  background-color: #111;
+  border: 1px var(--darkModeBg) solid;
+}
+
+#searchDropDark {
+  background-color: #111;
+  color: var(--darkModeTxt);
+}
+
+#profileDropDark:hover,
+#pdActiveDark {
+  border: 1px rgb(22, 22, 22) solid;
 }

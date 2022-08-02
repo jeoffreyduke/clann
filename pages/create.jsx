@@ -77,6 +77,7 @@ function CreateComp() {
   const selector = useSelector(handleAllUsers);
   const users = selector.payload.allUsersSlice.value;
   const user = selector.payload.userSlice.value;
+  const background = selector.payload.darkSlice.value;
   const roomId = uuid();
   const router = useRouter();
 
@@ -154,7 +155,10 @@ function CreateComp() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.heading}>Create your room</div>
-      <div className={styles.title}>
+      <div
+        className={styles.title}
+        id={background === true ? styles.titleDark : null}
+      >
         <div className={styles.inputLabel}>
           <label htmlFor="roomName">What will you call your room?</label>
         </div>
@@ -167,10 +171,17 @@ function CreateComp() {
         />
       </div>
       <div className={styles.select}>
-        <div className={styles.selectLabel}>
+        <div
+          className={styles.selectLabel}
+          id={background === true ? styles.selectLabelDark : null}
+        >
           <label htmlFor="subject">Subject</label>
         </div>
-        <select name="subject" className={styles.subject}>
+        <select
+          name="subject"
+          className={styles.subject}
+          id={background === true ? styles.subjectDark : null}
+        >
           <option onClick={handleSelectData} value="Professional">
             Professional
           </option>

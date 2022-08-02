@@ -4,6 +4,7 @@ import allUsersSlice from "./allUsersSlice";
 import allRoomsSlice from "./allRoomsSlice";
 import roomSlice from "./roomSlice";
 import countSlice from "./countSlice";
+import darkSlice from "./darkSlice";
 
 import {
   persistStore,
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   allRoomsSlice,
   roomSlice,
   countSlice,
+  darkSlice,
 });
 
 const persistedReducer = persistReducer(

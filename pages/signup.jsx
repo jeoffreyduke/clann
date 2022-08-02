@@ -21,6 +21,7 @@ function Signup() {
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const selector = useSelector(handleAllUsers);
+  const background = selector.payload.darkSlice.value;
   const [user] = useAuthState(auth);
   const router = useRouter();
 
@@ -57,7 +58,8 @@ function Signup() {
         "",
         "",
         date.format(now, pattern),
-        ""
+        "",
+        false
       );
 
       router.push("/signin");
@@ -108,14 +110,19 @@ function Signup() {
   };
 
   return (
-    <div className={styles.Signup}>
+    <div
+      className={styles.Signup}
+      id={background === true ? styles.SignupDark : null}
+    >
       <Head>
         <title>Sign Up / Clann</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.logo}>
         <Image
-          src="/../public/assets/clann/3.png"
+          src={
+            background === true ? "/assets/clann/2.png" : "/assets/clann/3.png"
+          }
           alt="logo"
           height={400}
           width={400}

@@ -19,6 +19,7 @@ function Body({ midComp }) {
   const selector = useSelector(handleUser);
   const rooms = selector.payload.allRoomsSlice.value;
   const user = selector.payload.userSlice.value;
+  const background = selector.payload.darkSlice.value;
   const router = useRouter();
 
   // check if the screen is a mobile screen
@@ -110,7 +111,9 @@ function Body({ midComp }) {
         </div>
         <div className={styles.copyright}>© 2022 Clann</div>
       </nav>
-      <main className={styles.main}>{midComp}</main>
+      <main className={styles.main} id={background ? styles.mainDark : null}>
+        {midComp}
+      </main>
       <aside className={styles.aside}>
         <div onClick={handleSignOut} className={styles.leave}>
           <Tooltip title="Sign Out" arrow placement="right">
