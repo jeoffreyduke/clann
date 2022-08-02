@@ -244,3 +244,8 @@
     width: 20rem;
   }
 }
+
+/* styles for dark mode */
+#profilePicDark {
+  background-color: var(--darkModeBg);
+}

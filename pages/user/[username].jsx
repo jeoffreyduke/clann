@@ -80,6 +80,7 @@ function ProfileComp() {
   const users = selector.payload.allUsersSlice.value;
   const { username } = router.query;
   const User = selector.payload.userSlice.value;
+  const background = selector.payload.darkSlice.value;
 
   const [isMobile, setIsMobile] = useState(false);
   const [id, setId] = useState(null);
@@ -205,6 +206,7 @@ function ProfileComp() {
 
           <div
             className={styles.profilePic}
+            id={background === true ? styles.profilePicDark : null}
             onClick={
               user?.profile_pic && User.name !== user.name
                 ? () => setBackdrop({ ...backdrop, profilePic: true })
