@@ -76,7 +76,7 @@ function FavComp() {
                 )}
               </div>
               <div className={styles.roomJoin}>
-                {rooms[room].inSession === false &&
+                {rooms[room]?.inSession === false &&
                 rooms[room]?.createdBy.name !== user.name ? (
                   <button>Locked</button>
                 ) : (
