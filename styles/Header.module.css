@@ -105,10 +105,10 @@
 
 .btn {
   display: inline-block;
-  height: 2.1rem;
+  height: 2rem;
   width: 2.5rem;
   position: relative;
-  top: 0.18rem;
+  top: 0.25rem;
   color: #fff;
   background-color: #f3f3f3;
   border: 1px #e7defa solid;
@@ -408,6 +408,20 @@
   .pdActive,
   .profileDrop {
     width: fit-content;
+  }
+}
+
+/* media queries max height 550 */
+@media (max-height: 550px) {
+  .logo {
+    width: 7rem;
+    height: 7rem;
+    top: -1.7rem;
+    left: -1.5rem;
+  }
+  .profile {
+    right: 1rem;
+    left: 0.5rem;
   }
 }
 
