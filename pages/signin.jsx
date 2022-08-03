@@ -141,14 +141,12 @@ function Signin() {
             </div>
             <div className={styles.btnCon}>
               <div
-                onClick={() => signIn()}
                 className={styles.google}
                 id={background === true ? styles.googleDark : null}
               >
                 <span /> CONTINUE WITH GOOGLE
               </div>
               <div
-                onClick={() => signIn()}
                 className={styles.facebook}
                 id={background === true ? styles.facebookDark : null}
               >
