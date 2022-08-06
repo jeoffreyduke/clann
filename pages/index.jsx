@@ -10,7 +10,12 @@ import { initializeApp } from "firebase/app";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { getDatabase, onValue, ref } from "firebase/database";
-import { createUser, createRoom, clearAllUsers } from "./api/database";
+import {
+  createUser,
+  createRoom,
+  clearAllUsers,
+  deleteUser,
+} from "./api/database";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Loading from "../components/Loading";

@@ -15,6 +15,13 @@ export function clearAllUsers() {
   remove(userRef);
 }
 
+export function deleteUser(uid) {
+  const db = getDatabase();
+  const userRef = ref(db, "users/" + uid);
+
+  remove(userRef);
+}
+
 export function createUser(
   userId,
   name,

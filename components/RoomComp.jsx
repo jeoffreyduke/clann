@@ -347,12 +347,10 @@ function RoomComp() {
     }
   }, [window.innerWidth]);
 
-  {
-    /*useEffect(() => {
+  useEffect(() => {
     if (roomActive === false && rooms[roomId]?.createdBy.name !== user.name)
       router.push("/");
-  }, [roomActive]);*/
-  }
+  }, [roomActive]);
 
   return (
     <div>
