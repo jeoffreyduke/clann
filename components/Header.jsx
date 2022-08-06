@@ -64,12 +64,16 @@ function Header() {
   useEffect(() => {
     if (search.length > 0) {
       // search for users and rooms
-      const userResults = Object.keys(users).filter((user) =>
-        users[user].name.toLowerCase().includes(search.toLowerCase())
-      );
-      const roomResults = Object.keys(rooms).filter((room) =>
-        rooms[room].name.toLowerCase().includes(search.toLowerCase())
-      );
+      const userResults =
+        users &&
+        Object.keys(users)?.filter((user) =>
+          users[user].name.toLowerCase().includes(search.toLowerCase())
+        );
+      const roomResults =
+        rooms &&
+        Object.keys(rooms)?.filter((room) =>
+          rooms[room].name.toLowerCase().includes(search.toLowerCase())
+        );
       setUsersSearchResults(userResults);
       setRoomsSearchResults(roomResults);
       console.log("filled", [userResults, roomResults]);
@@ -193,7 +197,7 @@ function Header() {
               className={styles.searchDrop}
               id={background === true ? styles.searchDropDark : null}
             >
-              {usersSearchResults.length > 0
+              {users && usersSearchResults.length > 0
                 ? usersSearchResults.map((user) => (
                     <div
                       className={styles.searchCon}
@@ -221,7 +225,7 @@ function Header() {
                     </div>
                   ))
                 : null}
-              {roomsSearchResults.length > 0
+              {rooms && roomsSearchResults.length > 0
                 ? roomsSearchResults.map((room) => (
                     <div
                       className={styles.searchCon}

@@ -158,6 +158,7 @@
 /* styles for dark mode */
 #titleDark > input {
   background-color: #111;
+  color: var(--darkModeTxt);
 }
 
 #selectLabelDark {
