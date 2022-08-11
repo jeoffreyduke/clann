@@ -53,10 +53,10 @@ function BackdropComp({ profilePic, coverPhoto, isMobile }) {
                 coverPhoto
                   ? {
                       height: isMobile ? "7.5rem" : "20rem",
-                      width: isMobile ? "25rem" : "50rem",
+                      width: isMobile ? "100%" : "50rem",
                       position: "relative",
                       top: isMobile ? "5.5rem" : "2.5rem",
-                      right: isMobile ? "1rem" : "12rem",
+                      right: isMobile ? "0" : "12rem",
                       backgroundImage: `url(${coverPhoto})`,
                       backgroundSize: isMobile ? "contain" : "cover",
                     }

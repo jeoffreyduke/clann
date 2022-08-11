@@ -127,7 +127,6 @@ function Header() {
     const bgRef = ref(db, "users/" + `${User?.uid}/background`);
     onValue(bgRef, (snapshot) => {
       dispatch(handleBgSwitch(snapshot.val()));
-      console.log(background);
     });
   }, [background, dispatch]);
 
