@@ -61,7 +61,7 @@ Installation Steps
     Fork the project. Click on the icon in the top right to get started
     Clone the project, you can use the following command:
 
-git clone https://github.com/<your-github-username>/clann
+     git clone https://github.com/<your-github-username>/clann
 
     Navigate to the project directory
 
