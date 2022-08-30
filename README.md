@@ -54,4 +54,46 @@ ScreenShots:
 ![Screenshot 2022-08-03 at 13-01-35 Settings _ Clann](https://user-images.githubusercontent.com/85391775/182604731-271199de-c9a1-47a0-965c-c65c0cab7949.png)
 ![Screenshot 2022-08-03 at 13-01-48 Settings _ Clann](https://user-images.githubusercontent.com/85391775/182604743-8b5bcccb-a9fa-4384-97e3-6c7d37fb4bf4.png)
 
+     
+
+Installation Steps
+
+    Fork the project. Click on the icon in the top right to get started
+    Clone the project, you can use the following command:
+
+git clone https://github.com/<your-github-username>/clann
+
+    Navigate to the project directory
+
+cd clann
+
+    Install dependencies with npm install
+
+npm install
+
+npm install -g commitizen 
+
+    Run the project
+
+npm run dev
+
+clinking_glasses After making a change
+
+    Create a new branch
+
+git checkout -b YourBranchName
+
+    Add it to staging area
+
+    NOTE: don't commit the package.json
+
+git add .
+
+    Commit your changes with
+
+git cz
+
+    Push your changes
+
+git push
     
