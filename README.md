@@ -97,3 +97,6 @@ Clann is a virtual platform for connecting to people of common interest via voic
 
     git push
     
+## Support
+
+This project needs a star️ from you. Don't forget to leave a star!
