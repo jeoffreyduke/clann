@@ -15,11 +15,11 @@ import styles from "../styles/Header.module.css";
 import { Avatar } from "@mui/material";
 import Badge from "@mui/material/Badge";
 import Tooltip from "@mui/material/Tooltip";
-import WhatshotOutlinedIcon from "@mui/icons-material/WhatshotOutlined";
-import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import GroupsOutlinedIcon from "@mui/icons-material/GroupsOutlined";
-import OtherHousesOutlinedIcon from "@mui/icons-material/OtherHousesOutlined";
+import WhatshotIcon from "@mui/icons-material/Whatshot";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import SearchIcon from "@mui/icons-material/Search";
+import GroupsIcon from "@mui/icons-material/Groups";
+import OtherHousesIcon from "@mui/icons-material/OtherHouses";
 import OtherHousesRoundedIcon from "@mui/icons-material/OtherHousesRounded";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { switchBg } from "../pages/api/database";
@@ -169,7 +169,7 @@ function Header() {
               className={styles.btn}
               id={background === true ? styles.btnDark : null}
             >
-              <SearchOutlinedIcon
+              <SearchIcon
                 sx={{
                   color: "#707070",
                   width: isMobile ? "18px" : "20px",
@@ -267,7 +267,7 @@ function Header() {
             {window.innerWidth < 768 ? null : (
               <Link href="/popular">
                 <Tooltip title="Popular" arrow>
-                  <WhatshotOutlinedIcon
+                  <WhatshotIcon
                     fontSize="small"
                     sx={{
                       color: "#707070",
@@ -293,7 +293,7 @@ function Header() {
                       top: "0.7rem",
                     }}
                   >
-                    <NotificationsNoneOutlinedIcon fontSize="small" />
+                    <NotificationsIcon fontSize="small" />
                   </Badge>
                 </Tooltip>
               </Link>
@@ -302,7 +302,7 @@ function Header() {
             {window.innerWidth < 768 ? null : (
               <Link href="/friends">
                 <Tooltip title="Friends" arrow>
-                  <GroupsOutlinedIcon
+                  <GroupsIcon
                     sx={{
                       color: "#707070",
                       position: "relative",
@@ -316,7 +316,7 @@ function Header() {
             {window.innerWidth < 768 ? null : (
               <Link href="/favorites">
                 <Tooltip title="Favorites" arrow>
-                  <OtherHousesOutlinedIcon
+                  <OtherHousesIcon
                     fontSize="small"
                     sx={{
                       color: "#707070",

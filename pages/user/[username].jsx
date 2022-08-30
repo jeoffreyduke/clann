@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { handleUser, refreshUser } from "../../provider/userSlice";
 import { createNotification } from "../api/database";
 import { Avatar, keyframes } from "@mui/material";
-import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import EditIcon from "@mui/icons-material/Edit";
 import CloseIcon from "@mui/icons-material/Close";
 import Backdrop from "@mui/material/Backdrop";
 import Tooltip from "@mui/material/Tooltip";
@@ -177,7 +177,7 @@ function ProfileComp() {
             ) : (
               <Link href="/settings">
                 <Tooltip title="Edit Cover Photo" arrow>
-                  <EditOutlinedIcon
+                  <EditIcon
                     sx={{
                       color: "#fff",
                       height: isMobile ? "18px" : "22px",
