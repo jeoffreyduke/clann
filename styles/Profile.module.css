@@ -78,6 +78,7 @@
   position: relative;
   right: 1rem;
   bottom: 10.9rem;
+  z-index: 100;
 }
 
 .editProfile > button {
