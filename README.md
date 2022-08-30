@@ -58,42 +58,42 @@ ScreenShots:
 
 Installation Steps
 
-   Fork the project. Click on the icon in the top right to get started
-   Clone the project, you can use the following command:
+   1. Fork the project. Click on the icon in the top right to get started
+   2. Clone the project, you can use the following command:
 
      git clone https://github.com/<your-github-username>/clann
 
-   Navigate to the project directory
+   3. Navigate to the project directory
 
     cd clann
 
-   Install dependencies with npm install
+   4. Install dependencies with npm install
 
     npm install
 
     npm install -g commitizen 
 
-   Run the project
+   5. Run the project
 
     npm run dev
 
 clinking_glasses After making a change
 
-   Create a new branch
+   1. Create a new branch
 
     git checkout -b YourBranchName
 
-   Add it to staging area
+   2. Add it to staging area
 
-   NOTE: don't commit the package.json
+    NOTE: don't commit the package.json
 
     git add .
 
-   Commit your changes with
+   3. Commit your changes with
 
     git cz
 
-   Push your changes
+   4. Push your changes
 
     git push
     
