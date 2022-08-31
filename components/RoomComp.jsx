@@ -28,6 +28,7 @@ import {
   removeUserFromRoom,
   deleteRoom,
   createNotification,
+  addUserToRoom,
 } from "../pages/api/database";
 import { getDatabase, onValue, ref } from "firebase/database";
 import {
@@ -44,6 +45,7 @@ import AddReactionOutlinedIcon from "@mui/icons-material/AddReactionOutlined";
 import Image from "next/image";
 import Link from "next/link";
 import Head from "next/head";
+import date from "date-and-time";
 
 function RoomComp() {
   const app = initializeApp(firebaseConfig);
@@ -79,6 +81,26 @@ function RoomComp() {
       router.push("/");
     }
   }, [router]);
+
+  // add user to room when he enters the room
+  const now = new Date();
+  const pattern = date.compile("MMM, DD YYYY");
+
+  useEffect(() => {
+    addUserToRoom(
+      userr.uid,
+      user.name,
+      user.username,
+      user.email,
+      user.password,
+      user.date,
+      user.profile_pic,
+      date.format(now, pattern),
+      roomId
+    );
+  }, []);
+
+  // remove user from room when he leaves the
 
   useEffect(() => {
     const db = getDatabase();
