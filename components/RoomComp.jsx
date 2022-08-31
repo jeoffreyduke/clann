@@ -87,17 +87,19 @@ function RoomComp() {
   const pattern = date.compile("MMM, DD YYYY");
 
   useEffect(() => {
-    addUserToRoom(
-      userr.uid,
-      user.name,
-      user.username,
-      user.email,
-      user.password,
-      user.date,
-      user.profile_pic,
-      date.format(now, pattern),
-      roomId
-    );
+    if (router.isReady && userr) {
+      addUserToRoom(
+        userr.uid,
+        user.name,
+        user.username,
+        user.email,
+        user.password,
+        user.date,
+        user.profile_pic,
+        date.format(now, pattern),
+        roomId
+      );
+    }
   }, []);
 
   // remove user from room when he leaves the
