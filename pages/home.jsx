@@ -66,6 +66,8 @@ export function HomeComp() {
     });
   };
 
+  useEffect(() => {}, []);
+
   useEffect(() => {
     if (window.innerWidth < 768) {
       setIsMobile(true);
