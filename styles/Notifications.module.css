@@ -74,6 +74,17 @@
 }
 
 /* styles for dark mode */
+@media (prefers-color-scheme: dark) {
+  .notifications {
+    border-bottom: 1px rgb(22, 22, 22) solid;
+  }
+
+  .notification {
+    border: 1px rgb(22, 22, 22) solid;
+    border-bottom: none;
+  }
+}
+
 #notificationsDark {
   border-bottom: 1px rgb(22, 22, 22) solid;
 }

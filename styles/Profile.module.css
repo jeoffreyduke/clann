@@ -247,6 +247,12 @@
 }
 
 /* styles for dark mode */
+@media (prefers-color-scheme: dark) {
+  .profilePic {
+    background-color: var(--darkModeBg);
+  }
+}
+
 #profilePicDark {
   background-color: var(--darkModeBg);
 }

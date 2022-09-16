@@ -355,6 +355,20 @@
 }
 
 /* styles for dark mode */
+@media (prefers-color-scheme: dark) {
+  .headerIcons {
+    background-color: var(--darkModeBg);
+  }
+
+  .dropDown {
+    background-color: var(--darkModeBg);
+  }
+
+  .active {
+    background-color: transparent;
+  }
+}
+
 #headerIconsDark {
   background-color: var(--darkModeBg);
 }
