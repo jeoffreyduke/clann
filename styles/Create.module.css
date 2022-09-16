@@ -156,23 +156,6 @@
 }
 
 /* styles for dark mode */
-@media (prefers-color-scheme: dark) {
-  .title > input {
-    background-color: #111;
-    color: var(--darkModeTxt);
-  }
-
-  .selectLabel {
-    background-color: var(--darkModeBg);
-    color: var(--darkModeTxt);
-  }
-
-  .subject {
-    background-color: transparent;
-    color: var(--darkModeTxt);
-  }
-}
-
 #titleDark > input {
   background-color: #111;
   color: var(--darkModeTxt);

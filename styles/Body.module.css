@@ -192,14 +192,6 @@
 }
 
 /* styles for dark mode */
-@media (prefers-color-scheme: dark) {
-  .main {
-    background-color: var(--darkModeBg) !important;
-    color: var(--darkModeTxt) !important;
-    border-color: rgb(22, 22, 22) !important;
-  }
-}
-
 #mainDark {
   background-color: var(--darkModeBg) !important;
   color: var(--darkModeTxt) !important;

@@ -429,7 +429,10 @@
 }
 
 /* styles for dark mode */
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of eb0a954 (started adding auto dark mode)
 #HeaderDark {
   background-color: var(--darkModeBg);
   color: var(--darkModeTxt);

@@ -188,13 +188,6 @@
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  .Loading {
-    background-color: var(--darkModeBg);
-    color: var(--darkModeTxt);
-  }
-}
-
 #LoadingDark {
   background-color: var(--darkModeBg);
   color: var(--darkModeTxt);
