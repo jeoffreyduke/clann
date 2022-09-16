@@ -3,7 +3,7 @@
   place-items: center;
   height: 3.5rem;
   width: 100vw;
-  background-color: var(--bg);
+  background-color: #fff;
 }
 
 .headerCon {
@@ -66,8 +66,7 @@
   padding: 1.5rem;
   padding-top: 0.5rem;
   padding-bottom: 2rem;
-  background-color: var(--bg);
-
+  background-color: #fff;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   z-index: 120;
   overflow-y: scroll;
@@ -164,8 +163,7 @@
   font-size: 0.8rem;
   padding: 1.5rem;
   padding-top: 2rem;
-  background-color: var(--bg);
-
+  background-color: #fff;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   z-index: 120;
   overflow-y: scroll;
@@ -429,7 +427,7 @@
 }
 
 /* styles for dark mode */
-#HeaderDark {
+z #HeaderDark {
   background-color: var(--darkModeBg);
   color: var(--darkModeTxt);
 }
