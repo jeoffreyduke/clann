@@ -1,3 +1,31 @@
+@media (prefers-color-scheme: dark) {
+  .Header {
+    background-color: var(--darkModeBg);
+    color: var(--darkModeTxt);
+  }
+
+  .dropDown {
+    background-color: var(--darkModeBg);
+    color: var(--darkModeTxt);
+  }
+
+  .btn,
+  .search > input {
+    background-color: #111;
+    border: 1px var(--darkModeBg) solid;
+  }
+
+  .searchDropDark {
+    background-color: #111;
+    color: var(--darkModeTxt);
+  }
+
+  .profileDrop:hover,
+  .pdActive {
+    border: 1px rgb(22, 22, 22) solid;
+  }
+}
+
 .Header {
   display: grid;
   place-items: center;
