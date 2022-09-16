@@ -618,6 +618,20 @@
 }
 
 /* styles for dark mode */
+@media (prefers-color-scheme: dark) {
+  .Signin {
+    background-color: var(--darkModeBg);
+    color: var(--darkModeTxt);
+  }
+
+  .user > input,
+  .pwd > input,
+  .facebook,
+  .google {
+    border: 1px var(--darkModeTxt) solid;
+  }
+}
+
 #SigninDark {
   background-color: var(--darkModeBg);
   color: var(--darkModeTxt);

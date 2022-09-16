@@ -294,6 +294,13 @@
 }
 
 /* styles for dark mode */
+@media (prefers-color-scheme: dark) {
+  .Signup {
+    background-color: var(--darkModeBg);
+    color: var(--darkModeTxt);
+  }
+}
+
 #SignupDark {
   background-color: var(--darkModeBg);
   color: var(--darkModeTxt);

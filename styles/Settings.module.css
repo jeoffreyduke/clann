@@ -298,6 +298,14 @@
 }
 
 /* styles for dark mode */
+@media (prefers-color-scheme: dark) {
+  .Settings {
+    background-color: var(--darkModeBg);
+    color: var(--darkModeTxt);
+    border: 1px rgb(22, 22, 22) solid;
+  }
+}
+
 #SettingsDark {
   background-color: var(--darkModeBg);
   color: var(--darkModeTxt);
