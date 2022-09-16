@@ -48,10 +48,19 @@ body::-webkit-scrollbar-thumb {
 :root {
   --mainColor: #8c52ff;
   --mainColorHover: #925efa;
+  --bg: #fff;
+  --txt: #000;
   --darkModeBg: rgba(33, 33, 33, 0.95);
-  --darkModeTxt: #dddddd;
+  --darkModeTxt: #ddd;
   --fontFamRegular: "Sora Regular";
   --fontFamBold: "Sora Strong";
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: rgba(33, 33, 33, 0.95);
+    --txt: #ddd;
+  }
 }
 
 a {
@@ -61,13 +70,6 @@ a {
 
 * {
   box-sizing: border-box;
-}
-
-@media (prefers-color-scheme: dark) {
-  body {
-    background-color: #111;
-    color: #ddd;
-  }
 }
 
 .bodyDark {

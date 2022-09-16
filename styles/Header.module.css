@@ -1,37 +1,9 @@
-@media (prefers-color-scheme: dark) {
-  .Header {
-    background-color: var(--darkModeBg);
-    color: var(--darkModeTxt);
-  }
-
-  .dropDown {
-    background-color: var(--darkModeBg);
-    color: var(--darkModeTxt);
-  }
-
-  .btn,
-  .search > input {
-    background-color: #111;
-    border: 1px var(--darkModeBg) solid;
-  }
-
-  .searchDropDark {
-    background-color: #111;
-    color: var(--darkModeTxt);
-  }
-
-  .profileDrop:hover,
-  .pdActive {
-    border: 1px rgb(22, 22, 22) solid;
-  }
-}
-
 .Header {
   display: grid;
   place-items: center;
   height: 3.5rem;
   width: 100vw;
-  background-color: #fff;
+  background-color: var(--bg);
 }
 
 .headerCon {
@@ -94,7 +66,8 @@
   padding: 1.5rem;
   padding-top: 0.5rem;
   padding-bottom: 2rem;
-  background-color: #fff;
+  background-color: var(--bg);
+
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   z-index: 120;
   overflow-y: scroll;
@@ -191,7 +164,8 @@
   font-size: 0.8rem;
   padding: 1.5rem;
   padding-top: 2rem;
-  background-color: #fff;
+  background-color: var(--bg);
+
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   z-index: 120;
   overflow-y: scroll;
@@ -455,33 +429,6 @@
 }
 
 /* styles for dark mode */
-@media (prefers-color-scheme: dark) {
-  .Header {
-    background-color: var(--darkModeBg);
-    color: var(--darkModeTxt);
-  }
-
-  .dropDown {
-    background-color: var(--darkModeBg);
-    color: var(--darkModeTxt);
-  }
-
-  .btn,
-  .search > input {
-    background-color: #111;
-    border: 1px var(--darkModeBg) solid;
-  }
-
-  .searchDropDark {
-    background-color: #111;
-    color: var(--darkModeTxt);
-  }
-
-  .profileDrop:hover,
-  .pdActive {
-    border: 1px rgb(22, 22, 22) solid;
-  }
-}
 
 #HeaderDark {
   background-color: var(--darkModeBg);
