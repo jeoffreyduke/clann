@@ -427,7 +427,7 @@
 }
 
 /* styles for dark mode */
-z #HeaderDark {
+#HeaderDark {
   background-color: var(--darkModeBg);
   color: var(--darkModeTxt);
 }
