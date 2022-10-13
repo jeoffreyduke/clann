@@ -22,5 +22,5 @@ jobs:
       - name: Label issues
         uses: andymckay/labeler@e6c4322d0397f3240f0e7e30a33b5c5df2d39e90
         with:
-          add-labels: "up for grabs, hacktoberfest, feature, good first issue, bug, assigned, documentation, enhancement, Eddiehub:good-first-issue"
+          add-labels: "up for grabs, hacktoberfest"
           repo-token: ${{ secrets.GITHUB_TOKEN }}
