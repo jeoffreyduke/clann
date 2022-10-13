@@ -1,4 +1,4 @@
-Clann is a virtual platform for connecting to people of common interest via voice chats. It was built by a 20-year-old Jeoffrey Duke because he wanted to help people who do not have access to real life support groups; and can not get that much needed comfort in associated in likemindedness.
+Clann is a virtual platform for connecting to people of common interest via voice chats. The project was initiated by Jeoffrey Duke; because he wanted to help people who do not have access to real life support groups; and can not get that much needed comfort in associated in likemindedness.
 
 ---
 
