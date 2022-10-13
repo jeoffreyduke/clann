@@ -78,5 +78,6 @@ git push origin YourBranchName
 
 After this, the maintainers will review the PR and will merge it if it helps move the Code-Magic project forward. Otherwise, it will be given constructive feedback and suggestions for the changes needed to add the PR to the codebase.
     
-Issues
+Issues:
+    
 In order to discuss changes, you are welcome to open an issue about what you would like to contribute. Enhancements are always encouraged and appreciated.
