@@ -12,7 +12,6 @@ Rules
 
     Fill out issue and pull request(PR) templates properly, if you don't know how, check out previous issues/PR to know how they are filled or this video👇🏾
 
-👌🏾 How to fill a pull request template
 
 Pull Request Template
 👩🏽‍💻 Prerequisite Skills to Contribute
@@ -79,22 +78,3 @@ git push origin YourBranchName
 
 trophy After this, the maintainers will review the PR and will merge it if it helps move the Code-Magic project forward. Otherwise, it will be given constructive feedback and suggestions for the changes needed to add the PR to the codebase.
 boom Issues
-
-In order to discuss changes, you are welcome to open an issue about what you would like to contribute. Enhancements are always encouraged and appreciated.
-Footer
-© 2022 GitHub, Inc.
-Footer navigation
-
-    Terms
-    Privacy
-    Security
-    Status
-    Docs
-    Contact GitHub
-    Pricing
-    API
-    Training
-    Blog
-    About
-
-clann/CONTRIBUTING.md at main · jeoffreyduke/Code-Magic
