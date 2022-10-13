@@ -49,7 +49,6 @@ export default function Index() {
   const [deviceWidth, setDeviceWidth] = useState(0);
 
   useEffect(() => {
-    //clearAllUsers();
     dispatch(refreshAllUsers());
     dispatch(refreshAllRooms());
     onValue(userRef, (snapshot) => {
