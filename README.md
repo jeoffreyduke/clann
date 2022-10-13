@@ -1,48 +1,31 @@
-Clann is a virtual platform for connecting to people of common interest via voice chats. It was built by a 20-year-old Jeoffrey Duke because he       wanted to help people who do not have access to real life support groups; and can not get that much needed comfort in associated in likemindedness.
+Clann is a virtual platform for connecting to people of common interest via voice chats. It was built by a 20-year-old Jeoffrey Duke because he wanted to help people who do not have access to real life support groups; and can not get that much needed comfort in associated in likemindedness.
 
+---
 
 ![Screenshot 2022-08-03 at 12-54-42 Sign In _ Clann](https://user-images.githubusercontent.com/85391775/182603365-77f1d059-fada-4510-80a3-3049bd9e7851.png)
-![Screenshot 2022-08-03 at 12-54-10 Sign In _ Clann](https://user-images.githubusercontent.com/85391775/182603507-7306c5f3-cc29-4be0-9ada-da056ebcb06a.png)
 
-    
+## Made with ❤️ Using
 
-## Features:
+-   Next.js
+-   Emotion
+-   MaterialUI
+-   Agora
+-   Redux
+-   Simple Peer
+-   Firebase
 
-    Responsiveness
-    Login / Register
-    Authentication
-    Creating Realtime Voice Chat Rooms
-    Deleting Rooms
-    Editing Room About info
-    Reactions in rooms
-    Adding / Removing Rooms to/from Favorites
-    Profiles
-    Editing Profile Details
-    Viewing Profile Pictures
-    Inviting Users To Rooms
-    Search Functionality
-    Dark Mode
-    Delete Account
-    
+## Features
 
+-   Fully Customizable Voice Chat Rooms
+-   Profile Customizations
+-   Google and Facebook Auth
+-   Inviting Users
+-   Dark Mode
 
-## This application is built using the following technologies:
+---
 
-    Next Js
-    React
-    Emotion
-    Firebase
-    Material UI
-    Redux
-    React Redux
-    Redux Persist
-    Agora
-    React Firebase Hooks
-    Simple Peer
-    UUID
-    
-    
-## ScreenShots:
+## ScreenShots
+
 ![Screenshot 2022-08-03 at 00-15-06 Home _ Clann](https://user-images.githubusercontent.com/85391775/182605188-9c2d78a8-ff48-4ab1-9a15-97a6e7ba7319.png)
 ![Screenshot 2022-08-03 at 00-14-55 Home _ Clann](https://user-images.githubusercontent.com/85391775/182604334-d9b2c120-fedf-4914-85ee-cf64f58af1b9.png)
 ![Screenshot 2022-08-03 at 12-57-17 Favorites _ Clann](https://user-images.githubusercontent.com/85391775/182604463-b9cc407e-18d8-4f91-be95-309c35f38fb1.png)
@@ -54,49 +37,43 @@ Clann is a virtual platform for connecting to people of common interest via voic
 ![Screenshot 2022-08-03 at 13-01-35 Settings _ Clann](https://user-images.githubusercontent.com/85391775/182604731-271199de-c9a1-47a0-965c-c65c0cab7949.png)
 ![Screenshot 2022-08-03 at 13-01-48 Settings _ Clann](https://user-images.githubusercontent.com/85391775/182604743-8b5bcccb-a9fa-4384-97e3-6c7d37fb4bf4.png)
 
-     
+---
 
-## Installation Steps
+## Local Setup
 
-   1. Fork the project. Click on the icon in the top right to get started
-   2. Clone the project, you can use the following command:
+1. Fork the project. Click on the icon in the top right to get started
 
-     git clone https://github.com/<your-github-username>/clann
+2. Clone the project, you can use the following commands
 
-   3. Navigate to the project directory
+```bash
+git clone https://github.com/<your-github-username>/clann
+```
 
-    cd clann
+3. Navigate to the project directory
 
-   4. Install dependencies with npm install
+```bash
+cd clann
+```
 
-    npm install
+4. Install dependencies
 
-    npm install -g commitizen 
+```bash
+npm install
+npm install -g commitizen
+```
 
-   5. Run the project
+5. Start the Node Server
 
-    npm run dev
+```bash
+npm run dev
+```
 
-## After making a change
+## Making Contributions
 
-   1. Create a new branch
+Please refer to [Contributing.MD]("./Contributing.MD") for contributing rules.
 
-    git checkout -b YourBranchName
+Make sure you make your changes in a new Git branch.
 
-   2. Add it to staging area
-
-    NOTE: don't commit the package.json
-
-    git add .
-
-   3. Commit your changes with
-
-    git cz
-
-   4. Push your changes
-
-    git push
-    
 ## Support
 
 This project needs a star️ from you. Don't forget to leave a star!
