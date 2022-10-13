@@ -22,8 +22,7 @@
 
 ### Contribute in project
 
-- [Node.js](https://nodejs.org/)
-- [TypeScript](https://www.typescriptlang.org/)
+- [Next.js](https://www.nextjs.org/)
 
 ---
 
