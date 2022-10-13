@@ -34,15 +34,15 @@ star2 HOW TO MAKE A PULL REQUEST:
 
     Clone your new fork of the repository in the terminal/CLI on your computer with the following command:
 
-git clone https://github.com/<your-github-username>/Code-Magic
+git clone https://github.com/<your-github-username>/clann
 
     Navigate to the newly created Code-Magic project directory:
 
-cd Code-Magic
+cd clann
 
     Set upstream command:
 
-git remote add upstream https://github.com/Dun-sin/Code-Magic.git
+git remote add upstream https://github.com/jeoffreyduke/clann.git
 
     Create a new branch:
 
@@ -97,4 +97,4 @@ Footer navigation
     Blog
     About
 
-Code-Magic/CONTRIBUTING.md at main · jeoffreyduke/Code-Magic
+clann/CONTRIBUTING.md at main · jeoffreyduke/Code-Magic
