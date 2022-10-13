@@ -20,14 +20,14 @@ Contribute in project
     Node.js
     TypeScript
 
-boom How to Contribute
+How to Contribute
 
     Take a look at the existing Issues or create a new issue!
     Fork the Repo. Then, create a branch for any issue that you are working on. Finally, commit your work.
     Create a Pull Request (PR), which will be promptly reviewed and given suggestions for improvements by the community.
     Add screenshots or screen captures to your Pull Request to help us understand the effects of the changes proposed in your PR.
 
-star2 HOW TO MAKE A PULL REQUEST:
+HOW TO MAKE A PULL REQUEST:
 
     Start by making a Fork of the Code-Magic repository. Click on the Fork symbol at the top right corner.
 
@@ -64,7 +64,7 @@ Github Docs for Syncing
 
     Stage your changes and commit:
 
-warning Make sure not to commit package.json or package-lock.json file
+Make sure not to commit package.json or package-lock.json file
 
 git cz
 
@@ -76,5 +76,7 @@ git push origin YourBranchName
 
     Congratulations! You've made your first contribution to Code-Magic!
 
-trophy After this, the maintainers will review the PR and will merge it if it helps move the Code-Magic project forward. Otherwise, it will be given constructive feedback and suggestions for the changes needed to add the PR to the codebase.
-boom Issues
+After this, the maintainers will review the PR and will merge it if it helps move the Code-Magic project forward. Otherwise, it will be given constructive feedback and suggestions for the changes needed to add the PR to the codebase.
+    
+Issues
+In order to discuss changes, you are welcome to open an issue about what you would like to contribute. Enhancements are always encouraged and appreciated.
