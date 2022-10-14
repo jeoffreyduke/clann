@@ -16,19 +16,30 @@ import Image from "next/image";
 import styles from "../styles/Signin.module.css";
 import Head from "next/head";
 import { handleBgSwitch } from "../provider/darkSlice";
-
+import InputField from "../components/InputField";
+import * as Yup from "yup"
+import { Formik } from "formik";
+import { useRouter } from 'next/router'
 function Signin() {
+  const router = useRouter()
   const dispatch = useDispatch();
   const selector = useSelector(handleUser);
   const user = selector.payload.userSlice.value;
   const users = selector.payload.allUsersSlice.value;
   const background = selector.payload.darkSlice.value;
 
-  const [userdata, setUserdata] = useState({
-    email: "",
-    password: "",
-  });
-
+  // const [userdata, setUserdata] = useState({
+  //   email: "",
+  //   password: "",
+  // });
+  const initialValue = {
+    email: '',
+    password: ''
+  }
+  const validationSchema = Yup.object({
+    email: Yup.string().email("Input a valid email address").required("This field is required"),
+    password: Yup.string().required("Clann password required")
+  })
   const [error, setError] = useState("");
   const [isMobile, setIsMobile] = useState(false);
 
@@ -68,13 +79,12 @@ function Signin() {
     });
   };
 
-  const handleLogin = (e) => {
-    e.preventDefault();
+  const handleLogin = (email, password) => {
 
     for (const key in users) {
       if (
-        users[key].email === userdata.email &&
-        users[key].password === userdata.password
+        users[key].email === email &&
+        users[key].password === password
       ) {
         setError("");
         dispatch(handleUser(users[key]));
@@ -82,15 +92,16 @@ function Signin() {
         console.log(background);
         console.log(users[key]);
         loginEmailPassword();
+        router.push('/home')
       } else if (
-        users[key].password === userdata.password &&
-        users[key].email !== userdata.email
+        users[key].password === password &&
+        users[key].email !== email
       ) {
         setError("Your email does not seem to be correct");
         console.log(error);
       } else if (
-        users[key].email === userdata.email &&
-        users[key].password !== userdata.password
+        users[key].email === email &&
+        users[key].password !== password
       ) {
         setError("Wrong password, please try again");
         console.log("wrong password");
@@ -125,29 +136,41 @@ function Signin() {
             objectFit="cover"
           />
         </section>
-        <section className={styles.right}>
-          <div className={styles.imageRight}>
-            <Image
-              src="/assets/clann/1.png"
-              alt="logo"
-              height={isMobile ? 130 : 200}
-              width={isMobile ? 130 : 200}
-            />
+        <section className={styles.formContainer}>
+          <div className={styles.topHead}>
+            <div style={{ translate: "-40%" }}>
+              <Image
+                src="/assets/clann/1.png"
+                alt="logo"
+                height={isMobile ? 130 : 200}
+                width={isMobile ? 130 : 200}
+              />
+            </div>
+
+            <div className={styles.signup}>
+              New to Clann?
+              <span>
+                <Link href="/signup">
+                  <a className={styles.linkLittle}>SIGN UP</a>
+                </Link>
+              </span>
+            </div>
+
           </div>
-          <div className={styles.rightContent}>
+          <div className={styles.loginForm}>
             <div className={styles.bigTxt}>{"You're not alone."}</div>
             <div className={styles.smTxt}>
               At Clann we make sure you feel heard and understood.
             </div>
             <div className={styles.btnCon}>
-              <div
-                className={styles.google}
+              <button
+                className={`${styles.btn} ${styles.google}`}
                 id={background === true ? styles.googleDark : null}
               >
                 <span /> CONTINUE WITH GOOGLE
-              </div>
-              <div
-                className={styles.facebook}
+              </button>
+              <button
+                className={`${styles.btn} ${styles.facebook}`}
                 id={background === true ? styles.facebookDark : null}
               >
                 <span>
@@ -166,7 +189,7 @@ function Signin() {
                   </svg>
                 </span>
                 CONTINUE WITH FACEBOOK
-              </div>
+              </button>
             </div>
 
             <div className={styles.orCon}>
@@ -177,62 +200,64 @@ function Signin() {
               </div>
             </div>
 
-            <div className={styles.loginForm}>
-              <form action="get" onSubmit={(e) => e.preventDefault()}>
-                <div
-                  className={styles.user}
-                  id={background === true ? styles.userDark : null}
+            <Formik initialValues={initialValue}
+              validationSchema={validationSchema}
+              onSubmit={({ email, password }) => handleLogin(email, password)}
+            >
+              {({ values, isSubmittiing, errors, handleChange, handleSubmit }) => (
+                <form
+                  className={styles.loginForm}
+                  onSubmit={(e) => { e.preventDefault() }}
                 >
-                  <div>
-                    <label htmlFor="user">Email address</label>
+
+                  <div
+                    className={styles.user}
+                    id={background === true ? styles.userDark : null}
+                  >
+
+                    <InputField label='Email Address'
+                      input={values.email}
+                      setInput={handleChange('email')}
+                      placeholder="Email"
+                    />
+
+                    <p className={styles.err}>
+                      {errors.email}
+                    </p>
+
                   </div>
-                  <input
-                    onChange={handleUserData}
-                    required
-                    value={userdata.email}
-                    name="email"
-                    id="user"
-                    type="text"
-                    placeholder="Email address"
-                  />
-                </div>
-                <div
-                  className={styles.pwd}
-                  id={background === true ? styles.pwdDark : null}
-                >
-                  <div>
-                    <label htmlFor="pwd">Password</label>
+
+                  <div
+                    className={styles.pwd}
+                    id={background === true ? styles.pwdDark : null}
+                  >
+
+                    <InputField label='Password'
+                      input={values.password}
+                      setInput={handleChange('password')}
+                      type={'password'}
+                    />
+                    <p className={styles.err}>
+                      {errors.password}
+                    </p>
                   </div>
-                  <input
-                    onChange={handleUserData}
-                    required
-                    value={userdata.password}
-                    name="password"
-                    type="password"
-                    id="pwd"
-                    placeholder="Password"
-                  />
-                </div>
-                <p className={styles.err}>{error}</p>
-                <div className={styles.forgot}>Forgot your password?</div>
-                <div className={styles.login}>
-                  <input onClick={handleLogin} type="button" value="LOG IN" />
-                </div>
-                <div className={styles.signup}>
-                  New to Clann?
-                  <span>
-                    <Link href="/signup">
-                      <a className={styles.linkLittle}>SIGN UP</a>
-                    </Link>
-                  </span>
-                </div>
-              </form>
-            </div>
+
+                  <p className={styles.err}>{error}</p>
+
+                  <div className={styles.forgot}>Forgot your password?</div>
+                  <button type="submit" onClick={handleSubmit} disabled={isSubmittiing} className={`${styles.loginBtn} ${styles.btn}`}>
+                    LOG IN
+                  </button>
+                </form>
+
+              )}
+            </Formik>
+
           </div>
         </section>
       </div>
 
-      <footer className={styles.footer}>© 2022 Clann, Ltd.</footer>
+      <footer className={styles.footer}>&copy; 2022 Clann, Ltd.</footer>
     </div>
   );
 }

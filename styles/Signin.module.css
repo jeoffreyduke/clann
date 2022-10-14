@@ -1,645 +1,637 @@
 .Signin {
-  background-color: #fff;
-  height: 100vh;
-  overflow: hidden;
+    background-color: #fff;
+    height: 100vh;
+    overflow: hidden;
 }
 
 .con {
-  display: flex;
-  font-family: var(--fontFamRegular);
+    display: flex;
+    font-family: var(--fontFamRegular);
+}
+
+.topHead {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .right {
-  height: 95vh;
-  width: 45vw;
-  padding: 2rem;
-  z-index: 100;
+    height: 95vh;
+    width: 45vw;
+    padding: 2rem;
+    z-index: 100;
 }
 
 .rightContent {
-  position: relative;
-  bottom: 7.5rem;
+    position: relative;
+    bottom: 7.5rem;
 }
 
 .imageRight {
-  position: relative;
-  right: 4.5rem;
-  bottom: 3.5rem;
+    position: relative;
+    right: 4.5rem;
+    bottom: 3.5rem;
 }
 
 .bigTxt {
-  font-size: 3.5rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  font-family: var(--fontFamBold);
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    font-family: var(--fontFamBold);
 }
 
 .smTxt {
-  width: 30rem;
-  font-size: 1.3rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
+    width: 30rem;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
 }
 
 .google,
 .facebook {
-  height: 2.5rem;
-  width: 20rem;
-  font-size: 0.82rem;
-  font-weight: 500;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid #000;
-  border-radius: 5rem;
-  color: #808080;
-  background-color: #fff;
-  margin-bottom: 1rem;
-  cursor: pointer;
+    height: 2.5rem;
+    width: 20rem;
+    font-size: 0.82rem;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #000;
+    border-radius: 5rem;
+    color: #808080;
+    background-color: #fff;
+    margin-bottom: 1rem;
+    cursor: pointer;
 }
 
-.google > span {
-  height: 20px;
-  width: 20px;
-  margin-right: 0.3rem;
-  background: rgba(0, 0, 0, 0)
-    url("https://accounts.scdn.co/sso/images/google-icon.1cdc8fce9609d07f0e9d8d0bc4b61f8f.svg")
-    no-repeat scroll center center;
+.google>span {
+    height: 20px;
+    width: 20px;
+    margin-right: 0.3rem;
+    background: rgba(0, 0, 0, 0) url("https://accounts.scdn.co/sso/images/google-icon.1cdc8fce9609d07f0e9d8d0bc4b61f8f.svg") no-repeat scroll center center;
 }
 
-.facebook > span {
-  margin-right: 0.3rem;
+.facebook>span {
+    margin-right: 0.3rem;
 }
 
 .orCon {
-  margin-top: 1rem;
+    margin-top: 1rem;
 }
 
 .or {
-  display: flex;
-  width: 20rem;
-  margin-bottom: 1rem;
+    display: flex;
+    width: 20rem;
+    margin: 2rem auto;
 }
 
-.or > span {
-  font-size: 0.75rem;
-  margin-left: 0.45rem;
-  margin-right: 0.45rem;
+.or>span {
+    font-size: 0.75rem;
+    margin-left: 0.45rem;
+    margin-right: 0.45rem;
 }
 
-.or > hr {
-  height: 1px;
-  width: 9.5rem;
-  background-color: #808080;
+.or>hr {
+    height: 1px;
+    width: 9.5rem;
+    background-color: #808080;
 }
 
 .pwd,
 .user {
-  font-size: 0.8rem;
+    font-size: 0.8rem;
 }
 
-.pwd > input,
-.user > input {
-  height: 2.5rem;
-  width: 20rem;
-  font-size: 0.75rem;
-  border: 1px solid #000;
-  padding: 0.5rem;
-  margin-top: 0.5rem;
-  margin-bottom: 1rem;
+.pwd>input,
+.user>input {
+    height: 2.5rem;
+    width: 20rem;
+    font-size: 0.75rem;
+    border: 1px solid #000;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
 }
 
-.pwd > input {
-  margin-bottom: 0.5rem !important;
+.pwd>input {
+    margin-bottom: 0.5rem !important;
 }
 
 .err {
-  color: #ff3333;
-  font-size: 0.7rem;
+    color: #ff3333;
+    font-size: 0.7rem;
 }
 
 .forgot {
-  font-size: 0.9rem;
+    font-size: 0.9rem;
+    text-align: right;
+    margin-bottom: 20px;
 }
 
-.login > input {
-  height: 2.5rem;
-  width: 20rem;
-  font-size: 0.9rem;
-  font-weight: 500;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: none;
-  border-radius: 5rem;
-  color: #fff;
-  background-color: var(--mainColor);
-  margin-top: 1rem;
-  cursor: pointer;
-  margin-bottom: 1rem;
-}
 
-.login > input:hover {
-  background-color: var(--mainColorHover);
-}
+/*background-color: var(--mainColor); */
 
 .left {
-  height: 95vh;
-  width: 55vw;
-  position: relative;
+    height: 95vh;
+    width: 55vw;
+    position: relative;
 }
 
 .image {
-  position: relative;
-  top: 4.5rem;
-  left: 25rem;
+    position: relative;
+    top: 4.5rem;
+    left: 25rem;
 }
 
 .signup {
-  font-size: 0.93rem;
+    font-size: 0.93rem;
 }
 
 .linkLittle {
-  font-weight: 900;
-  margin-left: 0.3rem;
+    font-weight: 900;
+    margin-left: 0.3rem;
 }
 
 .footer {
-  height: 5vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-top: 0.7rem;
-  font-size: 0.8rem;
-  color: #6a6a6a;
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 0.7rem;
+    font-size: 0.8rem;
+    color: #6a6a6a;
 }
+
 
 /*dark theme*/
+
 .google,
 .facebook {
-  height: 2.5rem;
-  width: 20rem;
-  font-size: 0.82rem;
-  font-weight: 500;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 5rem;
-  color: #808080;
-  background-color: #fff;
-  margin-bottom: 1.5rem;
+    height: 2.5rem;
+    width: 20rem;
+    font-size: 0.82rem;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5rem;
+    color: #808080;
+    background-color: #fff;
+    margin-bottom: 1.5rem;
 }
 
-.or > hr {
-  height: 1px;
-  width: 9.5rem;
-  background-color: #808080;
+.or>hr {
+    height: 1px;
+    width: 9.5rem;
+    background-color: #808080;
 }
 
-.login > button {
-  height: 2.5rem;
-  width: 20rem;
-  font-size: 0.9rem;
-  font-weight: 500;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: none;
-  border-radius: 5rem;
-  color: #fff;
-  background-color: var(--techBlue);
-  margin-top: 1rem;
-}
 
 /* media queries max width 1400 */
-@media (max-width: 1400px) {
-  .rightContent {
-    bottom: 8.2rem;
-  }
-  .imageRight {
-    right: 4.8rem;
-    bottom: 5rem;
-    margin-top: 1rem;
-    margin-bottom: rem;
-  }
-  .bigTxt {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    font-family: var(--fontFamBold);
-  }
-  .smTxt {
-    width: 20rem;
-    font-size: 0.75rem;
-    margin-bottom: 1rem;
-  }
-  .google,
-  .facebook {
-    height: 2rem;
-    width: 20rem;
-    font-size: 0.6rem;
-    margin-bottom: 1rem;
-  }
-  .google > span {
-    height: 20px;
-    width: 20px;
-    margin-right: 0.3rem;
-    background: rgba(0, 0, 0, 0)
-      url("https://accounts.scdn.co/sso/images/google-icon.1cdc8fce9609d07f0e9d8d0bc4b61f8f.svg")
-      no-repeat scroll center center;
-  }
-  .facebook > span {
-    margin-right: 0.3rem;
-  }
-  .pwd,
-  .user {
-    font-size: 0.75rem;
-  }
 
-  .pwd > input,
-  .user > input {
-    height: 2rem;
-    width: 20rem;
-    font-size: 0.7rem;
-    border: 1px solid #000;
-    padding: 0.5rem;
-    margin-top: 0.5rem;
-    margin-bottom: 1rem;
-  }
-  .pwd > input {
-    margin-bottom: 0.5rem !important;
-  }
-  .err {
-    color: #ff3333;
-    font-size: 0.7rem;
-  }
-  .forgot {
-    font-size: 0.75rem;
-  }
-  .login > input {
-    height: 2rem;
-    width: 20rem;
-    font-size: 0.75rem;
-    margin-top: 1rem;
-  }
-  .orCon {
-    margin-top: 1rem;
-  }
-  .or {
-    width: 20rem;
-    margin-bottom: 1rem;
-  }
-  .or > span {
-    font-size: 0.75rem;
-    margin-left: 0.45rem;
-    margin-right: 0.45rem;
-  }
-  .mobilePic {
-    height: 45vh;
-    width: 100vw;
-  }
-  .signup {
-    font-size: 0.75rem;
-  }
-  .footer {
-    font-size: 0.55rem;
-  }
+@media (max-width: 1400px) {
+    .rightContent {
+        bottom: 8.2rem;
+    }
+    .imageRight {
+        right: 4.8rem;
+        bottom: 5rem;
+        margin-top: 1rem;
+        margin-bottom: rem;
+    }
+    .bigTxt {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        font-family: var(--fontFamBold);
+    }
+    .smTxt {
+        width: 20rem;
+        font-size: 0.75rem;
+        margin-bottom: 1rem;
+    }
+    .google,
+    .facebook {
+        height: 2rem;
+        width: 20rem;
+        font-size: 0.6rem;
+        margin-bottom: 1rem;
+    }
+    .google>span {
+        height: 20px;
+        width: 20px;
+        margin-right: 0.3rem;
+        background: rgba(0, 0, 0, 0) url("https://accounts.scdn.co/sso/images/google-icon.1cdc8fce9609d07f0e9d8d0bc4b61f8f.svg") no-repeat scroll center center;
+    }
+    .facebook>span {
+        margin-right: 0.3rem;
+    }
+    .pwd,
+    .user {
+        font-size: 0.75rem;
+    }
+    .pwd>input,
+    .user>input {
+        height: 2rem;
+        width: 20rem;
+        font-size: 0.7rem;
+        border: 1px solid #000;
+        padding: 0.5rem;
+        margin-top: 0.5rem;
+        margin-bottom: 1rem;
+    }
+    .pwd>input {
+        margin-bottom: 0.5rem !important;
+    }
+    .err {
+        color: #ff3333;
+        font-size: 0.7rem;
+    }
+    .forgot {
+        font-size: 0.75rem;
+    }
+    .orCon {
+        margin-top: 1rem;
+    }
+    .or {
+        width: 20rem;
+        margin-bottom: 1rem;
+    }
+    .or>span {
+        font-size: 0.75rem;
+        margin-left: 0.45rem;
+        margin-right: 0.45rem;
+    }
+    .mobilePic {
+        height: 45vh;
+        width: 100vw;
+    }
+    .signup {
+        font-size: 0.75rem;
+    }
+    .footer {
+        font-size: 0.55rem;
+    }
 }
+
 
 /* media queries max width 900 */
+
 @media (max-width: 900px) {
-  .rightContent {
-    bottom: 2.5rem;
-  }
-  .imageRight {
-    right: 3.5rem;
-    bottom: 0.5rem;
-    margin-top: 1rem;
-    margin-bottom: rem;
-  }
-  .bigTxt {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    font-family: var(--fontFamBold);
-  }
-  .smTxt {
-    width: 100%;
-    font-size: 0.75rem;
-    margin-bottom: 1rem;
-  }
-  .google,
-  .facebook {
-    height: 2rem;
-    width: 100%;
-    font-size: 0.6rem;
-    margin-bottom: 1rem;
-  }
-  .google > span {
-    height: 20px;
-    width: 20px;
-    margin-right: 0.3rem;
-  }
-  .facebook > span {
-    margin-right: 0.3rem;
-  }
-  .pwd,
-  .user {
-    font-size: 0.75rem;
-  }
-  .pwd > input,
-  .user > input {
-    height: 2rem;
-    width: 100%;
-    font-size: 0.7rem;
-    padding: 0.5rem;
-    margin-top: 0.5rem;
-    margin-bottom: 1rem;
-  }
-  .pwd > input {
-    margin-bottom: 0.5rem !important;
-  }
-  .err {
-    font-size: 0.7rem;
-  }
-  .forgot {
-    font-size: 0.75rem;
-  }
-  .login > input {
-    height: 2rem;
-    width: 100%;
-    font-size: 0.75rem;
-    margin-top: 1rem;
-  }
-  .orCon {
-    margin-top: 1rem;
-  }
-  .or {
-    width: 100%;
-    margin-bottom: 1rem;
-  }
-  .or > span {
-    font-size: 0.75rem;
-    margin-left: 0.45rem;
-    margin-right: 0.45rem;
-  }
-  .mobilePic {
-    height: 45vh;
-    width: 100vw;
-  }
-  .signup {
-    font-size: 0.75rem;
-  }
-  .footer {
-    font-size: 0.55rem;
-  }
+    .google,
+    .facebook {
+        font-size: .8rem !important;
+    }
+    .formContainer {
+        width: 60%;
+    }
+    .left {
+        display: none;
+    }
+    .rightContent {
+        bottom: 2.5rem;
+    }
+    .imageRight {
+        right: 3.5rem;
+        bottom: 0.5rem;
+        margin-top: 1rem;
+        margin-bottom: rem;
+    }
+    .bigTxt {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        font-family: var(--fontFamBold);
+    }
+    .smTxt {
+        width: 100%;
+        font-size: 0.75rem;
+        margin-bottom: 1rem;
+    }
+    .google,
+    .facebook {
+        height: 2rem;
+        width: 100%;
+        font-size: 0.6rem;
+        margin-bottom: 1rem;
+    }
+    .google>span {
+        height: 20px;
+        width: 20px;
+        margin-right: 0.3rem;
+    }
+    .facebook>span {
+        margin-right: 0.3rem;
+    }
+    .pwd,
+    .user {
+        font-size: 0.75rem;
+    }
+    .pwd>input,
+    .user>input {
+        height: 2rem;
+        width: 100%;
+        font-size: 0.7rem;
+        padding: 0.5rem;
+        margin-top: 0.5rem;
+        margin-bottom: 1rem;
+    }
+    .pwd>input {
+        margin-bottom: 0.5rem !important;
+    }
+    .err {
+        font-size: 0.7rem;
+    }
+    .forgot {
+        font-size: 0.75rem;
+    }
+    .orCon {
+        margin-top: 1rem;
+    }
+    .or {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+    .or>span {
+        font-size: 0.75rem;
+        margin-left: 0.45rem;
+        margin-right: 0.45rem;
+    }
+    .mobilePic {
+        height: 45vh;
+        width: 100vw;
+    }
+    .signup {
+        font-size: 0.75rem;
+    }
+    .footer {
+        font-size: 0.55rem;
+    }
 }
+
 
 /* media queries max width 480 */
+
 @media (max-width: 480px) {
-  .Signin {
-    background-color: #fff;
-    height: 100vh;
-    padding-top: 3.2rem;
-  }
-  .right {
-    width: 100vw;
-  }
-  .rightContent {
-    bottom: 8.2rem;
-  }
-  .imageRight {
-    right: 3.2rem;
-    bottom: 5.5rem;
-    margin-top: 1rem;
-    margin-bottom: rem;
-  }
-  .bigTxt {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    font-family: var(--fontFamBold);
-  }
-  .smTxt {
-    width: 100%;
-    font-size: 0.75rem;
-    margin-bottom: 1rem;
-  }
-  .google,
-  .facebook {
-    height: 2rem;
-    width: 100%;
-    font-size: 0.6rem;
-    margin-bottom: 1rem;
-  }
-  .google > span {
-    height: 20px;
-    width: 20px;
-    margin-right: 0.3rem;
-    background: rgba(0, 0, 0, 0)
-      url("https://accounts.scdn.co/sso/images/google-icon.1cdc8fce9609d07f0e9d8d0bc4b61f8f.svg")
-      no-repeat scroll center center;
-  }
-  .facebook > span {
-    margin-right: 0.3rem;
-  }
-  .pwd,
-  .user {
-    font-size: 0.75rem;
-  }
-
-  .pwd > input,
-  .user > input {
-    height: 2rem;
-    width: 100%;
-    font-size: 0.7rem;
-    border: 1px solid #000;
-    padding: 0.5rem;
-    margin-top: 0.5rem;
-    margin-bottom: 1rem;
-  }
-
-  .pwd > input {
-    margin-bottom: 0.5rem !important;
-  }
-
-  .err {
-    color: #ff3333;
-    font-size: 0.7rem;
-  }
-
-  .forgot {
-    font-size: 0.75rem;
-  }
-
-  .login > input {
-    height: 2rem;
-    width: 100%;
-    font-size: 0.75rem;
-    margin-top: 1rem;
-  }
-  .orCon {
-    margin-top: 1rem;
-  }
-  .or {
-    width: 100%;
-    margin-bottom: 1rem;
-  }
-  .or > span {
-    font-size: 0.75rem;
-    margin-left: 0.45rem;
-    margin-right: 0.45rem;
-  }
-  .mobilePic {
-    height: 45vh;
-    width: 100vw;
-  }
-  .signup {
-    font-size: 0.75rem;
-  }
-  .footer {
-    width: 100%;
-    font-size: 0.55rem;
-    display: flex;
-    justify-content: center;
-    position: absolute;
-    bottom: 0.5rem;
-  }
+    .signup {
+        width: 70%;
+        text-align: right;
+    }
+    .google,
+    .facebook {
+        font-size: .8rem !important;
+    }
+    .formContainer {
+        width: 90%;
+    }
+    /* .Signin {
+        background-color: #fff;
+        height: 100vh;
+        padding-top: 3.2rem;
+    } */
+    .right {
+        width: 100vw;
+    }
+    .rightContent {
+        bottom: 8.2rem;
+    }
+    .imageRight {
+        right: 3.2rem;
+        bottom: 5.5rem;
+        margin-top: 1rem;
+        margin-bottom: rem;
+    }
+    .bigTxt {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        font-family: var(--fontFamBold);
+    }
+    .smTxt {
+        width: 100%;
+        font-size: 0.75rem;
+        margin-bottom: 1rem;
+    }
+    .google,
+    .facebook {
+        height: 2rem;
+        width: 100%;
+        font-size: 0.6rem;
+        margin-bottom: 1rem;
+    }
+    .google>span {
+        height: 20px;
+        width: 20px;
+        margin-right: 0.3rem;
+        background: rgba(0, 0, 0, 0) url("https://accounts.scdn.co/sso/images/google-icon.1cdc8fce9609d07f0e9d8d0bc4b61f8f.svg") no-repeat scroll center center;
+    }
+    .facebook>span {
+        margin-right: 0.3rem;
+    }
+    .pwd,
+    .user {
+        font-size: 0.75rem;
+    }
+    .pwd>input,
+    .user>input {
+        height: 2rem;
+        width: 100%;
+        font-size: 0.7rem;
+        border: 1px solid #000;
+        padding: 0.5rem;
+        margin-top: 0.5rem;
+        margin-bottom: 1rem;
+    }
+    .pwd>input {
+        margin-bottom: 0.5rem !important;
+    }
+    .err {
+        color: #ff3333;
+        font-size: 0.7rem;
+    }
+    .forgot {
+        font-size: 0.75rem;
+    }
+    .orCon {
+        margin-top: 1rem;
+    }
+    .or {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+    .or>span {
+        font-size: 0.75rem;
+        margin-left: 0.45rem;
+        margin-right: 0.45rem;
+    }
+    .mobilePic {
+        height: 45vh;
+        width: 100vw;
+    }
+    .signup {
+        font-size: 0.75rem;
+    }
+    .btn {
+        padding: 10px !important;
+        font-size: .8rem !important;
+    }
+    .signup {
+        font-size: .7rem !important;
+    }
 }
+
 
 /* media queries max height 550 */
+
 @media (max-height: 550px) {
-  .Signin {
-    height: 100vh;
-    padding-top: 3.2rem;
-  }
-  .right {
-    width: 100vw;
-  }
-  .rightContent {
-    bottom: 10.5rem;
-  }
-  .imageRight {
-    right: 3.2rem;
-    bottom: 8rem;
-    margin-top: 1.5rem;
-    margin-bottom: 0rem;
-  }
-  .bigTxt {
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    font-family: var(--fontFamBold);
-  }
-  .smTxt {
-    width: 100%;
-    font-size: 0.7rem;
-    margin-bottom: 0.5rem;
-  }
-  .google,
-  .facebook {
-    height: 1.8rem;
-    width: 100%;
-    font-size: 0.55rem;
-    margin-bottom: 0.5rem;
-  }
-  .google > span {
-    height: 20px;
-    width: 20px;
-    margin-right: 0.3rem;
-    background: rgba(0, 0, 0, 0)
-      url("https://accounts.scdn.co/sso/images/google-icon.1cdc8fce9609d07f0e9d8d0bc4b61f8f.svg")
-      no-repeat scroll center center;
-  }
-  .facebook > span {
-    margin-right: 0.3rem;
-  }
-  .pwd,
-  .user {
-    font-size: 0.7rem;
-  }
-
-  .pwd > input,
-  .user > input {
-    height: 1.8rem;
-    width: 100%;
-    font-size: 0.65rem;
-    border: 1px solid #000;
-    padding: 0.5rem;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .pwd > input {
-    margin-bottom: 0.5rem !important;
-  }
-
-  .err {
-    font-size: 0.7rem;
-  }
-
-  .forgot {
-    font-size: 0.7rem;
-  }
-
-  .login > input {
-    height: 1.8rem;
-    width: 100%;
-    font-size: 0.7rem;
-    margin-top: 0.5rem;
-  }
-  .orCon {
-    margin-top: 0.5rem;
-  }
-  .or {
-    width: 100%;
-    margin-bottom: 0.5rem;
-  }
-  .or > span {
-    font-size: 0.7rem;
-    margin-left: 0.45rem;
-    margin-right: 0.45rem;
-  }
-  .mobilePic {
-    height: 45vh;
-    width: 100vw;
-  }
-  .signup {
-    font-size: 0.7rem;
-  }
-  .footer {
-    font-size: 0.5rem;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    position: absolute;
-    bottom: 0.2rem;
-  }
+    .formContainer {
+        width: 70%;
+    }
+    .Signin {
+        height: 100vh;
+        padding-top: 3.2rem;
+    }
+    .right {
+        width: 100vw;
+    }
+    .rightContent {
+        bottom: 10.5rem;
+    }
+    .imageRight {
+        right: 3.2rem;
+        bottom: 8rem;
+        margin-top: 1.5rem;
+        margin-bottom: 0rem;
+    }
+    .bigTxt {
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        font-family: var(--fontFamBold);
+    }
+    .smTxt {
+        width: 100%;
+        font-size: 0.7rem;
+        margin-bottom: 0.5rem;
+    }
+    .google,
+    .facebook {
+        height: 1.8rem;
+        width: 100%;
+        font-size: 0.55rem;
+        margin-bottom: 0.5rem;
+    }
+    .google>span {
+        height: 20px;
+        width: 20px;
+        margin-right: 0.3rem;
+        background: rgba(0, 0, 0, 0) url("https://accounts.scdn.co/sso/images/google-icon.1cdc8fce9609d07f0e9d8d0bc4b61f8f.svg") no-repeat scroll center center;
+    }
+    .facebook>span {
+        margin-right: 0.3rem;
+    }
+    .pwd,
+    .user {
+        font-size: 0.7rem;
+    }
+    .pwd>input,
+    .user>input {
+        height: 1.8rem;
+        width: 100%;
+        font-size: 0.65rem;
+        border: 1px solid #000;
+        padding: 0.5rem;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+    .pwd>input {
+        margin-bottom: 0.5rem !important;
+    }
+    .err {
+        font-size: 0.7rem;
+    }
+    .forgot {
+        font-size: 0.7rem;
+    }
+    .orCon {
+        margin-top: 0.5rem;
+    }
+    .or {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+    .or>span {
+        font-size: 0.7rem;
+        margin-left: 0.45rem;
+        margin-right: 0.45rem;
+    }
+    .mobilePic {
+        height: 45vh;
+        width: 100vw;
+    }
+    .signup {
+        font-size: 0.7rem;
+    }
 }
 
-/* styles for dark mode */
-@media (prefers-color-scheme: dark) {
-  .Signin {
-    background-color: var(--darkModeBg);
-    color: var(--darkModeTxt);
-  }
 
-  .user > input,
-  .pwd > input,
-  .facebook,
-  .google {
-    border: 1px var(--darkModeTxt) solid;
-  }
+/* styles for dark mode */
+
+@media (prefers-color-scheme: dark) {
+    .Signin {
+        background-color: var(--darkModeBg);
+        color: var(--darkModeTxt);
+    }
+    .user>input,
+    .pwd>input,
+    .facebook,
+    .google {
+        border: 1px var(--darkModeTxt) solid;
+    }
 }
 
 #SigninDark {
-  background-color: var(--darkModeBg);
-  color: var(--darkModeTxt);
+    background-color: var(--darkModeBg);
+    color: var(--darkModeTxt);
 }
 
-#userDark > input,
-#pwdDark > input,
+#userDark>input,
+#pwdDark>input,
 #facebookDark,
 #googleDark {
-  border: 1px var(--darkModeTxt) solid;
+    border: 1px var(--darkModeTxt) solid;
+}
+
+.loginForm {
+    width: 100%;
+}
+
+.btn {
+    border: none;
+    outline: none;
+    font-weight: bold;
+    padding: 20px;
+    font-size: 1.2rem;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.loginBtn {
+    background-color: var(--mainColor);
+    color: white;
+    margin-bottom: 50px;
+}
+
+.google,
+.facebook {
+    margin-bottom: 20px;
+}
+
+.formContainer {
+    margin: 0 auto;
+    max-width: 1000px;
+}
+
+.pwd {
+    padding-top: 20px
 }

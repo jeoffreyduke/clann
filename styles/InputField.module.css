@@ -1,0 +1,29 @@
+.inputField {
+    padding: 15px;
+    width: 100%;
+    font-size: 1.2rem;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.label {
+    font-size: 1.5rem;
+}
+
+@media screen and (max-width:550px) {
+    .label {
+        font-size: .7rem;
+    }
+    .inputField {
+        padding: 15px;
+        font-size: .8rem;
+    }
+}
+
+@media screen and (max-width:900px) {
+    .label {
+        font-size: 1rem;
+    }
+}
