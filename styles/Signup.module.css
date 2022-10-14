@@ -1,143 +1,38 @@
 .Signup {
-  height: 100vh;
-  width: 100vw;
-  display: grid;
-  place-items: center;
-  background-color: #fff;
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    place-items: center;
+    background-color: #fff;
 }
 
 .logo {
-  position: relative;
-  top: -2rem;
-  right: 1rem;
+    position: relative;
+    top: -2rem;
+    right: 1rem;
 }
 
 .loginForm {
-  position: relative;
-  bottom: 11rem;
+    position: relative;
+    bottom: 11rem;
 }
 
 .date,
 .email,
 .pwd,
 .alias {
-  font-size: 0.8rem;
+    font-size: 0.8rem;
 }
 
 .userName {
-  width: 20rem;
-  display: flex;
-  justify-content: space-between;
-  margin-top: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-.userName > input {
-  height: 2.5rem;
-  width: 9.5rem;
-  font-size: 0.75rem;
-  border: 1px solid #000;
-  padding: 0.5rem;
-  border-radius: 0.2rem;
-  outline: none;
-}
-
-.checkCon {
-  display: flex;
-  font-size: 0.85rem;
-}
-
-.checkBox > input {
-  height: 1rem;
-  width: 3rem;
-}
-
-.date > input,
-.email > input,
-.pwd > input,
-.alias > input {
-  height: 2.5rem;
-  width: 20rem;
-  font-size: 0.75rem;
-  border: 1px solid #000;
-  padding: 0.5rem;
-  margin-top: 0.5rem;
-  margin-bottom: 1rem;
-  border-radius: 0.2rem;
-  outline: none;
-}
-
-.signup > input {
-  height: 2.5rem;
-  width: 20rem;
-  font-size: 0.9rem;
-  font-weight: 500;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: none;
-  border-radius: 5rem;
-  color: #fff;
-  background-color: var(--mainColor);
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
-
-.err {
-  color: #ff3333;
-  font-size: 0.7rem;
-  text-align: center;
-}
-
-.signin {
-  font-size: 0.93rem;
-  text-align: center;
-}
-
-.linkLittle {
-  font-weight: 900;
-  margin-left: 0.3rem;
-}
-
-/* media queries max width 1400 */
-@media screen and (max-width: 1400px) {
-  .Signup {
-    height: 100vh;
-    width: 100vw;
-    display: grid;
-    place-items: center;
-    background-color: #fff;
-    padding: 1rem;
-    padding-top: 0;
-  }
-
-  .logo {
-    position: relative;
-    top: -7rem;
-    right: 1rem;
-  }
-
-  .loginForm {
-    position: relative;
-    bottom: 17rem;
-  }
-
-  .date,
-  .email,
-  .pwd,
-  .alias {
-    font-size: 0.8rem;
-  }
-
-  .userName {
     width: 20rem;
     display: flex;
     justify-content: space-between;
     margin-top: 0.5rem;
     margin-bottom: 1rem;
-  }
+}
 
-  .userName > input {
+.userName>input {
     height: 2.5rem;
     width: 9.5rem;
     font-size: 0.75rem;
@@ -145,22 +40,22 @@
     padding: 0.5rem;
     border-radius: 0.2rem;
     outline: none;
-  }
+}
 
-  .checkCon {
+.checkCon {
     display: flex;
     font-size: 0.85rem;
-  }
+}
 
-  .checkBox > input {
+.checkBox>input {
     height: 1rem;
     width: 3rem;
-  }
+}
 
-  .date > input,
-  .email > input,
-  .pwd > input,
-  .alias > input {
+.date>input,
+.email>input,
+.pwd>input,
+.alias>input {
     height: 2.5rem;
     width: 20rem;
     font-size: 0.75rem;
@@ -170,9 +65,9 @@
     margin-bottom: 1rem;
     border-radius: 0.2rem;
     outline: none;
-  }
+}
 
-  .signup > input {
+.signup>input {
     height: 2.5rem;
     width: 20rem;
     font-size: 0.9rem;
@@ -182,126 +77,221 @@
     align-items: center;
     border: none;
     border-radius: 5rem;
-  }
-  .signin {
+    color: #fff;
+    background-color: var(--mainColor);
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.err {
+    color: #ff3333;
+    font-size: 0.7rem;
+    text-align: center;
+}
+
+.signin {
     font-size: 0.93rem;
     text-align: center;
-  }
-  .linkLittle {
+}
+
+.linkLittle {
     font-weight: 900;
     margin-left: 0.3rem;
-  }
 }
+
+
+/* media queries max width 1400 */
+
+@media screen and (max-width: 1400px) {
+    .Signup {
+        height: 100vh;
+        width: 100vw;
+        display: grid;
+        place-items: center;
+        background-color: #fff;
+        padding: 1rem;
+        padding-top: 0;
+    }
+    .logo {
+        position: relative;
+        top: -7rem;
+        right: 1rem;
+    }
+    .loginForm {
+        position: relative;
+        bottom: 17rem;
+    }
+    .date,
+    .email,
+    .pwd,
+    .alias {
+        font-size: 0.8rem;
+    }
+    .userName {
+        width: 20rem;
+        display: flex;
+        justify-content: space-between;
+        margin-top: 0.5rem;
+        margin-bottom: 1rem;
+    }
+    .userName>input {
+        height: 2.5rem;
+        width: 9.5rem;
+        font-size: 0.75rem;
+        border: 1px solid #000;
+        padding: 0.5rem;
+        border-radius: 0.2rem;
+        outline: none;
+    }
+    .checkCon {
+        display: flex;
+        font-size: 0.85rem;
+    }
+    .checkBox>input {
+        height: 1rem;
+        width: 3rem;
+    }
+    .date>input,
+    .email>input,
+    .pwd>input,
+    .alias>input {
+        height: 2.5rem;
+        width: 20rem;
+        font-size: 0.75rem;
+        border: 1px solid #000;
+        padding: 0.5rem;
+        margin-top: 0.5rem;
+        margin-bottom: 1rem;
+        border-radius: 0.2rem;
+        outline: none;
+    }
+    .signup>input {
+        height: 2.5rem;
+        width: 20rem;
+        font-size: 0.9rem;
+        font-weight: 500;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        border-radius: 5rem;
+    }
+    .signin {
+        font-size: 0.93rem;
+        text-align: center;
+    }
+    .linkLittle {
+        font-weight: 900;
+        margin-left: 0.3rem;
+    }
+}
+
 
 /* media queries max width 480 */
+
 @media screen and (max-width: 480px) {
-  .Signup {
-    height: 100vh;
-    width: 100vw;
-    display: grid;
-    place-items: start;
-    background-color: #fff;
-    padding: 1rem;
-    padding-top: 0;
-  }
-  .logo {
-    position: relative;
-    top: -1.5rem;
-    right: 1rem;
-  }
-
-  .loginForm {
-    position: relative;
-    bottom: 9.5rem;
-  }
-
-  .date,
-  .email,
-  .pwd,
-  .alias {
-    font-size: 0.7rem;
-  }
-
-  .userName {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    margin-top: 0.5rem;
-    margin-bottom: 1rem;
-  }
-
-  .userName > input {
-    height: 2rem;
-    width: 47.5%;
-    font-size: 0.75rem;
-    border: 1px solid #000;
-    padding: 0.5rem;
-    border-radius: 0.2rem;
-    outline: none;
-  }
-
-  .checkCon {
-    display: flex;
-    justify-items: center;
-    align-items: center;
-    font-size: 0.75rem;
-  }
-
-  .checkBox > input {
-    height: 1rem;
-    width: 3rem;
-  }
-
-  .date > input,
-  .email > input,
-  .pwd > input,
-  .alias > input {
-    height: 2rem;
-    width: 100%;
-    font-size: 0.75rem;
-    border: 1px solid #000;
-    padding: 0.5rem;
-    margin-top: 0;
-    margin-bottom: 0.5rem;
-    border-radius: 0.2rem;
-    outline: none;
-  }
-
-  .signup > input {
-    height: 2rem;
-    width: 100%;
-    font-size: 0.75rem;
-    font-weight: 500;
-    display: flex;
-  }
-  .signin {
-    font-size: 0.76rem;
-  }
+    .Signup {
+        height: 100vh;
+        width: 100vw;
+        display: grid;
+        place-items: start;
+        background-color: #fff;
+        padding: 1rem;
+        padding-top: 0;
+    }
+    .logo {
+        position: relative;
+        top: -1.5rem;
+        right: 1rem;
+    }
+    .loginForm {
+        position: relative;
+        bottom: 9.5rem;
+    }
+    .date,
+    .email,
+    .pwd,
+    .alias {
+        font-size: 0.7rem;
+    }
+    .userName {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin-top: 0.5rem;
+        margin-bottom: 1rem;
+    }
+    .userName>input {
+        height: 2rem;
+        width: 47.5%;
+        font-size: 0.75rem;
+        border: 1px solid #000;
+        padding: 0.5rem;
+        border-radius: 0.2rem;
+        outline: none;
+    }
+    .checkCon {
+        display: flex;
+        justify-items: center;
+        align-items: center;
+        font-size: 0.75rem;
+    }
+    .checkBox>input {
+        height: 1rem;
+        width: 3rem;
+    }
+    .date>input,
+    .email>input,
+    .pwd>input,
+    .alias>input {
+        height: 2rem;
+        width: 100%;
+        font-size: 0.75rem;
+        border: 1px solid #000;
+        padding: 0.5rem;
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+        border-radius: 0.2rem;
+        outline: none;
+    }
+    .signup>input {
+        height: 2rem;
+        width: 100%;
+        font-size: 0.75rem;
+        font-weight: 500;
+        display: flex;
+    }
+    .signin {
+        font-size: 0.76rem;
+    }
 }
+
 
 /* media queries max height 550 */
-@media (max-height: 550px) {
-  .logo {
-    position: relative;
-    top: -4rem;
-    right: 1rem;
-  }
 
-  .loginForm {
-    position: relative;
-    bottom: 11.5rem;
-  }
+@media (max-height: 550px) {
+    .logo {
+        position: relative;
+        top: -4rem;
+        right: 1rem;
+    }
+    .loginForm {
+        position: relative;
+        bottom: 11.5rem;
+    }
 }
 
+
 /* styles for dark mode */
+
 @media (prefers-color-scheme: dark) {
-  .Signup {
-    background-color: var(--darkModeBg);
-    color: var(--darkModeTxt);
-  }
+    .Signup {
+        background-color: var(--darkModeBg);
+        color: var(--darkModeTxt);
+    }
 }
 
 #SignupDark {
-  background-color: var(--darkModeBg);
-  color: var(--darkModeTxt);
+    background-color: var(--darkModeBg);
+    color: var(--darkModeTxt);
 }
