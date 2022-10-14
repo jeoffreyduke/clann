@@ -70,7 +70,7 @@ npm run dev
 
 ## Making Contributions
 
-Please refer to [Contributing.MD]("./Contributing.MD") for contributing rules.
+Please refer to [CONTRIBUTING.md](/CONTRIBUTING.md) for contributing rules.
 
 Make sure you make your changes in a new Git branch.
 
