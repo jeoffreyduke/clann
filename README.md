@@ -14,7 +14,7 @@ Clann is a virtual platform for connecting to people of common interest via voic
 -   Simple Peer
 -   Firebase
 
-## 👇🏽 Features
+## Features
 
 -   Fully Customizable Voice Chat Rooms
 -   Profile Customizations
@@ -68,18 +68,12 @@ npm install -g commitizen
 npm run dev
 ```
 
-## 👩🏽‍💻 Making Contributions
+## Making Contributions
 
 Please refer to [CONTRIBUTING.md](/CONTRIBUTING.md) for contributing rules.
 
 Make sure you make your changes in a new Git branch.
 
-## 💪🏽 Thanks to all Contributors
+## Support
 
-Thanks a lot for spending your time to lay the building blocks for Clann. Thanks a lot! Cheers🥂
-
-[![Contributors](https://contrib.rocks/image?repo=jeoffreyduke/clann)](https://github.com/jeoffreyduke/clann/graphs/contributors)
-
-## 🙏🏽 Support
-
-This project needs a star️ from you. Don't forget to leave a star!✨
+This project needs a star️ from you. Don't forget to leave a star!
