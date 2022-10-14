@@ -138,12 +138,13 @@ function Signin() {
         </section>
         <section className={styles.formContainer}>
           <div className={styles.topHead}>
-            <div style={{ translate: "-40%" }}>
+            <div style={{position:'absolute',right:0,translate:'40%' }}>
               <Image
                 src="/assets/clann/1.png"
                 alt="logo"
                 height={isMobile ? 130 : 200}
                 width={isMobile ? 130 : 200}
+                
               />
             </div>
 
@@ -252,12 +253,14 @@ function Signin() {
 
               )}
             </Formik>
+            <footer className={styles.footer}>&copy; 2022 Clann, Ltd.</footer>
 
           </div>
         </section>
+
       </div>
 
-      <footer className={styles.footer}>&copy; 2022 Clann, Ltd.</footer>
+
     </div>
   );
 }

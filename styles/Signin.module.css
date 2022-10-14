@@ -1,18 +1,22 @@
 .Signin {
     background-color: #fff;
     height: 100vh;
-    overflow: hidden;
 }
 
 .con {
     display: flex;
     font-family: var(--fontFamRegular);
+    align-items: center;
+    height: 100vh;
 }
 
 .topHead {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
+    /* transform: translateY(30%); */
+    margin: 20px 0;
 }
 
 .right {
@@ -132,7 +136,7 @@
 /*background-color: var(--mainColor); */
 
 .left {
-    height: 95vh;
+    height: 100vh;
     width: 55vw;
     position: relative;
 }
@@ -153,13 +157,14 @@
 }
 
 .footer {
-    height: 5vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 0.7rem;
+    /* height: 5vh; */
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* padding-top: 0.7rem; */
     font-size: 0.8rem;
     color: #6a6a6a;
+    text-align: center;
 }
 
 
@@ -277,7 +282,16 @@
 
 /* media queries max width 900 */
 
+@media screen and (max-width:1400px) {
+    /* .formContainer {
+        transform: translateY(-20%);
+    } */
+}
+
 @media (max-width: 900px) {
+    .formContainer {
+        margin: auto;
+    }
     .google,
     .facebook {
         font-size: .8rem !important;
@@ -375,7 +389,6 @@
 @media (max-width: 480px) {
     .signup {
         width: 70%;
-        text-align: right;
     }
     .google,
     .facebook {
@@ -604,14 +617,15 @@
 
 .loginForm {
     width: 100%;
+    /* transform: translateY(-15%); */
 }
 
 .btn {
     border: none;
     outline: none;
     font-weight: bold;
-    padding: 20px;
-    font-size: 1.2rem;
+    padding: 15px;
+    font-size: .8rem;
     width: 100%;
     border-radius: 5px;
 }
@@ -619,12 +633,13 @@
 .loginBtn {
     background-color: var(--mainColor);
     color: white;
-    margin-bottom: 50px;
+    margin-bottom: 5px;
 }
 
 .google,
 .facebook {
     margin-bottom: 20px;
+    font-size: 1rem;
 }
 
 .formContainer {
