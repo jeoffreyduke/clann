@@ -220,6 +220,7 @@ function Signin() {
                       input={values.email}
                       setInput={handleChange('email')}
                       placeholder="Email"
+                      id="user"
                     />
 
                     <p className={styles.err}>
@@ -237,6 +238,7 @@ function Signin() {
                       input={values.password}
                       setInput={handleChange('password')}
                       type={'password'}
+                      id="pwd"
                     />
                     <p className={styles.err}>
                       {errors.password}
