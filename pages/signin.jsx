@@ -164,14 +164,16 @@ function Signin() {
               At Clann we make sure you feel heard and understood.
             </div>
             <div className={styles.btnCon}>
-              <button
-                className={`${styles.btn} ${styles.google}`}
+              <div
+                onClick={() => signIn()}
+                className={styles.google}
                 id={background === true ? styles.googleDark : null}
               >
                 <span /> CONTINUE WITH GOOGLE
-              </button>
-              <button
-                className={`${styles.btn} ${styles.facebook}`}
+              </div>
+              <div
+                onClick={() => signIn()}
+                className={styles.facebook}
                 id={background === true ? styles.facebookDark : null}
               >
                 <span>
