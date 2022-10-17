@@ -36,6 +36,8 @@ function Signup() {
     mobOrEmail: "",
     password: "",
     date: "",
+    gender: null,
+    customGender: ''
   });
 
   const createAccount = async (e) => {
@@ -196,17 +198,29 @@ function Signup() {
             />
           </div>
 
+          {userData.gender === "CUSTOM" && (
+            <div className={styles.date}>
+              <input
+                onChange={handleUserData}
+                value={userData.customGender}
+                name="customGender"
+                type="text"
+                placeholder="gender"
+              />
+            </div>
+          )}
+
           <div className={styles.checkCon}>
             <div className={styles.checkBox}>
-              <input type="checkbox" name="male" />
+              <input type="radio" name="gender" id="male" value="MALE" onChange={handleUserData} />
               <label htmlFor="male">Male</label>
             </div>
             <div className={styles.checkBox}>
-              <input type="checkbox" name="female" />
+              <input type="radio" name="gender" id="female" value="FEMALE" onChange={handleUserData} />
               <label htmlFor="female">Female</label>
             </div>
             <div className={styles.checkBox}>
-              <input type="checkbox" name="custom" />
+              <input type="radio" name="gender" id="custom" value="CUSTOM" onChange={handleUserData} />
               <label htmlFor="custom">Custom</label>
             </div>
           </div>
