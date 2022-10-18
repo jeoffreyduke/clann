@@ -1,18 +1,14 @@
 import React from "react";
+import styles from "../styles/About.module.css"
 import Header from "../components/Header";
 import Body from "../components/Body";
 import Head from "next/head";
 
-
-const tcolor = {
-  color: '#8C52FF',
-};
-
 function AboutComp() {
     return (
       <>
-        <h2 style={tcolor} >About Us</h2>
-        <p style={{ fontSize: 17 }}>Clann was created with the mission to provide people with a
+        <h2 className={styles.heading} >About Us</h2>
+        <p className={styles.content}>Clann was created with the mission to provide people with a
            convenient and affordable way to connect with others who share similar interests. We believe that everyone should have access to support groups and the comfort that comes with them, regardless of location or circumstance.<br/><br/>
 
           Clann is a virtual platform that uses voice chats to connect people of common interest.

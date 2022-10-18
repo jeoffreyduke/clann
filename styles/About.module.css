@@ -1,0 +1,13 @@
+.heading {
+    color: var(--mainColor);
+}
+
+.content {
+    font-size: 0.9rem;
+}
+
+@media (max-width: 767px) {
+    .content {
+        font-size: 0.75rem;
+    }
+}
