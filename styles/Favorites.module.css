@@ -48,6 +48,18 @@
   width: 50px;
 }
 
+.noRoomsYet {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.noRoomsYetText {
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-align: center;
+}
+
 /* media queries max width 768 */
 @media (max-width: 768px) {
   .AvatarGroup > *:first-child {
@@ -97,5 +109,9 @@
   .roomJoin > button:hover {
     background-color: var(--mainColorHover);
     cursor: pointer;
+  }
+  .noRoomsYetText {
+    font-size: 0.9rem;
+    font-weight: 700;
   }
 }

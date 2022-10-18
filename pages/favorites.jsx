@@ -12,6 +12,27 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { handleUser } from "../provider/userSlice";
 import { Avatar, AvatarGroup } from "@mui/material";
 import Head from "next/head";
+import Image from "next/image";
+
+function NoRoomsYet() {
+  return (
+    <div className={styles.noRoomsYet}>
+      <div className={styles.con}>
+        <div className={styles.noRoomsYetImg}>
+          <Image
+            src="/assets/waiting.svg"
+            alt="No rooms yet"
+            width={300}
+            height={300}
+          />
+        </div>
+        <div className={styles.noRoomsYetText}>
+          You do not have any favorites yet.
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function FavComp() {
   const app = initializeApp(firebaseConfig);
@@ -41,7 +62,7 @@ function FavComp() {
       </Head>
       <div className={styles.Favorites}>
         {user && !user?.favorites ? (
-          <p>No rooms yet</p>
+          <NoRoomsYet />
         ) : (
           Object.keys(user?.favorites).map((room) => (
             <div
