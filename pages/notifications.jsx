@@ -70,6 +70,7 @@ function NotifComp() {
       <div
         className={styles.notifications}
         id={background === true ? styles.notificationsDark : null}
+        style={{ border: !user.notifications && 0 }}
       >
         {user.notifications ?
           Object.values(user.notifications)
@@ -124,14 +125,14 @@ function NotifComp() {
                           <button
                             disabled={
                               !rooms[notif.roomId]?.inSession === false &&
-                              rooms[notif.roomId]?.createdBy.name !== User.name
+                                rooms[notif.roomId]?.createdBy.name !== User.name
                                 ? true
                                 : false
                             }
                             onClick={() => router.push(`/room/${notif.roomId}`)}
                           >
                             {!rooms[notif.roomId]?.inSession === false &&
-                            rooms[notif.roomId]?.createdBy.name !== User.name
+                              rooms[notif.roomId]?.createdBy.name !== User.name
                               ? "Locked"
                               : "Enter"}
                           </button>
@@ -145,11 +146,19 @@ function NotifComp() {
               ) : (
                 ""
               );
-            }):<p className={styles.noNotifyText}>You have no notifications</p>}
+            }) : (
+            <>
+              <p className={`${styles.noNotifyText}`} id={background === true ? styles.notificationsDark : null}>
+                You have no notifications
+              </p>
+              <div className={styles.noNotification}>
+                <Image src={noNotification} alt='No notification' />
+              </div>
+            </>
+          )
+        }
       </div>
-      <div className={styles.noNotification}>
-      <Image src={noNotification} alt='No notification'/>
-      </div>
+
     </div>
   );
 }
