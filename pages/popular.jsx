@@ -2,11 +2,27 @@ import React from "react";
 import Header from "../components/Header";
 import Body from "../components/Body";
 import Head from "next/head";
+import Image from "next/image";
+import styles from "../styles/Friends.module.css";
 
 function PopularComp() {
   return (
     <>
-      <div>Coming soon</div>
+      <div className={styles.underCons}>
+        <div className={styles.con}>
+          <div className={styles.underConsImg}>
+            <Image
+              src="/assets/construction.svg"
+              alt="Under construction"
+              width={300}
+              height={300}
+            />
+          </div>
+          <div className={styles.underConsText}>
+            This page is under construction.
+          </div>
+        </div>
+      </div>
     </>
   );
 }
