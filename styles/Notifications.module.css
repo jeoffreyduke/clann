@@ -2,7 +2,7 @@
   width: 100%;
 }
 
-.Notifications > header {
+.Notifications>header {
   font-size: 1.1rem;
   font-weight: 600;
   padding-bottom: 1rem;
@@ -21,7 +21,7 @@
   border-bottom: none;
 }
 
-.notification > div {
+.notification>div {
   display: flex;
   align-items: center;
 }
@@ -33,11 +33,11 @@
   z-index: 100;
 }
 
-.notificationMsg > span {
+.notificationMsg>span {
   font-weight: 700;
 }
 
-.enterBtn > button {
+.enterBtn>button {
   width: 6rem;
   padding: 0.5rem;
   font-size: 0.75rem;
@@ -48,9 +48,25 @@
   border: 1.8px solid var(--mainColor);
 }
 
+.noNotification {
+  max-width: 300px;
+  margin: 50px auto;
+
+}
+
 /* media queries max width 480 */
 @media screen and (max-width: 480px) {
-  .Notifications > header {
+  .noNotifyText {
+    font-size: .8rem;
+  }
+
+  .noNotification {
+    width: 80%;
+    margin: 40px auto;
+
+  }
+
+  .Notifications>header {
     font-size: 0.95rem;
     font-weight: 600;
     padding-bottom: 1rem;
@@ -65,7 +81,7 @@
     border-bottom: none;
   }
 
-  .enterBtn > button {
+  .enterBtn>button {
     width: 4rem;
     padding: 0.3rem;
     margin-right: 0.5rem;

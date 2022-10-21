@@ -15,7 +15,8 @@ import { Avatar } from "@mui/material";
 import OtherHousesRoundedIcon from "@mui/icons-material/OtherHousesRounded";
 import Link from "next/link";
 import Head from "next/head";
-
+import Image from "next/image";
+import noNotification from "../public/assets/no-notification.svg"
 function NotifComp() {
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
@@ -70,7 +71,7 @@ function NotifComp() {
         className={styles.notifications}
         id={background === true ? styles.notificationsDark : null}
       >
-        {user.notifications &&
+        {user.notifications ?
           Object.values(user.notifications)
             .reverse()
             .map((notif) => {
@@ -144,7 +145,10 @@ function NotifComp() {
               ) : (
                 ""
               );
-            })}
+            }):<p className={styles.noNotifyText}>You have no notifications</p>}
+      </div>
+      <div className={styles.noNotification}>
+      <Image src={noNotification} alt='No notification'/>
       </div>
     </div>
   );
