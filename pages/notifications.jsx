@@ -15,7 +15,8 @@ import { Avatar } from "@mui/material";
 import OtherHousesRoundedIcon from "@mui/icons-material/OtherHousesRounded";
 import Link from "next/link";
 import Head from "next/head";
-
+import Image from "next/image";
+import noNotification from "../public/assets/no-notification.svg"
 function NotifComp() {
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
@@ -69,8 +70,9 @@ function NotifComp() {
       <div
         className={styles.notifications}
         id={background === true ? styles.notificationsDark : null}
+        style={{ border: !user.notifications && 0 }}
       >
-        {user.notifications &&
+        {user.notifications ?
           Object.values(user.notifications)
             .reverse()
             .map((notif) => {
@@ -123,14 +125,14 @@ function NotifComp() {
                           <button
                             disabled={
                               !rooms[notif.roomId]?.inSession === false &&
-                              rooms[notif.roomId]?.createdBy.name !== User.name
+                                rooms[notif.roomId]?.createdBy.name !== User.name
                                 ? true
                                 : false
                             }
                             onClick={() => router.push(`/room/${notif.roomId}`)}
                           >
                             {!rooms[notif.roomId]?.inSession === false &&
-                            rooms[notif.roomId]?.createdBy.name !== User.name
+                              rooms[notif.roomId]?.createdBy.name !== User.name
                               ? "Locked"
                               : "Enter"}
                           </button>
@@ -144,8 +146,19 @@ function NotifComp() {
               ) : (
                 ""
               );
-            })}
+            }) : (
+            <>
+              <p className={`${styles.noNotifyText}`} id={background === true ? styles.notificationsDark : null}>
+                You have no notifications
+              </p>
+              <div className={styles.noNotification}>
+                <Image src={noNotification} alt='No notification' />
+              </div>
+            </>
+          )
+        }
       </div>
+
     </div>
   );
 }
