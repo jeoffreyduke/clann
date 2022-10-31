@@ -65,6 +65,7 @@ function Signup() {
       );
 
       router.push("/signin");
+      
     } catch (error) {
       // check for error codes
       if (error.code === AuthErrorCodes.EMAIL_ALREADY_IN_USE) {

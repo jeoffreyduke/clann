@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { handleUser } from "../provider/userSlice";
 import { handleAllUsers } from "../provider/allUsersSlice";
-import { firebaseConfig } from ".";
-import { initializeApp } from "firebase/app";
+
+
 import {
   getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
   signInWithEmailAndPassword,
   AuthErrorCodes,
 } from "firebase/auth";
@@ -18,24 +20,55 @@ import Head from "next/head";
 import { handleBgSwitch } from "../provider/darkSlice";
 
 function Signin() {
+
   const dispatch = useDispatch();
   const selector = useSelector(handleUser);
   const user = selector.payload.userSlice.value;
   const users = selector.payload.allUsersSlice.value;
   const background = selector.payload.darkSlice.value;
 
+  const [error, setError] = useState("");
+  const [isMobile, setIsMobile] = useState(false);
+
+  // user information
   const [userdata, setUserdata] = useState({
     email: "",
     password: "",
   });
 
-  const [error, setError] = useState("");
-  const [isMobile, setIsMobile] = useState(false);
 
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getDatabase();
-  const userRef = ref(db, "users/");
+  // const app = initializeApp(firebaseConfig);
+  // const auth = getAuth(app);
+  // const db = getDatabase();
+  // const userRef = ref(db, "users/");
+
+  const signWithGoogle = async () => {
+
+    const provider = new GoogleAuthProvider();
+    const auth = getAuth();
+
+    try{
+      const credential = await signInWithPopup(auth, provider);
+      // This gives you a Google Access Token. You can use it to access the Google API.
+      // const credential = GoogleAuthProvider.credentialFromResult(result);
+      // const token = credential.accessToken;
+      // The signed-in user info.
+      const user = credential.user;
+      console.log(user);
+
+    }catch(error){
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // The email of the user's account used.
+      // const email = error.customData.email;
+      // The AuthCredential type that was used.
+      // const credential = GoogleAuthProvider.credentialFromError(error);
+      console.log(errorMessage);
+    }
+
+
+  }
 
   const loginEmailPassword = async (e) => {
     try {
@@ -60,6 +93,7 @@ function Signin() {
       }
     }
   };
+
 
   const handleUserData = (e) => {
     setUserdata({
@@ -97,6 +131,8 @@ function Signin() {
       }
     }
   };
+
+
 
   useEffect(() => {
     if (window.innerWidth <= 900) {
@@ -146,12 +182,14 @@ function Signin() {
               >
                 GUEST LOGIN
               </div>
-              <div
+              
+              <div onClick={ signWithGoogle }
                 className={styles.google}
                 id={background === true ? styles.googleDark : null}
               >
                 <span /> CONTINUE WITH GOOGLE
               </div>
+
             </div>
 
             <div className={styles.orCon}>
