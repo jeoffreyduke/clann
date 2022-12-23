@@ -135,9 +135,9 @@ function Signin() {
             />
           </div>
           <div className={styles.rightContent}>
-            <div className={styles.bigTxt}>{"Trust the Vibe 💜⚡"}</div>
+            <div className={styles.bigTxt}>{"Trust the Vibe 💜"}</div>
             <div className={styles.smTxt}>
-              At Vibe we make sure your voice is heard.
+              Tap in with your tribe.
             </div>
             <div className={styles.btnCon}>
             <div
