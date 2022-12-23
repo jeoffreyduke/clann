@@ -151,7 +151,7 @@ function CreateComp() {
   return (
     <div className={styles.Create}>
       <Head>
-        <title>Create / Clann</title>
+        <title>Create / Vibe</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.heading}>Create your room</div>

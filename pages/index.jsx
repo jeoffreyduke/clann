@@ -21,14 +21,14 @@ import { useRouter } from "next/router";
 import Loading from "../components/Loading";
 
 export const firebaseConfig = {
-  apiKey: "AIzaSyDI4J_cygaTFClHNVmHdPtJHy2uTUh3-u0",
-  authDomain: "clann-web.firebaseapp.com",
-  databaseURL: "https://clann-web-default-rtdb.firebaseio.com",
-  projectId: "clann-web",
-  storageBucket: "clann-web.appspot.com",
-  messagingSenderId: "310101668106",
-  appId: "1:310101668106:web:8977644b0555887ff74af3",
-  measurementId: "G-MNJR2E2C0P",
+  apiKey: "AIzaSyCZDi1sxQ5X6Rcii5tUc2fzRR4b058YI1E",
+  authDomain: "vibe-292ba.firebaseapp.com",
+  databaseURL: "https://vibe.arvrtise.com",
+  projectId: "vibe-292ba",
+  storageBucket: "vibe-292ba.appspot.com",
+  messagingSenderId: "399348267188",
+  appId: "1:399348267188:web:3e052912354e0879e0ffe1",
+  measurementId: "G-8C0WQJ0TH4",
 };
 
 const app = initializeApp(firebaseConfig);
@@ -89,7 +89,7 @@ export default function Index() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Home / Clann</title>
+        <title>Home / Vibe</title>
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
       </Head>
       {user ? <Home /> : <Signin />}

@@ -8,12 +8,12 @@ function AboutComp() {
     return (
       <>
         <h2 className={styles.heading} >About Us</h2>
-        <p className={styles.content}>Clann was created with the mission to provide people with a
+        <p className={styles.content}>Vibe was created with the mission to provide people with a
            convenient and affordable way to connect with others who share similar interests. We believe that everyone should have access to support groups and the comfort that comes with them, regardless of location or circumstance.<br/><br/>
 
-          Clann is a virtual platform that uses voice chats to connect people of common interest.
-          Our project was initiated by <b>Jeoffrey Duke,</b> who wanted to help people who do not have access to real-life support groups. 
-          Clann offers a convenient and affordable way for people to connect with others who share similar interests, providing them with the support they need.</p>
+          Vibe is a virtual platform that uses voice chats to connect people of common interest.
+          Our project was initiated by <b>Hahz & Candy,</b> who wanted to help people unite world wide. 
+          Vibe offers a convenient and affordable way for people to connect with others who share similar interests, providing them with the support they need.</p>
       </>
     );
   }
@@ -22,7 +22,7 @@ function AboutComp() {
     return (
       <>
         <Head>
-          <title>About / Clann</title>
+          <title>About / Vibe</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <Header />

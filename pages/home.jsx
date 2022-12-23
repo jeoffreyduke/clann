@@ -78,14 +78,14 @@ export function HomeComp() {
   return (
     <>
       <Head>
-        <title>Home / Clann</title>
+        <title>Home / Vibe</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <section className={styles.first}>
         <div className={styles.header}>In session</div>
         <div className={styles.roomBox}>
           <div className={styles.roomTitle}>Not in session</div>
-          <div className={styles.roomName}>Alcoholics Anonymous</div>
+          <div className={styles.roomName}>Mental Health</div>
           <div className={styles.roomUsers}>
             {!users ? (
               <div className={styles.noUsers}>No users</div>
@@ -221,7 +221,7 @@ export function HomeComp() {
 
         <div className={styles.roomBox}>
           <div className={styles.roomTitle}>Not in session</div>
-          <div className={styles.roomName}>Alcoholics Anonymous</div>
+          <div className={styles.roomName}>Mental Health</div>
           <div className={styles.roomUsers}>
             {!users ? (
               <div className={styles.noUsers}>No users</div>

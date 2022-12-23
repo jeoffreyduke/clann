@@ -113,7 +113,7 @@ function Signin() {
       id={background === true ? styles.SigninDark : null}
     >
       <Head>
-        <title>Sign In / Clann</title>
+        <title>Sign In / Vibe</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.con}>
@@ -137,7 +137,7 @@ function Signin() {
           <div className={styles.rightContent}>
             <div className={styles.bigTxt}>{"You're not alone."}</div>
             <div className={styles.smTxt}>
-              At Clann we make sure you feel heard and understood.
+              At Vibe we make sure your voice is heard.
             </div>
             <div className={styles.btnCon}>
             <div
@@ -204,7 +204,7 @@ function Signin() {
                   <input onClick={handleLogin} type="button" value="LOG IN" />
                 </div>
                 <div className={styles.signup}>
-                  New to Clann?
+                  New tapping into Vibe?
                   <span>
                     <Link href="/signup">
                       <a className={styles.linkLittle}>SIGN UP</a>
@@ -217,7 +217,7 @@ function Signin() {
         </section>
       </div>
 
-      <footer className={styles.footer}>© 2022 Clann, Ltd.</footer>
+      <footer className={styles.footer}>© 2022 ARVRtise Vibe, Ltd.</footer>
     </div>
   );
 }

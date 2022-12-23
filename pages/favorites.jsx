@@ -57,7 +57,7 @@ function FavComp() {
   return (
     <>
       <Head>
-        <title>Favorites / Clann</title>
+        <title>Favorites / Vibe</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.Favorites}>

@@ -31,7 +31,7 @@ function Popular() {
   return (
     <>
       <Head>
-        <title>Popular / Clann</title>
+        <title>Popular / Vibe</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />

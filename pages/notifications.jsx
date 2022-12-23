@@ -63,7 +63,7 @@ function NotifComp() {
   return (
     <div className={styles.Notifications}>
       <Head>
-        <title>Notifications / Clann</title>
+        <title>Notifications / Vibe</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header>Notifications</header>

@@ -31,7 +31,7 @@ function Friends() {
   return (
     <>
       <Head>
-        <title>Friends / Clann</title>
+        <title>Tribe / Vibe</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
