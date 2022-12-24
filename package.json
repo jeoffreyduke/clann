@@ -1,8 +1,8 @@
 {
-  "name": "clann",
+  "name": "Vibe",
   "version": "0.1.0",
   "private": true,
-  "author": "Jeoffrey Duke",
+  "author": "Hahz Terry",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

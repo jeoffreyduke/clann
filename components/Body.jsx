@@ -109,7 +109,7 @@ function Body({ midComp }) {
             )}
           </ul>
         </div>
-        <div className={styles.copyright}>© 2022 Clann</div>
+        <div className={styles.copyright}>© 2022 ARVRtise Vibe</div>
       </nav>
       <main className={styles.main} id={background ? styles.mainDark : null}>
         {midComp}
